@@ -1,0 +1,481 @@
+/* alert section */
+.alert-section {
+    position: fixed;
+    z-index: 2;
+    width: calc(100% - 250px);
+}
+
+.wrapper.active .alert-section{
+    width: calc(100% - 80px);
+    margin-left: 80px;
+}
+
+.alert-section label {
+    display: flex;
+}
+
+.alert-section .alert {
+    padding-left: 25px;
+    border-radius: 15px;
+}
+
+.alert-section .alert strong {
+    font-family: 'abhaya';
+}
+
+.alert-section .alert button {
+    margin-right: 2px;
+    outline: none;
+}
+
+@media screen and (max-width:768px) {
+    .wrapper .content .alert-section {
+        width: calc(100% - 80px);
+    }
+    
+    .wrapper.mob-active .content .alert-section {
+        width: calc(100% - 250px);
+    }
+}
+/* end of alert section */
+
+
+/*
+ 
+.card-stats {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    
+}
+
+.title span {
+    color: #000;
+}
+
+.card-body p span {
+    color: #000;
+}
+
+.card-icon {
+    padding: 15px;
+    border-radius: 50px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+}
+
+.card-icon i {
+    font-size: 30px;
+    color: #fff;
+}
+
+.one{
+    background: linear-gradient(60deg, #f44336, #e53935);
+    box-shadow: 0 12px 20px -10px rgba(244,67,54,.28),0 4px 20px 0 rgba(0,0,0,.12),0 7px 8px -5px rgba(244,67,54,.2);
+}
+
+.two {
+    background: linear-gradient(60deg, #66bb6a, #43a047);
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(76, 175, 80, 0.4);
+}
+
+.three {
+    background:  linear-gradient(60deg,#f5700c,#ff9800);
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 152, 0, 0.4);
+}
+
+.four {
+    background: linear-gradient(60deg,#26c6da,#00acc1);
+    box-shadow: 0 12px 20px -10px rgba(0,188,212,.28),0 4px 20px 0 rgba(0,0,0,.12),0 7px 8px -5px rgba(0,188,212,.2);
+}
+*/
+
+
+
+/* reminder modal section */
+.modal-reminder {
+    width: 100%;
+}
+
+.modal-reminder .modal-content {
+    border-radius: 1px;
+    border: none;
+    background-image: linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 100%), url('../../../assets/img/modal_background.jpg');
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+
+.modal-reminder .modal-header {
+    position: relative;
+    justify-content: center;
+    background: rgba(242, 242, 242, 0.4);
+}
+
+.modal-reminder .modal-body {
+    padding: 30px;
+}
+
+.modal-reminder .modal-footer {
+    background: rgba(242, 242, 242, 0.4);
+    border: none;
+}
+
+.modal-reminder h4 {
+    text-align: center;
+    font-size: 26px;
+}
+
+.modal-reminder label {
+    font-weight: normal;
+    font-size: 13px;
+}
+
+.modal-reminder .form-control {
+    min-height: 38px;
+    border-radius: 8px;
+}
+
+.modal-reminder .btn {
+    margin-right: 14px;
+    min-height: 38px;
+    border-radius: 0;
+}
+
+.modal-reminder .form-control:focus {
+    box-shadow: none;
+}
+
+.modal-reminder .hint-text {
+    text-align: center;
+}
+
+.modal-reminder .close {
+    position: absolute;
+    top: 15px;
+    outline: none;
+    right: 15px;
+}
+
+.modal-reminder .checkbox-inline {
+    margin-top: 12px;
+}
+
+.modal-reminder input[type="checkbox"] {
+    margin-top: 2px;
+}
+
+.modal-reminder .btn {
+    min-width: 100px;
+    background: #0099CC;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border: none;
+    line-height: normal;
+}
+
+.modal-reminder .btn:hover,
+.modal-reminder .btn:focus {
+    background: #248bd0;
+}
+
+.modal-reminder .hint-text a {
+    color: #999;
+}
+
+.trigger-btn {
+    display: inline-block;
+    margin: 100px auto;
+}
+
+@media screen and (max-width:576px) {
+    .modal-reminder {
+        width: 300px;
+        margin: 0 auto;
+        margin-top: 150px;
+    }
+}
+/* end of reminder modal section */
+
+
+
+
+
+.parent/*row*/ { 
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.card-stats,
+.card-cal,
+.search-babies,
+.compose-mail,
+.view-vaccine,
+.view-reminders{
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+}
+
+.card-header {
+    border-bottom: none;
+    background: #fff;
+}
+
+.card-header.stat-header {
+    border-bottom: none;
+    background: #fff;
+    height: 162.6px;
+    display: grid;
+    justify-items: center;
+}
+
+.card-stats {
+    height: 100%;
+}
+
+.card-stats .title .card-title {
+    text-align: start;
+    font-family: 'yaldevicolombo';
+}
+
+.card-stats .title span {
+    color: #000;
+    font-family: 'yaldevicolombo';
+}
+
+.card-stats .card-body p span {
+    color: #000;
+    font-family: 'abhaya';
+    font-size: 14px;
+}
+
+.card-stats .card-icon {
+    padding: 15px;
+    border-radius: 50px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+}
+
+.card-stats .card-icon i {
+    font-size: 30px;
+    color: #ffa7ba;
+}
+
+.card-category {
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #999999;
+    margin-top: 40px;
+    height: 30px;
+}
+
+.card-title {
+    text-align: center;
+    font-weight: bolder;
+    color: rgba(22, 13, 22, 0.9 )
+}
+
+.card-title.counter,
+.card-title .counter {
+    font-size: 2.5rem;
+}
+
+.icon-color {
+    background: linear-gradient(60deg, #2a94c3,#2a94c3);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+
+/* search babies compose-mail view-reminder view-vaccine section */
+.search-babies,
+.view-reminders {
+    height: 100%;
+}
+
+.compose-mail .card-header,
+.view-vaccine .card-header,
+.view-reminders .card-header,
+.search-babies .card-header {
+    background: none;
+    border: none;
+    height: auto ;
+}
+
+.compose-mail .card-header h6,
+.view-vaccine .card-header h6,
+.view-reminders .card-header h6,
+.search-babies .card-header h6 {
+    font-family: 'yaldevicolombo';
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+.compose-mail .card-body,
+.view-vaccine .card-body,
+.view-reminders .card-body,
+.search-babies .card-body {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0;
+    margin: 10px 10px;
+}
+
+.view-vaccine .card-body,
+.search-babies .card-body {
+    min-height: 140px;
+}
+
+.compose-mail .form-control:focus,
+.search-babies .form-control:focus {
+    box-shadow: none;
+}
+
+.compose-mail .form-control::placeholder,
+.search-babies .form-control::placeholder {
+    font-size: 13px;
+    font-family: 'abhaya';
+}
+
+.compose-mail .card-footer,
+.search-babies .card-footer {
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.compose-mail .card-footer .btn,
+.search-babies .card-footer .btn {
+    min-width: 100px;
+    background: #2a94c3;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+    line-height: normal;
+    min-height: 38px;
+    font-family: 'abhaya';
+    font-size: 17px;
+}
+
+.compose-mail table {
+    border-collapse: separate !important;
+    border-spacing: 5px;
+}
+
+.compose-mail .card-body table .table-data {
+    font-family: 'abhaya';
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.view-vaccine .thead-theme {
+    background: #2a94c3;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+}
+
+.view-vaccine .thead-theme th {
+    font-family: 'abhaya';
+    border-top: 0 !important;
+    border-bottom: 2px solid #2a94c3 !important;
+    text-transform: uppercase;
+    font-weight: normal;
+    color: #f8f9fa;
+    font-size: 0.875rem;
+}
+
+.view-vaccine .table td {
+    font-size: 0.75rem;
+}
+
+.view-reminders .table-reminder {
+	background-color: #fff;
+	border-bottom: 1px solid #eee;
+}
+
+.view-reminders .table-reminder tbody tr:hover {
+	cursor: pointer;
+	background-color: #eee;
+}
+
+.view-reminders .table-reminder tbody tr td {
+	padding: 5px;
+	vertical-align: middle;
+	border-top-color: #eee;
+}
+
+.view-reminders .table-reminder .media-photo {
+	width: 22px;
+}
+
+.view-reminders .table-reminder .discription {
+	font-size: 13px;
+}
+
+.view-reminders .table-reminder .date {
+	font-size: 11px;
+	color: #999;
+}
+
+.view-reminders .table-reminder .btn {
+    background: #d9534f;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    font-size: 10px;
+    border-radius: 0;
+    text-transform: uppercase;
+    line-height: normal;
+}
+
+
+
+
+@media screen and (max-width:480px) {
+    .wrapper.mob-active .card-stats .card-body p span {
+        color: #000;
+        font-size: 10px;
+    }
+    .view-vaccine .table td {
+        font-size: 0.5rem;
+    }
+    .view-reminders .table-reminder .media-photo {
+        width: 15px;
+    }
+    .compose-mail .card-body table .table-data,
+    .view-reminders .table-reminder .discription,
+    .view-reminders .table-reminder .btn,
+    .view-reminders .table-reminder .date {
+        font-size: 0.5rem;
+    }
+    .view-reminders .table-reminder .btn {
+        padding: .2rem .2rem;
+    }
+    .view-vaccine .thead-theme th {
+        font-size: 0.6rem;
+    }
+    .compose-mail .card-footer .btn,
+    .search-babies .card-footer .btn {
+        font-size: 0.65rem;
+        min-height: 30px;
+        min-width: 80px;
+    }
+    .compose-mail .card-header h6,
+    .view-vaccine .card-header h6,
+    .view-reminders .card-header h6,
+    .search-babies .card-header h6 {
+        font-size: 15px;
+    }
+    .compose-mail .form-control::placeholder,
+    .search-babies .form-control::placeholder {
+        font-size: 10px;
+    }
+    
+}
+
+

@@ -1,0 +1,213 @@
+/* alert section */
+.alert-section {
+    font-family: sans-serif;
+    position: fixed;
+    z-index: 2;
+    width: calc(100% - 250px);
+}
+
+.wrapper.active .alert-section{
+    width: calc(100% - 80px);
+    margin-left: 80px;
+}
+
+.alert-section label {
+    display: flex;
+}
+
+.alert-section .alert {
+    padding-left: 25px;
+    border-radius: 15px;
+}
+
+.alert-section .alert strong {
+    font-family: 'abhaya';
+}
+
+.alert-section .alert button {
+    margin-right: 2px;
+    outline: none;
+}
+
+@media screen and (max-width:768px) {
+    .wrapper .content .alert-section {
+        width: calc(100% - 80px);
+    }
+    
+    .wrapper.mob-active .content .alert-section {
+        width: calc(100% - 250px);
+    }
+}
+/* end of alert section */
+
+
+.card-send-msg {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+}
+
+.card-header {
+    background: #2a94c3;
+    border-radius: 0 !important;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.card-header h3 {
+    font-family: "yaldevicolombo";
+    font-weight: bold;
+    margin-top: 6px;
+    margin-left: 10px;
+}
+
+.b_table .table tr td .data-receiver {
+    font-size: 14px;
+    position: relative;
+    top: 2px;
+}
+
+.b_table .table tr td .data-receiver {
+    min-width: 120px;
+}
+
+.table td,
+.table th {
+    padding: .35rem;
+    vertical-align: middle;
+}
+
+td.content div {
+    width: 100%;
+    height: 100%;
+    overflow:hidden;
+}
+
+td.content {
+    height: 36px;
+}
+
+td.content .data-btn .btn{
+    font-family: 'abhaya';
+    padding: 0px;
+    border-radius: 0;
+    width: 65px;
+    position: relative;
+    top: -1px;
+}
+
+td.content .data-btn .btn:focus {
+    box-shadow: none;
+}
+
+
+/* modal */
+
+.model-send-msg {
+    color: #636363;
+}
+
+.model-send-msg .modal-content {
+    color: #000;
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 13px;
+}
+
+.model-send-msg .modal-header {
+
+    border-bottom: none;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.model-send-msg .modal-header h5 {
+    font-family: 'yaldevicolombo';
+}
+
+.model-send-msg .close {
+    position: absolute;
+    top: -5px;
+    right: -2px;
+    outline: none;
+}
+
+.model-send-msg lable {
+    font-family: 'abhaya';
+    margin-left: 2px;
+}
+
+.model-send-msg .modal-body .form-control {
+    box-shadow: none;
+    font-family: 'abhaya';
+    font-size: 0.8rem;
+    color: #000;
+}
+
+.model-send-msg .modal-footer {
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 13px;
+    padding: 10px 15px 25px;
+    justify-content: center;
+}
+
+.model-send-msg .btn {
+    color: #000;
+    font-family: 'abhaya';
+    font-size: 14px;
+    border-radius: 2px;
+    min-width: 120px;
+    border: none;
+    max-height: 40px;
+    margin: 0 5px;
+}
+
+.model-send-msg .btn-info {
+    background: #c1c1c1;
+}
+
+.model-send-msg .btn-info:hover,
+.model-send-msg .btn-info:focus {
+    background: #a8a8a8;
+    box-shadow: none;
+}
+
+.model-send-msg .btn-success:hover,
+.model-send-msg .btn-success:focus {
+    box-shadow: none;
+}
+
+/* end modal */
+
+
+
+@media screen and (max-width:992px) {
+    .img-col {
+        display: none;
+    }
+}
+
+@media screen and (max-width:420px) {
+    .wrapper.mob-active .b_table .table {
+        display: none;
+    }
+    .wrapper.mob-active .card-send-msg {
+        margin-top: 25px;
+    }
+    .card-header h3 {
+        font-size: 1rem;
+    }
+    .b_table .table tr td .data-receiver {
+        min-width: 98px;
+    }
+    td.content .data-btn .btn {
+        font-size: 0.75rem;
+        width: 52px;
+    }
+    .model-send-msg .btn {
+        font-size: 10px;
+        min-width: 110px;
+    }
+}

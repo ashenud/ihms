@@ -1,0 +1,495 @@
+/* alert section */
+.alert-section {
+    position: fixed;
+    z-index: 2;
+    width: calc(100% - 250px);
+}
+
+.wrapper.active .alert-section{
+    width: calc(100% - 80px);
+    margin-left: 80px;
+}
+
+.alert-section label {
+    display: flex;
+}
+
+.alert-section .alert {
+    padding-left: 25px;
+    border-radius: 15px;
+}
+
+.alert-section .alert strong {
+    font-family: 'abhaya';
+}
+
+.alert-section .alert button {
+    margin-right: 2px;
+    outline: none;
+}
+
+.alert-section .delete-alert,
+.alert-section .success-alert {
+    display: none;
+}
+
+@media screen and (max-width:768px) {
+    .wrapper .content .alert-section {
+        width: calc(100% - 80px);
+    }
+    
+    .wrapper.mob-active .content .alert-section {
+        width: calc(100% - 250px);
+    }
+}
+/* end of alert section */
+
+
+
+.parent/*row*/ { 
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.card-stats,
+.card-cal,
+.search-babies,
+.card-chart,
+.card-table,
+.view-reminders {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+}
+
+.card-header {
+    border-bottom: none;
+    background: #fff;
+}
+
+.card-header.stat-header {
+    border-bottom: none;
+    background: #fff;
+    height: 162.6px;
+    display: grid;
+    justify-items: center;
+}
+
+.card-stats {
+    height: 278px;
+}
+
+.card-icon {
+    padding: 15px;
+    border-radius: 50px;
+    width: 75px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card-icon i {
+    font-size: 40px;
+    color: #ffa7ba;
+}
+
+.card-category {
+    font-family: 'abhaya';
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #6c757d;
+    margin-top: 40px;
+    height: 30px;
+}
+
+.card-title {
+    text-align: center;
+    font-weight: bolder;
+    color: rgba(22, 13, 22, 0.9 )
+}
+
+.card-title.counter,
+.card-title .counter {
+    font-size: 2.5rem;
+}
+
+.icon-color {
+    background: linear-gradient(60deg, #2a94c3,#2a94c3);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+
+.card-cal {
+    padding: 10px 10px;
+    height: 278px;
+    background: #fff;
+}
+
+.calendar_content div.today {
+    background: #2a94c3;
+    color: #ffa7ba !important;
+}
+
+.calendar_content div.selected {
+    background-color: #2a94c3;
+}
+
+.calendar_content div.selected:hover {
+    border-radius: 0;
+}
+
+.calendar, .calendar_weekdays, .calendar_content {
+    width: 100%;
+    max-width: none;
+}
+
+/* search babies section */
+.view-reminders,
+.search-babies {
+    height: 100%;
+}
+
+.view-reminders .card-header,
+.search-babies .card-header {
+    background: none;
+    border: none;
+    height: auto ;
+}
+
+.view-reminders .card-header h6,
+.search-babies .card-header h6 {
+    font-family: 'yaldevicolombo';
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+.view-reminders .card-body,
+.search-babies .card-body {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0;
+    margin: 10px 10px;
+    
+}
+
+.search-babies .form-control:focus {
+    box-shadow: none;
+}
+
+.search-babies .form-control::placeholder {
+    font-family: 'abhaya';
+}
+
+.search-babies .card-footer {
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.search-babies .card-footer .btn {
+    font-family: 'abhaya';
+    font-size: 17px;
+    min-width: 100px;
+    background: #2a94c3;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+    line-height: normal;
+    min-height: 38px;
+}
+/* end of search babies section */
+
+.view-reminders .card-header .btn {
+    font-family: 'abhaya';
+    font-size: 17px;
+    min-width: 100px;
+    background: #2a94c3;
+    padding-top: 8px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+    line-height: normal;
+    min-height: 38px;
+}
+
+.view-reminders p.count {
+    font-family: "abhaya";
+    margin-top: -17px;
+    margin-bottom: 3px;
+}
+
+.view-reminders .table-reminder {
+	background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.view-reminders .table-reminder tbody tr:hover {
+	cursor: pointer;
+	background-color: #eee;
+}
+
+.view-reminders .table-reminder tbody tr td {
+	padding: 5px;
+	/* vertical-align: middle; */
+	border-top-color: #eee;
+}
+
+.view-reminders .table-reminder .media-photo {
+	width: 22px;
+}
+
+.view-reminders .table-reminder .discription {
+	font-size: 13px;
+}
+
+.view-reminders .table-reminder .date {
+	font-size: 11px;
+	color: #999;
+}
+
+.view-reminders .table-reminder .btn {
+    font-family: "abhaya";
+    background: #d9534f;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    font-size: 14px;
+    padding: 3px 10px;
+    border-radius: 0;
+    text-transform: uppercase;
+    line-height: normal;
+}
+
+
+/* reminder modal section */
+.modal-reminder {
+    width: 100%;
+}
+
+.modal-reminder .modal-title{
+    font-family: 'yaldevicolombo';
+}
+
+.modal-reminder .form-group label,
+.modal-reminder .form-group input {
+    font-family: 'abhaya';
+}
+
+.modal-reminder .modal-content {
+    border-radius: 1px;
+    border: none;
+    background-image: linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 100%), url('../../../assets/img/modal_background.jpg');
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+
+.modal-reminder .modal-header {
+    position: relative;
+    justify-content: center;
+    background: rgba(242, 242, 242, 0.4);
+}
+
+.modal-reminder .modal-body {
+    padding: 30px;
+}
+
+.modal-reminder .modal-footer {
+    background: rgba(242, 242, 242, 0.4);
+    border: none;
+}
+
+.modal-reminder h4 {
+    text-align: center;
+    font-size: 26px;
+}
+
+.modal-reminder label {
+    font-weight: normal;
+    font-size: 13px;
+}
+
+.modal-reminder .form-control {
+    min-height: 38px;
+    border-radius: 8px;
+}
+
+.modal-reminder .btn {
+    margin-right: 14px;
+    min-height: 38px;
+    border-radius: 0;
+}
+
+.modal-reminder .form-control:focus {
+    box-shadow: none;
+}
+
+.modal-reminder .hint-text {
+    text-align: center;
+}
+
+.modal-reminder .close {
+    position: absolute;
+    top: 15px;
+    outline: none;
+    right: 15px;
+}
+
+.modal-reminder .checkbox-inline {
+    margin-top: 12px;
+}
+
+.modal-reminder input[type="checkbox"] {
+    margin-top: 2px;
+}
+
+.modal-reminder .btn {
+    font-family: 'abhaya';
+    min-width: 100px;
+    background: #0099CC;
+    padding-top: 10px;
+    color: #fff !important;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border: none;
+    line-height: normal;
+}
+
+.modal-reminder .btn:hover,
+.modal-reminder .btn:focus {
+    background: #248bd0;
+    color: #fff !important;
+}
+
+.modal-reminder .hint-text a {
+    color: #999;
+}
+
+.trigger-btn {
+    display: inline-block;
+    margin: 100px auto;
+}
+
+@media screen and (max-width:576px) {
+    .modal-reminder {
+        width: 300px;
+        margin: 0 auto;
+        margin-top: 150px;
+    }
+}
+/* end of reminder modal section */
+
+
+.card-chart {
+    height: 100%;
+}
+
+.card-chart .chart-header {
+    margin: 10px;
+    background: linear-gradient(60deg,#2a94c3,#2a94c3);
+    border-radius: 0;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0,188,212,.4), 0 1px 5px 0 rgba(0,188,212,.4);
+}
+
+.card-chart .chart-body {
+    padding: 10px;
+}
+
+.card-chart .chart-body h3 {
+    font-family: 'yaldevicolombo';
+    font-size: 20px;
+    margin-bottom: 0;
+    font-weight: bolder;
+    color: rgba(22, 13, 22, 0.9 )
+}
+
+.card-chart .chart-body p {
+    font-family: 'abhaya';
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #6c757d;
+    margin-bottom: 0;
+}
+
+@media screen and (max-width:420px) {
+    .calendar_weekdays div, .calendar_content div {
+        font-size: 11px;
+    }
+    .calendar_weekdays div {
+        font-size: 6px !important;
+    }
+    .calendar_header h2 {
+        font-size: 10px;
+    }
+    .search-babies .form-control::placeholder {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width:480px) {
+
+    .view-reminders .table-reminder .media-photo {
+        width: 15px;
+    }
+    .view-reminders .table-reminder .discription,
+    .view-reminders .table-reminder .btn,
+    .view-reminders .table-reminder .date {
+        font-size: 0.5rem;
+    }
+    .view-reminders .table-reminder .btn {
+        padding: .2rem .2rem;
+    }
+    .view-reminders .card-header h6 {
+        font-size: 15px;
+    }
+
+}
+
+
+
+
+/*.card-table {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.card-table-header {
+    background: linear-gradient(60deg,#ef5350,#d32f2f);
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,.2),0 13px 24px -11px rgba(244,67,54,.6);
+    margin-top: -45px;
+    border-radius: 3px;
+    padding: 20px 0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.card-table-header p {
+    color: #fff;
+    font-weight: bolder;
+    font-size: 15px;
+    margin: 0 10px;
+    
+}
+
+.card-table-body {
+    padding: 0;
+}
+
+.card-table-body table tbody tr td .badge-over {
+    background: rgba(237,173,234, 1);
+    font-size: 12px;
+    padding: 5px;
+}
+
+.card-table-body table tbody tr td .badge-under {
+    background: rgba(232,121,70, 1);    
+    font-size: 12px;
+    padding: 5px;
+}
+
+.card-table-body table tbody tr td .badge:hover {
+    box-shadow: 0 5px 20px 0 rgba(0,0,0,.2),0 13px 24px -11px rgba(244,67,54,.6);
+    cursor: default;
+}*/
+
+
