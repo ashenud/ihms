@@ -79,7 +79,7 @@
             </li>
             <div class="collapse collapse-charts" id="charts">
                 <li>
-                    <a href="/baby/charts-weight" class="text-uppercase drop b-weight">
+                    <a href="{{url('baby/charts-weight')}}" class="text-uppercase drop b-weight">
                         <span class="icon">
                             <i class="fas fa-chart-line" aria-hidden="true"></i>
                         </span>

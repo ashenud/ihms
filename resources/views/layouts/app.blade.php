@@ -7,8 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('img/apple-icon.png')}}">
+    <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}">
 
     <!--fonts and icons-->
     <link rel="stylesheet" href="{{asset('css/fontawesome/css/all.css')}}">
@@ -30,6 +30,8 @@
     @yield('title')
 
     @yield('style')
+
+    @yield('head-scripts')
 
 </head>
 <body>

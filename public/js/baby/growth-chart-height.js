@@ -16,10 +16,12 @@ $(document).ready(function() {
             var bWidth = 2;
         }
         
+        var heights = JSON.parse(height);
+        
         var childDataHeight = {
             label: ['උස'],
             yAxisID: 'A',
-            data: height,
+            data: heights.height_list,
             fill: false,
             backgroundColor: 'rgba(0, 16, 85, 1)',
             borderColor: 'rgba(0, 16, 85, 1)',
@@ -29,15 +31,13 @@ $(document).ready(function() {
         };
 
         $.ajax({
-            url: '/data/growth-chart-height.json',
+            url: dataURL,
             method: "GET",
         }).done(function (json, status) {
 
             if (status === "success" && json.hasOwnProperty("data")) {
 
-
-
-                if (gen == 'male') {
+                if (heights.baby_gender == 'M') {
                     chartData = json.data.male;
                 } else {
                     chartData = json.data.female;
@@ -45,8 +45,6 @@ $(document).ready(function() {
 
                 var datasets = chartData.datasets;
                 chartData.datasets.unshift(childDataHeight);
-                console.log(chartData);
-
 
                 Chart.defaults.global.defaultFontFamily = 'Helvetica';
                 Chart.defaults.global.defaultFontFamily = 'abhaya';

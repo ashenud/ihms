@@ -13,8 +13,10 @@ $(document).ready(function() {
         
     });
     
+    var weights = JSON.parse(weight);
+    console.log(weights);
 
-    var initialChart = "f24m";
+    var initialChart = weights.initialChart;
 
     if(initialChart == "f24m"){
         drawGrowthF24mChart();
@@ -38,47 +40,29 @@ $(document).ready(function() {
         var childDataWeight = {
             label: ['බර'],
             yAxisID: 'A',
-            data: weightF24,
+            data: weights.weight_24,
             fill: false,
             backgroundColor: 'rgba(0, 16, 85, 1)',
             borderColor: 'rgba(0, 16, 85, 1)',
             lineTension: 0,
             borderWidth: bWidth,
             pointRadius: pRadius,
-
-        };
-
-        var childDataHeight = {
-            label: ['උස'],
-            yAxisID: 'B',
-            data: heightF24,
-            fill: false,
-            backgroundColor: 'rgba(0, 16, 85, 1)',
-            borderColor: 'rgba(0, 16, 85, 1)',
-            lineTension: 0,
-            borderWidth: 2,
-            pointRadius: 3,
         };
 
         $.ajax({
-            url: '/data/growth-chart-weight-f24.json',
+            url: dataURLf24,
             method: "GET",
         }).done(function (json, status) {
 
             if (status === "success" && json.hasOwnProperty("data")) {
 
-
-
-                if (gen == 'male') {
+                if (weights.baby_gender == 'M') {
                     chartData = json.data.male;
                 } else {
                     chartData = json.data.female;
                 }
-
-                var datasets = chartData.datasets;
+                
                 chartData.datasets.unshift(childDataWeight);
-                //chartData.datasets.push(childDataHeight);
-
 
                 Chart.defaults.global.defaultFontFamily = 'Helvetica';
                 Chart.defaults.global.defaultFontFamily = 'abhaya';
@@ -179,7 +163,7 @@ $(document).ready(function() {
         var childDataWeight = {
             label: ['බර'],
             yAxisID: 'A',
-            data: weightL36,
+            data: weights.weight_36,
             fill: false,
             backgroundColor: 'rgba(0, 16, 85, 1)',
             borderColor: 'rgba(0, 16, 85, 1)',
@@ -189,37 +173,20 @@ $(document).ready(function() {
 
         };
 
-        var childDataHeight = {
-            label: ['උස'],
-            yAxisID: 'B',
-            data: heightL36,
-            fill: false,
-            backgroundColor: 'rgba(0, 16, 85, 1)',
-            borderColor: 'rgba(0, 16, 85, 1)',
-            lineTension: 0,
-            borderWidth: 2,
-            pointRadius: 3,
-        };
-
         $.ajax({
-            url: '/data/growth-chart-weight-l36.json',
+            url: dataURLl36,
             method: "GET",
         }).done(function (json, status) {
 
             if (status === "success" && json.hasOwnProperty("data")) {
 
-
-
-                if (gen == 'male') {
+                if (weights.baby_gender == 'M') {
                     chartData = json.data.male;
                 } else {
                     chartData = json.data.female;
                 }
 
-                var datasets = chartData.datasets;
                 chartData.datasets.unshift(childDataWeight);
-                //chartData.datasets.push(childDataHeight);
-
 
                 Chart.defaults.global.defaultFontFamily = 'Helvetica';
                 Chart.defaults.global.defaultFontFamily = 'abhaya';

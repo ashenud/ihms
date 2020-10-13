@@ -39,3 +39,4 @@ Route::get('/baby/select', 'App\Http\Controllers\Baby\BabyController@select')->n
 Route::post('/baby/change', 'App\Http\Controllers\Baby\BabyController@change')->middleware('mother');
 Route::get('/baby/dashboard', 'App\Http\Controllers\Baby\BabyController@index')->name('baby')->middleware('mother');
 Route::get('/baby/charts-height', 'App\Http\Controllers\Baby\BabyController@chartsHeight')->name('charts-height')->middleware('mother');
+Route::get('/baby/charts-weight', 'App\Http\Controllers\Baby\BabyController@chartsWeight')->name('charts-weight')->middleware('mother');

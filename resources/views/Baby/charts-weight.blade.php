@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-<title>Baby Height Chart</title>
+<title>Baby Weight Chart</title>
 @endsection
 
 @section('style')
@@ -16,10 +16,11 @@
 @section('head-scripts')
     @isset($data)
         <script>
-            var height = @json($data['baby_heights']);
-            var dataURL = "{{asset('data/growth-chart-height.json')}}";
-            // console.log(height);
-        </script>       
+            var weight = @json($data['baby_weights']);
+            var dataURLf24 = "{{asset('data/growth-chart-weight-f24.json')}}";
+            var dataURLl36 = "{{asset('data/growth-chart-weight-l36.json')}}";
+            // console.log(weight);
+        </script>
     @endisset
 @endsection
 
@@ -45,18 +46,20 @@
                        <p>
 
                         @if ($data['baby_gender'] == 'M')
-                            දරුවාගේ උස ප්‍රස්ථාරය (පිරිමි)
+                            දරුවාගේ බර ප්‍රස්ථාරය (පිරිමි)
                         @else
-                            දරුවාගේ උස ප්‍රස්ථාරය (ගැහැණු)
+                            දරුවාගේ බර ප්‍රස්ථාරය (ගැහැණු)
                         @endif
                         
                         </p>
                         <div class="btn-set">
-                            <button type="button" class="btn change-btn btn-sm download">බාගත කරන්න</button>
+                            <button type="button" class="btn change-btn btn-sm" data-type="f24m">මාස 0 - 24</button>
+                            <button type="button" class="btn change-btn btn-sm" data-type="l36m">මාස 25 - 60</button>
+                            <button type="button" id="download" class="btn change-btn btn-sm download">බාගත කරන්න</button>
                         </div>
                     </div>
                     <div class="chart-canvas">
-                        <canvas id="growth-chart-height" class="line-chart"></canvas>
+                        <canvas id="growth-chart-weight" class="line-chart"></canvas>
                     </div>
                 </div>
             </div>
@@ -67,12 +70,13 @@
                         <div class="col-xl-12 col-sm-6 data-range">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">උස සටහන</h5>
-                                    <p><span class="badge color-1">     </span>නියමිත උස</p>
+                                    <h5 class="card-title">බර සටහන</h5>
+                                    <p><span class="badge color-5">     </span>අධිබර</p>
                                     <p><span class="badge color-1"><i></i></span>මධ්‍යස්ථය</p>
-                                    <p><span class="badge color-4">     </span>මිටි බවට අවදානම</p>
-                                    <p><span class="badge color-2">     </span>මිටි බව</p>
-                                    <p><span class="badge color-3">     </span>මිටි බව</p>
+                                    <p><span class="badge color-1">     </span>නියමිත බර</p>
+                                    <p><span class="badge color-4">     </span>අඩු බරට අවදානම</p>
+                                    <p><span class="badge color-2">     </span>අඩු බර</p>
+                                    <p><span class="badge color-3">     </span>උග්‍ර අඩු බර</p>
                                 </div>
                             </div>
                         </div>
@@ -88,27 +92,33 @@
  
     <script type="text/javascript" src="{{asset('js/charts/Chart.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/jspdf.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/baby/growth-chart-height.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/baby/growth-chart-weight.js')}}"></script>
 
     <script>
         $(function() {
             $('.inner-sidebar-menu ul li a.d-dash').addClass('active');
         }); 
+
+        $(document).ready(function() {
+            $('#baby-charts').on('click', function () {
+                $('#charts').toggleClass('collapse-charts d-none');
+            });         
+        });
     </script>
 
      <!-- canvas to pdf -->
-     <script>
+    <script>
         
-        $(".download").click(function() {
+        $("#download").click(function() {
             
-            var canvas = document.getElementById('growth-chart-height');
+            var canvas = document.getElementById('growth-chart-weight');
             
             var imgData = canvas.toDataURL();
             var doc = new jsPDF('p', 'mm', 'a4');
             doc.setFont("helvetica");
             doc.setFontType("bold");
             doc.setFontSize(12);
-            doc.text(10,9, 'Baby Height Chart');
+            doc.text(10,9, 'Baby Weight Chart');
             doc.setFontSize(6);
             doc.text(170,293, 'Generated on <?php //echo date("Y, F j");?>');
             doc.setFontSize(8);
@@ -119,7 +129,7 @@
 
             doc.addImage(imgData, 'JPEG', 28, 15, width, height);
             //doc.output('dataurlnewwindow');     //opens the data uri in new window
-            doc.save('baby-height-chart.pdf'); //Download the rendered PDF.
+            doc.save('baby-weight-chart.pdf'); //Download the rendered PDF.
         });
     
     </script>
