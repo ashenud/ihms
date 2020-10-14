@@ -27,6 +27,7 @@ Route::get('/admin/dashboard', 'App\Http\Controllers\Admin\AdminController@index
 
 /* @@ doctor controllers @@ */
 Route::get('/doctor/dashboard', 'App\Http\Controllers\Doctor\DoctorController@index')->name('doctor')->middleware('doctor');
+Route::post('/doctor/baby-select', 'App\Http\Controllers\Doctor\DoctorController@babySelect')->middleware('doctor');
 
 /* @@ sister controllers @@ */
 Route::get('/sister/dashboard', 'App\Http\Controllers\Sister\SisterController@index')->name('sister')->middleware('sister');
@@ -36,7 +37,8 @@ Route::get('/midwife/dashboard', 'App\Http\Controllers\Midwife\MidwifeController
 
 /* @@ baby controllers @@ */
 Route::get('/baby/select', 'App\Http\Controllers\Baby\BabyController@select')->name('baby-select')->middleware('mother');
-Route::post('/baby/change', 'App\Http\Controllers\Baby\BabyController@change')->middleware('mother');
-Route::get('/baby/dashboard', 'App\Http\Controllers\Baby\BabyController@index')->name('baby')->middleware('mother');
-Route::get('/baby/charts-height', 'App\Http\Controllers\Baby\BabyController@chartsHeight')->name('charts-height')->middleware('mother');
-Route::get('/baby/charts-weight', 'App\Http\Controllers\Baby\BabyController@chartsWeight')->name('charts-weight')->middleware('mother');
+Route::post('/baby/change', 'App\Http\Controllers\Baby\BabyController@change')->middleware('readonly');
+Route::get('/baby/dashboard', 'App\Http\Controllers\Baby\BabyController@index')->name('baby')->middleware('readonly');
+Route::get('/baby/charts-height', 'App\Http\Controllers\Baby\BabyController@chartsHeight')->name('charts-height')->middleware('readonly');
+Route::get('/baby/charts-weight', 'App\Http\Controllers\Baby\BabyController@chartsWeight')->name('charts-weight')->middleware('readonly');
+Route::get('/baby/charts-bmi', 'App\Http\Controllers\Baby\BabyController@chartsBmi')->name('charts-bmi')->middleware('readonly');

@@ -19,6 +19,7 @@ class CreateMidwivesTable extends Migration
             $table->string('midwife_name');
             $table->integer('gn_division')->nullable();
             $table->integer('moh_division')->nullable();
+            $table->integer('status')->default('1');
             $table->timestamps();
         });
     }

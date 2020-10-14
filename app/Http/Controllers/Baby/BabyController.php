@@ -52,7 +52,13 @@ class BabyController extends Controller
         
         $data['baby_name']=$baby[0]['baby_first_name'].' '.$baby[0]['baby_last_name'];
 
-        return view('Baby.dashboard')->with('data', $data);
+        if(Auth::user()->role_id == 1) {
+            return redirect()->route('charts-weight');
+        }
+        else {
+            return view('Baby.dashboard')->with('data', $data);
+        }
+        
     }
 
     public function chartsHeight() {
@@ -83,6 +89,22 @@ class BabyController extends Controller
 
         $data['baby_heights'] = $heights;
 
+        if(Auth::user()->role_id == '1') {
+            $chart_generator = "doctor ". Auth::user()->doctor->doctor_name;
+        }
+        elseif(Auth::user()->role_id == '3') {
+            $chart_generator = "sister ". Auth::user()->midwife->midwife_name;
+        }
+        elseif(Auth::user()->role_id == '4') {
+            $chart_generator = "mother ". Auth::user()->mother->mother_name;
+        }
+        else {
+            $chart_generator = 'System User';
+        }
+
+        $data['chart_generator'] = $chart_generator;
+        $data['chart_baby'] = "baby ".$baby[0]['baby_first_name']." ".$baby[0]['baby_last_name'];
+
         // dd($data);
         return view('Baby.charts-height')->with('data', $data);
     }
@@ -107,31 +129,119 @@ class BabyController extends Controller
                             ->toArray();
         
         $weightF24 = '';
-        $monthF24 = '';
         $weightL36 = '';
-        $monthL36 = '';
 
         foreach ($months as $month) {
             if ($month['baby_age_in_months']<25) {
                 $weightF24 = $weightF24 . $month['weight'].',';
-                $monthF24 = $monthF24 . $month['baby_age_in_months'] .',';
             }
             else {
                 $weightL36 = $weightL36 . $month['weight'].',';
-                $monthL36 = $monthL36 . $month['baby_age_in_months'] .',';
             }
         }
 
         $weightF24 = trim($weightF24,",");
-        $monthF24 = trim($monthF24,",");
         $weightL36 = trim($weightL36,",");
-        $monthL36 = trim($monthL36,",");
 
-        $weights = '{"baby_gender":"'.$data['baby_gender'].'","weight_24":['.$weightF24.'],"weight_36":['.$weightL36.'],"month_24":['.$monthF24.'],"month_36":['.$monthL36.'],"initialChart":"f24m"}';
+        if ($weightL36 != '') {
+            $initial = 'l36m';
+        } 
+        else {
+            $initial = 'f24m';
+        }
+
+        $weights = '{"baby_gender":"'.$data['baby_gender'].'","weight_24":['.$weightF24.'],"weight_36":['.$weightL36.'],"initialChart":"'.$initial.'"}';
 
         $data['baby_weights'] = $weights;
 
+        if(Auth::user()->role_id == '1') {
+            $chart_generator = "doctor ". Auth::user()->doctor->doctor_name;
+        }
+        elseif(Auth::user()->role_id == '3') {
+            $chart_generator = "sister ". Auth::user()->midwife->midwife_name;
+        }
+        elseif(Auth::user()->role_id == '4') {
+            $chart_generator = "mother ". Auth::user()->mother->mother_name;
+        }
+        else {
+            $chart_generator = 'System User';
+        }
+
+        $data['chart_generator'] = $chart_generator;
+        $data['chart_baby'] = "baby ".$baby[0]['baby_first_name']." ".$baby[0]['baby_last_name'];
+
         // dd($data);
         return view('Baby.charts-weight')->with('data', $data);
+    }
+
+    public function chartsBmi() {
+
+        $baby_id=Session::get('baby_id');
+        $data = array();
+
+        $baby=Baby::where('baby_id',$baby_id)
+                    ->where('status',1)
+                    ->limit(1)
+                    ->get()
+                    ->toArray();
+
+        $data['baby_name']=$baby[0]['baby_first_name'].' '.$baby[0]['baby_last_name'];
+        $data['baby_gender']=$baby[0]['baby_gender'];
+
+        $months = Growth::where('baby_id', $baby_id)
+                            ->orderBy('baby_age_in_months', 'asc')
+                            ->get()
+                            ->toArray();
+
+        $weightF24 = '';
+        $weightL36 = '';
+        $heightF24 = '';
+        $heightL36 = '';
+
+        foreach ($months as $month) {
+            if ($month['baby_age_in_months']<25) {
+                $weightF24 = $weightF24 . $month['weight'].',';
+                $heightF24 = $heightF24 . $month['height'].',';
+            }
+            else {
+                $weightL36 = $weightL36 . $month['weight'].',';
+                $heightL36 = $heightL36 . $month['height'].',';
+            }
+        }
+
+        $weightF24 = trim($weightF24,",");
+        $weightL36 = trim($weightL36,",");
+        $heightF24 = trim($heightF24,",");
+        $heightL36 = trim($heightL36,",");
+
+        if ($weightL36 != '') {
+            $initial = 'l36m';
+        } 
+        else {
+            $initial = 'f24m';
+        }
+
+        $bmi_data = '{"baby_gender":"'.$data['baby_gender'].'","weight_24":['.$weightF24.'],"weight_36":['.$weightL36.'],"height_24":['.$heightF24.'],"height_36":['.$heightL36.'],"initialChart":"'.$initial.'"}';
+
+        $data['baby_bmi_data'] = $bmi_data;
+
+        if(Auth::user()->role_id == '1') {
+            $chart_generator = "doctor ". Auth::user()->doctor->doctor_name;
+        }
+        elseif(Auth::user()->role_id == '3') {
+            $chart_generator = "sister ". Auth::user()->midwife->midwife_name;
+        }
+        elseif(Auth::user()->role_id == '4') {
+            $chart_generator = "mother ". Auth::user()->mother->mother_name;
+        }
+        else {
+            $chart_generator = 'System User';
+        }
+
+        $data['chart_generator'] = $chart_generator;
+        $data['chart_baby'] = "baby ".$baby[0]['baby_first_name']." ".$baby[0]['baby_last_name'];
+
+        // dd($weights);
+        return view('Baby.charts-bmi')->with('data', $data);
     }
 }

@@ -16,6 +16,10 @@
     @endisset
 @endsection
 
+@section('sidebar')
+@include('layouts.sidebars.sister')
+@endsection
+
 @section('content')
 <div class="content">
                

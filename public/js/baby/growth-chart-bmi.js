@@ -13,8 +13,10 @@ $(document).ready(function() {
         
     });
     
+    var bmi = JSON.parse(bmi_data);
+    console.log(bmi);
 
-    var initialChart = "f24m";
+    var initialChart = bmi.initialChart;
 
     if(initialChart == "f24m"){
         drawGrowthF24mChart();
@@ -30,10 +32,10 @@ $(document).ready(function() {
         var scatterData = [];
         
         var i;
-        for (i = 0; i < weightF24.length; i++) {
+        for (i = 0; i < bmi.height_24.length; i++) {
             var scatterItem = {
-                "x": heightF24[i],
-                "y": weightF24[i]
+                "x": bmi.height_24[i],
+                "y": bmi.weight_24[i]
             };
             scatterData.push(scatterItem);
         }
@@ -59,21 +61,18 @@ $(document).ready(function() {
         };
 
         $.ajax({
-            url: '/data/growth-chart-bmi-f24.json',
+            url: dataURLf24,
             method: "GET",
         }).done(function (json, status) {
 
             if (status === "success" && json.hasOwnProperty("data")) {
 
-
-
-                if (gen == 'male') {
+                if (bmi.baby_gender == 'M') {
                     chartData = json.data.male;
                 } else {
                     chartData = json.data.female;
                 }
 
-                var datasets = chartData.datasets;
                 chartData.datasets.unshift(childDataBmi);
 
                 Chart.defaults.global.defaultFontFamily = 'Helvetica';
@@ -179,10 +178,10 @@ $(document).ready(function() {
         var scatterData = [];
         
         var i;
-        for (i = 0; i < weightL36.length; i++) {
+        for (i = 0; i < bmi.height_36.length; i++) {
             var scatterItem = {
-                "x": heightL36[i],
-                "y": weightL36[i]
+                "x": bmi.height_36[i],
+                "y": bmi.weight_36[i]
             };
             scatterData.push(scatterItem);
         }
@@ -208,23 +207,19 @@ $(document).ready(function() {
         };
 
         $.ajax({
-            url: '/data/growth-chart-bmi-l36.json',
+            url: dataURLl36,
             method: "GET",
         }).done(function (json, status) {
 
             if (status === "success" && json.hasOwnProperty("data")) {
 
-
-
-                if (gen == 'male') {
+                if (bmi.baby_gender == 'M') {
                     chartData = json.data.male;
                 } else {
                     chartData = json.data.female;
                 }
 
-                var datasets = chartData.datasets;
                 chartData.datasets.unshift(childDataBmi);
-
 
                 Chart.defaults.global.defaultFontFamily = 'Helvetica';
                 Chart.defaults.global.defaultFontFamily = 'abhaya';

@@ -139,7 +139,7 @@
 
 <script>
     $(function() {
-        $('.inner-sidebar-menu ul li a.d-dash').addClass('active');
+        $('.inner-sidebar-menu ul li a.li-dash').addClass('active');
     }); 
 </script>
 

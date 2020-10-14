@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'sister' => \App\Http\Middleware\Sister::class,
         'midwife' => \App\Http\Middleware\Midwife::class,
         'mother' => \App\Http\Middleware\Mother::class,
+        'readonly' => \App\Http\Middleware\ReadOnly::class,
     ];
 }

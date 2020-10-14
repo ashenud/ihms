@@ -47,7 +47,7 @@ class LoginController extends Controller
             else {
                 Session::flash('message', 'ඔබට මෙහි පිවිසීමට අවසර නොමැත !'); 
                 Session::flash('alert-class', 'alert-danger'); 
-                return redirect('/?asfaf');
+                return redirect('/');
             }
 
         }

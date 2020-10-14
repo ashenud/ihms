@@ -43,7 +43,6 @@ $(document).ready(function() {
                     chartData = json.data.female;
                 }
 
-                var datasets = chartData.datasets;
                 chartData.datasets.unshift(childDataHeight);
 
                 Chart.defaults.global.defaultFontFamily = 'Helvetica';

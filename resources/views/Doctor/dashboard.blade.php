@@ -16,6 +16,10 @@
     @endisset
 @endsection
 
+@section('sidebar')
+@include('layouts.sidebars.doctor')
+@endsection
+
 @section('content')
 <div class="content">
               
@@ -46,16 +50,7 @@
                                 <i class="fas fa-baby"></i>
                             </div>
                             <p class="card-category">ක්‍රියාකාරී ළදරුවන්</p>
-
-                            <?php 
-
-                                /* $query1="SELECT * FROM baby_register WHERE status='active'";
-                                $result1=mysqli_query($conn, $query1);
-                                $num_rows=mysqli_num_rows($result1); */
-
-                            ?>
-
-                            <h3 class="card-title counter"><?php //echo $num_rows; ?></h3>
+                            <h3 class="card-title counter">{{ $data['babies_count'] }}</h3>
                         </div>
                     </div>
                 </a>
@@ -69,14 +64,7 @@
                                 <i class="far fa-envelope"></i>
                             </div>
                             <p class="card-category">එන පණිවිඩ</p>
-
-                            <?php
-                                /* $query4="SELECT COUNT(status) AS unreadSMS FROM doctor_message WHERE status='unread' AND doctor_id='".$_SESSION['doctor_id']."'";
-                                $result4=mysqli_query($conn,$query4);
-                                $row4=mysqli_fetch_assoc($result4); */
-                            ?>
-
-                            <h3 class="card-title counter"><?php //echo $row4['unreadSMS']; ?></h3>
+                            <h3 class="card-title counter">{{ $data['msg_count'] }}</h3>
                         </div>
                     </div>
                 </a>
@@ -125,17 +113,18 @@
           
             <div class="col-lg-6 mb-2">
                 <div class="card search-babies">
-                    <form method="POST" action="/pages/doctor/php/doc-search-baby-by-mNIC.php">
+                    <form method="POST" action="{{url('doctor/baby-select')}}">
+                        @csrf
                         <div class="card-header">
                             <h6 class="font-weight-bold">ළදරුවන් නිරීක්ෂණය කිරීම</h6>
                         </div>
                         <div class="card-body">
                             <div class="search-input">
-                                <input type="text" name="searchUser" class="form-control" placeholder="සෙවීම සඳහා මවගේ හැඳුනුම් අංකය ඇතුළත් කරන්න..." required>
+                                <input type="text" name="mother_nic" class="form-control" placeholder="සෙවීම සඳහා මවගේ හැඳුනුම් අංකය ඇතුළත් කරන්න..." required>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <input type="submit" value="සොයන්න" class="btn btn-sm text-light" name="searchBabyUsingMnic">
+                            <input type="submit" value="සොයන්න" class="btn btn-sm text-light" name="submit">
                         </div>
                     </form>
                 </div>
@@ -234,8 +223,17 @@
 
 <script>
     $(function() {
-        $('.inner-sidebar-menu ul li a.d-dash').addClass('active');
+        $('.inner-sidebar-menu ul li a.li-dash').addClass('active');
     }); 
+
+    $(document).ready(function() {            
+        //counting up
+        $('.counter').counterUp({
+            delay: 10,
+            time: 1000
+        });
+    });
+
 </script>
 
 @endsection

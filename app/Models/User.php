@@ -40,4 +40,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function doctor() {
+        return $this->belongsTo('App\Models\Doctor\Doctor','user_id','doctor_id');
+    }
+
+    public function sister() {
+        return $this->belongsTo('App\Models\Sister\Sister','user_id','sister_id');
+    }
+
+    public function midwife() {
+        return $this->belongsTo('App\Models\Midwife\Midwife','user_id','midwife_id');
+    }
+
+    public function mother() {
+        return $this->belongsTo('App\Models\Mother\Mother','user_id','mother_nic');
+    }
+
 }

@@ -15,6 +15,10 @@
     @endisset
 @endsection
 
+@section('sidebar')
+@include('layouts.sidebars.midwife')
+@endsection
+
 @section('content')
 <div class="content">
                

@@ -3,18 +3,12 @@
 
         <div class="user-area pb-2 mb-3">
             @yield('user-area')
-            <?php
-               /*  $query00 = "SELECT * FROM doctor WHERE doctor_id='".$_SESSION['doctor_id']."'";
-                $result00= mysqli_query($conn,$query00);
-                $row00=mysqli_fetch_assoc($result00); */
-            ?>
-            <a href="#"> <span><?php //echo $row00['doctor_name'];?></span> </a>
         </div>
 
         <!--sidebar items-->
         <ul>
             <li>
-                <a href="/doctor/dashboard" class="text-uppercase d-dash">
+                <a href="{{url('doctor/dashboard')}}" class="text-uppercase li-dash">
                     <span class="icon">
                         <i class="fas fa-chart-pie" aria-hidden="true"></i>
                     </span>
@@ -31,7 +25,7 @@
             </li>
             <div class="collapse collapse-manage" id="manage">
                 <li>
-                    <a href="/doctor/view-sisters" class="text-uppercase drop d-sis">
+                    <a href="{{url('doctor/view-sisters')}}" class="text-uppercase drop li-sis">
                         <span class="icon-active">
                             <i class="fas fa-search" aria-hidden="true"></i>
                         </span>
@@ -39,7 +33,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/doctor/view-babies" class="text-uppercase drop d-baby">
+                    <a href="{{url('doctor/view-babies')}}" class="text-uppercase drop li-baby">
                         <span class="icon">
                             <i class="fas fa-search" aria-hidden="true"></i>
                         </span>
@@ -48,34 +42,28 @@
                 </li>
             </div>
             <li>
-                <a href="/doctor/inbox" class="text-uppercase d-inbox">
+                <a href="{{url('doctor/inbox')}}" class="text-uppercase li-inbox">
                     <span class="icon">
                         <i class="fas fa-inbox" aria-hidden="true"></i>
 
-                        <?php
-                            /* $sql001="SELECT COUNT(status) AS unreadSMS FROM doctor_message WHERE status='unread' AND doctor_id='".$_SESSION['doctor_id']."'";
-                            $run001=mysqli_query($conn,$sql001);
-                            $row001=mysqli_fetch_assoc($run001);
-                            $count=$row001['unreadSMS'];
-
-                            if(0<$count && $count<=9) {
-                                echo "<span class='badge badge-danger'>";
-                                echo $count;
-                                echo "</span>";
-                            }
-                            else if($count>9) {
-                                echo "<span class='badge badge-danger'>";
-                                echo "9+";
-                                echo "</span>";
-                            } */
-                        ?>
+                        @if ($data['msg_count'] > 0)
+                            @if ($data['msg_count'] >= 10)
+                                <span class='badge badge-danger'>
+                                    9+
+                                </span>
+                            @else
+                                <span class='badge badge-danger'>
+                                    {{ $data['msg_count'] }}
+                                </span>
+                            @endif
+                        @endif
 
                     </span>
                     <span class="list">එන පණිවිඩ</span>
                 </a>
             </li>
             <li>
-                <a href="/doctor/send-messages" class="text-uppercase d-send">
+                <a href="{{url('doctor/send-messages')}}" class="text-uppercase li-send">
                     <span class="icon">
                         <i class="fas fa-envelope" aria-hidden="true"></i>
                     </span>

@@ -80,11 +80,6 @@
 
 @section('script')
 
-<script type="text/javascript" src="{{asset('js/jquery.waypoints.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/jquery.counterup.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('css/calendar/calendar.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/charts/Chart.min.js')}}"></script>
-
 <script>
     $(function() {
         $('.inner-sidebar-menu ul li a.d-dash').addClass('active');

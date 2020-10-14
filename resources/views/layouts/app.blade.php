@@ -81,17 +81,7 @@
         <!-- main body (sidebar and content) -->
         <div class="main-body">
 
-            @if (Auth::user()->role_id=='0')
-                @include('layouts.sidebars.admin')
-            @elseif (Auth::user()->role_id=='1')
-                @include('layouts.sidebars.doctor')
-            @elseif (Auth::user()->role_id=='2')
-                @include('layouts.sidebars.sister')
-            @elseif (Auth::user()->role_id=='3')
-                @include('layouts.sidebars.midwife')
-            @elseif (Auth::user()->role_id=='4')
-                @yield('sidebar')
-            @endif
+            @yield('sidebar')
 
             <!-- content -->
             @yield('content')

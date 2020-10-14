@@ -14,7 +14,7 @@ $(document).ready(function() {
     });
     
     var weights = JSON.parse(weight);
-    console.log(weights);
+    // console.log(weights);
 
     var initialChart = weights.initialChart;
 

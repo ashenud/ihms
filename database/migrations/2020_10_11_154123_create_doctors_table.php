@@ -19,6 +19,7 @@ class CreateDoctorsTable extends Migration
             $table->string('doctor_name');
             $table->integer('gn_division')->nullable();
             $table->integer('moh_division')->nullable();
+            $table->integer('status')->default('1');
             $table->timestamps();
         });
     }
