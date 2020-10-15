@@ -47,21 +47,21 @@
             </li>                     
             <li>
                 @if (Auth::user()->role_id == '1')
-                    <a href="{{url('doctor/vac-permission')}}" class="text-uppercase li-vacc">
+                    <a href="{{url('baby/vaccinations-permission')}}" class="text-uppercase li-vacc">
                         <span class="icon">
                             <i class="fas fa-syringe" aria-hidden="true"></i>
                         </span>
                         <span class="list">එන්නත් කිරීම</span>
                     </a>
                 @elseif (Auth::user()->role_id == '3')
-                    <a href="{{url('midwife/vaccine-mark')}}" class="text-uppercase li-vacc">
+                    <a href="{{url('baby/vaccinations-mark')}}" class="text-uppercase li-vacc">
                         <span class="icon">
                             <i class="fas fa-syringe" aria-hidden="true"></i>
                         </span>
                         <span class="list">එන්නත් කිරීම</span>
                     </a>
                 @elseif (Auth::user()->role_id == '4')
-                    <a href="{{url('baby/vaccinations')}}" class="text-uppercase li-vacc">
+                    <a href="{{url('baby/vaccinations-view')}}" class="text-uppercase li-vacc">
                         <span class="icon">
                             <i class="fas fa-syringe" aria-hidden="true"></i>
                         </span>
@@ -143,15 +143,16 @@
                 </li>
                 
             @endif
-            
+
             <li>
-            <a href="{{url('baby/select')}}" class="text-uppercase li-select">
+                <a href="{{url('baby/select')}}" class="text-uppercase li-select">
                     <span class="icon">
                         <i class="fas fa-baby" aria-hidden="true"></i>
                     </span>
                     <span class="list">දරුවා තෝරන්න</span>
                 </a>
             </li>
+
         </ul>
         <!--end of sidebar items-->
 

@@ -46,14 +46,21 @@
                     <span class="icon">
                         <i class="fas fa-inbox" aria-hidden="true"></i>
 
-                        @if ($data['msg_count'] > 0)
-                            @if ($data['msg_count'] >= 10)
+                        @php
+                            $msg_count = DB::table('doctor_messages')->where('doctor_id', Auth::user()->user_id)
+                                                        ->where('read_status',1)
+                                                        ->where('status',1)
+                                                        ->count();
+                        @endphp
+
+                        @if ($msg_count > 0)
+                            @if ($msg_count >= 10)
                                 <span class='badge badge-danger'>
                                     9+
                                 </span>
                             @else
                                 <span class='badge badge-danger'>
-                                    {{ $data['msg_count'] }}
+                                    {{ $msg_count }}
                                 </span>
                             @endif
                         @endif

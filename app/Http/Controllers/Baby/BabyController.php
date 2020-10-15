@@ -11,15 +11,20 @@ use Illuminate\Support\Facades\Session;
 
 class BabyController extends Controller
 {
+
     public function select() {
         
-        $mother_id=Auth::user()->user_id; 
+        if(Auth::user()->role_id == 4) {
+            Session::put('mother_nic', Auth::user()->user_id);
+        }
+
+        $mother_nic=Session::get('mother_nic');
 
         $data = array();
 
         $babies = Baby::join('mothers', 'babies.mother_nic', '=', 'babies.mother_nic')
                         ->select('babies.baby_id', 'babies.baby_gender', 'babies.baby_first_name', 'mothers.mother_name')
-                        ->where('babies.mother_nic',$mother_id)
+                        ->where('babies.mother_nic',$mother_nic)
                         ->where('babies.status',1)
                         ->get()
                         ->toArray();
@@ -53,7 +58,10 @@ class BabyController extends Controller
         $data['baby_name']=$baby[0]['baby_first_name'].' '.$baby[0]['baby_last_name'];
 
         if(Auth::user()->role_id == 1) {
-            return redirect()->route('charts-weight');
+            return redirect()->route('vacc-permission');
+        }
+        elseif(Auth::user()->role_id == 3) {
+            return redirect()->route('vacc-mark');
         }
         else {
             return view('Baby.dashboard')->with('data', $data);
@@ -244,4 +252,9 @@ class BabyController extends Controller
         // dd($weights);
         return view('Baby.charts-bmi')->with('data', $data);
     }
+
+    public function vaccView() {
+        return view('Baby.vaccinations-view');
+    }
+
 }
