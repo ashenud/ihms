@@ -47,14 +47,14 @@
             </li>                     
             <li>
                 @if (Auth::user()->role_id == '1')
-                    <a href="{{url('baby/vaccinations-permission')}}" class="text-uppercase li-vacc">
+                    <a href="{{url('doctor/vaccinations-permission')}}" class="text-uppercase li-vacc">
                         <span class="icon">
                             <i class="fas fa-syringe" aria-hidden="true"></i>
                         </span>
                         <span class="list">එන්නත් කිරීම</span>
                     </a>
                 @elseif (Auth::user()->role_id == '3')
-                    <a href="{{url('baby/vaccinations-mark')}}" class="text-uppercase li-vacc">
+                    <a href="{{url('midwife/vaccinations-mark')}}" class="text-uppercase li-vacc">
                         <span class="icon">
                             <i class="fas fa-syringe" aria-hidden="true"></i>
                         </span>

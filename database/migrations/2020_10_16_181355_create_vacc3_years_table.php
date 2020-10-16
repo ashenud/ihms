@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVacc2MonthsTable extends Migration
+class CreateVacc3YearsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateVacc2MonthsTable extends Migration
      */
     public function up()
     {
-        Schema::create('vacc2_months', function (Blueprint $table) {
+        Schema::create('vacc3_years', function (Blueprint $table) {
             $table->id();
             $table->string('baby_id');
             $table->string('midwife_id');
             $table->string('approved_doctor_id')->nullable();
             $table->integer('vac_id');
             $table->string('vac_name');
-            $table->date('date_given');
-            $table->string('batch_no');
-            $table->string('side_effects');
+            $table->date('date_given')->nullable();
+            $table->string('batch_no')->nullable();
+            $table->string('side_effects')->nullable();
             $table->integer('status')->default('1')->comment('1-given, 0-not given');
             $table->timestamps();
         });
@@ -35,6 +35,6 @@ class CreateVacc2MonthsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vacc2_months');
+        Schema::dropIfExists('vacc3_years');
     }
 }

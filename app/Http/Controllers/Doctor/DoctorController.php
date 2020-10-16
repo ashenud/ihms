@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Baby\Baby;
 use App\Models\Doctor\DoctorMessage;
+use App\Models\Vaccine\VaccBirth;
+use App\Models\Vaccine\VaccineDate;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class DoctorController extends Controller
 {
@@ -57,6 +60,75 @@ class DoctorController extends Controller
     }
 
     public function vaccPermission() {
+
+        $baby_id=Session::get('baby_id');
+        $data = array();
+        $query = array();
+        $query[1] = DB::table('vacc_births');
+        $query[2] = DB::table('vacc_births');
+        $query[3] = DB::table('vacc2_months');
+        $query[4] = DB::table('vacc2_months');
+        $query[5] = DB::table('vacc2_months');
+        $query[6] = DB::table('vacc4_months');
+        $query[7] = DB::table('vacc4_months');
+        $query[8] = DB::table('vacc4_months');
+        $query[9] = DB::table('vacc6_months');
+        $query[10] = DB::table('vacc6_months');
+        $query[11] = DB::table('vacc9_months');
+        $query[12] = DB::table('vacc12_months');
+        $query[13] = DB::table('vacc18_months');
+        $query[14] = DB::table('vacc18_months');
+        $query[15] = DB::table('vacc5_years');
+        $query[16] = DB::table('vacc5_years');
+        $query[17] = DB::table('vacc5_years');
+        $query[18] = DB::table('vacc10_years');
+        $query[19] = DB::table('vacc10_years');
+        $query[20] = DB::table('vacc10_years');
+
+        $vac_data = VaccineDate::where('baby_id',$baby_id)->get()->toArray();
+
+        $vaccine = array();
+        
+        for($j=1; $j<=20; $j++) {
+            for($i=0; $i<count($vac_data); $i++) {
+                if($vac_data[$i]['vac_id']==$j) {
+                    $vaccine[$j]['name'] = $vac_data[$i]['vac_name'];
+                    $vaccine[$j]['giving_status'] = 1;
+                    $vaccine[$j]['giving_date'] = $vac_data[$i]['giving_date'];
+                    if($vac_data[$i]['given_status'] == 1 && $vac_data[$i]['approvel_status'] == 1) {
+                        $vaccine[$j]['given_status'] = 1;
+                        $details = $query[$j]->where('baby_id',$baby_id)->where('vac_id',$j)->get();
+                        $vaccine[$j]['date_given'] = $details['$date_given'];
+                        $vaccine[$j]['batch_no'] = $details['$batch_no'];
+                        $vaccine[$j]['approved_doctor_id'] = $details[0]->approved_doctor_id;
+                        if(!isset($details["side_effects"])) {
+                            $vaccine[$j]['side_effects'] = "නැත";
+                            }
+                            else {
+                            $vaccine[$j]['side_effects'] = $details["side_effects"];
+                            }
+                    }
+                    elseif ($vac_data[$i]['given_status'] == 0 && $vac_data[$i]['approvel_status'] == 1) {
+                        $vaccine[$j]['given_status'] = 0;
+                        $vaccine[$j]['approvel_status'] = 1;
+                        $details = $query[$j]->where('baby_id',$baby_id)->where('vac_id',$j)->get();
+                        // dd($details);
+                        $vaccine[$j]['approved_doctor_id'] = $details[0]->approved_doctor_id;
+                    }
+                    else {
+                        $vaccine[$j]['given_status'] = 0;
+                        $vaccine[$j]['approvel_status'] = 0;
+                    }
+                }
+                else {
+                    $vaccine[$j]['giving_status'] = 0;
+                }
+            }
+        }
+
+        $data['vac_data'] = $vaccine;
+
+        dd($data);
         return view('Baby.vaccinations-permission');
     }
     
