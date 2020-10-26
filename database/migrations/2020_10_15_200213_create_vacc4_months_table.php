@@ -17,12 +17,12 @@ class CreateVacc4MonthsTable extends Migration
             $table->id();
             $table->string('baby_id');
             $table->string('midwife_id');
-            $table->string('approved_doctor_id');
+            $table->string('approved_doctor_id')->nullable();
             $table->integer('vac_id');
             $table->string('vac_name');
-            $table->date('date_given');
-            $table->string('batch_no');
-            $table->string('side_effects');
+            $table->date('date_given')->nullable();
+            $table->string('batch_no')->nullable();
+            $table->string('side_effects')->nullable();
             $table->integer('status')->default('1')->comment('1-given, 0-not given');
             $table->timestamps();
         });

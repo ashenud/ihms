@@ -832,7 +832,7 @@
                                                         <input type="checkbox" id="vaccine2" value="2" checked="checked" disabled>
                                                         <label for="vaccine2">බී.සී.ජී. දෙවන මාත්‍රාව<br>(B.C.G. 2nd dose)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row2['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row2['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             }
@@ -907,7 +907,7 @@
                                                         <input type="checkbox" id="vaccine3" value="3" checked="checked" disabled>
                                                         <label for="vaccine3">පංච සං‍යුජ එන්නත 1<br>(Pentavalent 1)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row3['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row3['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             }
@@ -919,7 +919,7 @@
                                                         <input type="checkbox" id="vaccine3" value="3" disabled>
                                                         <label for="vaccine3">පංච සං‍යුජ එන්නත 1<br>(Pentavalent 1)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data3['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data3['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -954,7 +954,7 @@
                                                         <input type="checkbox" id="vaccine4" value="4" checked="checked" disabled>
                                                         <label for="vaccine4">මුඛ පෝලියෝ 1<br>(OPV 1)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row4['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row4['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             }
@@ -966,7 +966,7 @@
                                                         <input type="checkbox" id="vaccine4" value="4" disabled>
                                                         <label for="vaccine4">මුඛ පෝලියෝ 1<br>(OPV 1)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data4['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data4['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1002,7 +1002,7 @@
                                                         <input type="checkbox" id="vaccine5" value="5" checked="checked" disabled>
                                                         <label for="vaccine5">අජීවී පෝලියෝ 1<br>(fIPV 1)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row5['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row5['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             }
@@ -1013,7 +1013,7 @@
                                                         <input type="checkbox" id="vaccine5" value="5" disabled>
                                                         <label for="vaccine5">අජීවී පෝලියෝ 1<br>(fIPV 1)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data5['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data5['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1064,7 +1064,7 @@
                                                         <input type="checkbox" id="vaccine6" value="6" checked="checked" disabled>
                                                         <label for="vaccine6">පංච සං‍යුජ එන්නත 2<br>(Pentavalent 2)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row6['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row6['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             }
@@ -1075,7 +1075,7 @@
                                                         <input type="checkbox" id="vaccine6" value="6" disabled>
                                                         <label for="vaccine6">පංච සං‍යුජ එන්නත 2<br>(Pentavalent 2)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data6['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data6['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1110,7 +1110,7 @@
                                                         <input type="checkbox" id="vaccine7" value="7" checked="checked" disabled>
                                                         <label for="vaccine7">මුඛ පෝලියෝ 2<br>(OPV 2)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row7['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row7['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             }
@@ -1121,7 +1121,7 @@
                                                         <input type="checkbox" id="vaccine7" value="7" disabled>
                                                         <label for="vaccine7">මුඛ පෝලියෝ 2<br>(OPV 2)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data7['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data7['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1157,7 +1157,7 @@
                                                         <input type="checkbox" id="vaccine8" value="8" checked="checked" disabled>
                                                         <label for="vaccine8">අජීවී පෝලියෝ 2<br>(fIPV 2)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row8['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row8['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             }
@@ -1170,7 +1170,7 @@
                                                         <input type="checkbox" id="vaccine8" value="8" disabled>
                                                         <label for="vaccine8">අජීවී පෝලියෝ 2<br>(fIPV 2)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data8['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data8['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1224,7 +1224,7 @@
                                                         <input type="checkbox" id="vaccine9" value="9" checked="checked" disabled>
                                                         <label for="vaccine9">පංච සං‍යුජ එන්නත 3<br>(Pentavalent 3)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row9['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row9['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             }
@@ -1237,7 +1237,7 @@
                                                         <input type="checkbox" id="vaccine9" value="9" disabled>
                                                         <label for="vaccine9">පංච සං‍යුජ එන්නත 3<br>(Pentavalent 3)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data9['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data9['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1276,7 +1276,7 @@
                                                         <input type="checkbox" id="vaccine10" value="10" checked="checked" disabled>
                                                         <label for="vaccine10">මුඛ පෝලියෝ 3<br>(OPV 3)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row10['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row10['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             }
@@ -1288,7 +1288,7 @@
                                                         <input type="checkbox" id="vaccine10" value="10" disabled>
                                                         <label for="vaccine10">මුඛ පෝලියෝ 3<br>(OPV 3)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data10['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data10['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1341,7 +1341,7 @@
                                                         <input type="checkbox" id="vaccine11" value="11" checked="checked" disabled>
                                                         <label for="vaccine11">සරම්ප, කම්මුල්ගාය,<br>රුබෙල්ලා 1<br>(MMR 1)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row11['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row11['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             
@@ -1353,7 +1353,7 @@
                                                         <input type="checkbox" id="vaccine11" value="11" disabled>
                                                         <label for="vaccine11">සරම්ප, කම්මුල්ගාය,<br>රුබෙල්ලා 1<br>(MMR 1)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data11['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data11['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1406,7 +1406,7 @@
                                                         <input type="checkbox" id="vaccine12" value="12" checked="checked" disabled>
                                                         <label for="vaccine12">ජපන් නිදිකර්පථප්‍රදාහය<br>(Live JE)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row12['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row12['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             }
@@ -1418,7 +1418,7 @@
                                                         <input type="checkbox" id="vaccine12" value="12" disabled>
                                                         <label for="vaccine12">ජපන් නිදිකර්පථප්‍රදාහය<br>(Live JE)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data12['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data12['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1471,7 +1471,7 @@
                                                         <input type="checkbox" id="vaccine13" value="13" checked="checked" disabled>
                                                         <label for="vaccine13">{{$data['vac_data'][3]['name']}}</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row13['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row13['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             }
@@ -1483,7 +1483,7 @@
                                                         <input type="checkbox" id="vaccine13" value="13" disabled>
                                                         <label for="vaccine13">{{$data['vac_data'][3]['name']}}</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data13['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data13['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1521,7 +1521,7 @@
                                                         <input type="checkbox" id="vaccine14" value="14" checked="checked" disabled>
                                                         <label for="vaccine14">මුඛ පෝලියෝ 4<br>(OPV 4)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row14['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row14['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             }
@@ -1533,7 +1533,7 @@
                                                         <input type="checkbox" id="vaccine14" value="14" disabled>
                                                         <label for="vaccine14">මුඛ පෝලියෝ 4<br>(OPV 4)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data14['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data14['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1586,7 +1586,7 @@
                                                         <input type="checkbox" id="vaccine15" value="15" checked="checked" disabled>
                                                         <label for="vaccine15">සරම්ප, කම්මුල්ගාය,<br>රුබෙල්ලා 2<br>(MMR 2)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row15['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row15['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             
@@ -1598,7 +1598,7 @@
                                                         <input type="checkbox" id="vaccine15" value="15" disabled>
                                                         <label for="vaccine15">සරම්ප, කම්මුල්ගාය,<br>රුබෙල්ලා 2<br>(MMR 2)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data15['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data15['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1652,7 +1652,7 @@
                                                         <input type="checkbox" id="vaccine16" value="16" checked="checked" disabled>
                                                         <label for="vaccine16">ද්විත්ව<br>(D.T)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row16['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row16['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             
@@ -1664,7 +1664,7 @@
                                                         <input type="checkbox" id="vaccine16" value="16" disabled>
                                                         <label for="vaccine16">ද්විත්ව<br>(D.T)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data16['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data16['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1702,7 +1702,7 @@
                                                         <input type="checkbox" id="vaccine17" value="17" checked="checked" disabled>
                                                         <label for="vaccine17">මුඛ පෝලියෝ 5<br>(OPV 5)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row17['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row17['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             }
@@ -1714,7 +1714,7 @@
                                                         <input type="checkbox" id="vaccine17" value="17" disabled>
                                                         <label for="vaccine17">මුඛ පෝලියෝ 5<br>(OPV 5)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data17['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data17['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1767,7 +1767,7 @@
                                                         <input type="checkbox" id="vaccine18" value="18" checked="checked" disabled>
                                                         <label for="vaccine18">එච්. පී. වී. එන්නත 1<br>(HPV Vaccine 1)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row18['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row18['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             }
@@ -1779,7 +1779,7 @@
                                                         <input type="checkbox" id="vaccine18" value="18" disabled>
                                                         <label for="vaccine18">එච්. පී. වී. එන්නත 1<br>(HPV Vaccine 1)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data18['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data18['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1817,7 +1817,7 @@
                                                         <input type="checkbox" id="vaccine19" value="19" checked="checked" disabled>
                                                         <label for="vaccine19">එච්. පී. වී. එන්නත 2<br>(HPV Vaccine 2)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data19['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data19['giving_date']; ?></span>
                                                 </div>
                                         <?php 
                                             
@@ -1829,7 +1829,7 @@
                                                         <input type="checkbox" id="vaccine19" value="19" disabled>
                                                         <label for="vaccine19">එච්. පී. වී. එන්නත 2<br>(HPV Vaccine 2)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data19['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data19['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
@@ -1883,7 +1883,7 @@
                                                         <input type="checkbox" id="vaccine20" value="20" checked="checked" disabled>
                                                         <label for="vaccine20">වැඩිහිටි පිටගැස්ම හා<br>ඩිප්තීරියා (aTd)</label>
                                                     </span>
-                                                    <span class="badge color-given"><?php echo "ලබා දුන් දිනය: ".$row20['date_given']; ?></span>
+                                                    <span class="badge color-given"><?php //echo "ලබා දුන් දිනය: ".$row20['date_given']; ?></span>
                                                 </div>
                                         <?php 
                                             
@@ -1895,7 +1895,7 @@
                                                         <input type="checkbox" id="vaccine20" value="20" disabled>
                                                         <label for="vaccine20">වැඩිහිටි පිටගැස්ම හා<br>ඩිප්තීරියා (aTd)</label>
                                                     </span>
-                                                    <span class="badge badge-red"><?php echo "දිය යුතු දිනය: ".$data20['giving_date']; ?></span>
+                                                    <span class="badge badge-red"><?php //echo "දිය යුතු දිනය: ".$data20['giving_date']; ?></span>
                                                 </div>
                                         <?php
                                             }
