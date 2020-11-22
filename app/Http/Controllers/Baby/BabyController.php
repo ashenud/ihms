@@ -24,7 +24,7 @@ class BabyController extends Controller
 
         $data = array();
 
-        $babies = Baby::join('mothers', 'babies.mother_nic', '=', 'babies.mother_nic')
+        $babies = Baby::join('mothers', 'mothers.mother_nic', '=', 'babies.mother_nic')
                         ->select('babies.baby_id', 'babies.baby_gender', 'babies.baby_first_name', 'mothers.mother_name')
                         ->where('babies.mother_nic',$mother_nic)
                         ->where('babies.status',1)
