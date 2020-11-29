@@ -23,7 +23,7 @@ class CreateVacc3YearsTable extends Migration
             $table->date('date_given')->nullable();
             $table->string('batch_no')->nullable();
             $table->string('side_effects')->nullable();
-            $table->integer('status')->default('1')->comment('1-given, 0-not given');
+            $table->integer('status')->default('0')->comment('1-given, 0-not given');
             $table->timestamps();
         });
     }

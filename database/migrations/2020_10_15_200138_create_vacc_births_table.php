@@ -24,7 +24,7 @@ class CreateVaccBirthsTable extends Migration
             $table->string('batch_no')->nullable();
             $table->integer('scar')->default('0')->comment('1-yes, 0-no');
             $table->string('side_effects')->nullable();
-            $table->integer('status')->default('1')->comment('1-given, 0-not given');
+            $table->integer('status')->default('0')->comment('1-given, 0-not given');
             $table->timestamps();
         });
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 192.168.1.101
--- Generation Time: Nov 22, 2020 at 08:27 PM
+-- Generation Time: Nov 30, 2020 at 02:19 AM
 -- Server version: 10.4.15-MariaDB-1:10.4.15+maria~bionic-log
 -- PHP Version: 7.4.11
 
@@ -84,6 +84,45 @@ INSERT INTO `birth_details` (`id`, `baby_id`, `midwife_id`, `birth_weight`, `bir
 (1, '001/02/2018/1000', 'midwife1', 4.00, 50.00, 'Good', 1, 2, 1, 28.00, 'Yes', 'Normal', 'Cradle position', NULL, NULL),
 (2, '001/01/2020/1000', 'midwife1', 2.20, 50.00, 'Good', 2, 1, 1, 24.00, 'Yes', 'Good', 'Cross-cradle position', NULL, NULL),
 (3, '001/02/2020/1000', 'midwife1', 5.50, 45.00, 'Good', 0, 2, 0, 25.00, 'No', 'Good', 'Cradle position', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `child_health_notes`
+--
+
+CREATE TABLE `child_health_notes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `baby_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `midwife_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `baby_age_group` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `baby_age_group_id` int(11) NOT NULL,
+  `eye_size` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `squint` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `retina` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cornea` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `eye_movement` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hearing` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `weight` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `height` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `development` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `heart` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `other` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `doctor_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `clinic_date` date NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `child_health_notes`
+--
+
+INSERT INTO `child_health_notes` (`id`, `baby_id`, `midwife_id`, `baby_age_group`, `baby_age_group_id`, `eye_size`, `squint`, `retina`, `cornea`, `eye_movement`, `hearing`, `weight`, `height`, `development`, `heart`, `hip`, `other`, `doctor_id`, `clinic_date`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, '001/02/2018/1000', 'midwife1', '1st Month', 1, 'O', 'O', 'O', 'O', 'O', 'O', 'N', 'NH', 'O', 'O', 'O', ' ', 'doctor1', '2018-02-04', NULL, NULL, NULL),
+(2, '001/02/2018/1000', 'midwife1', 'After 2nd Month', 2, 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'NH', 'O', 'O', 'O', ' ', 'doctor1', '2020-04-04', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -297,7 +336,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (22, '2020_10_15_201221_create_vacc_others_table', 1),
 (23, '2020_10_16_180920_create_vacc9_months_table', 1),
 (24, '2020_10_16_181355_create_vacc3_years_table', 1),
-(25, '2020_10_16_181624_create_vacc11_years_table', 1);
+(25, '2020_10_16_181624_create_vacc11_years_table', 1),
+(27, '2020_11_29_115924_create_child_health_notes_table', 2);
 
 -- --------------------------------------------------------
 
@@ -412,10 +452,18 @@ CREATE TABLE `vacc2_months` (
   `date_given` date DEFAULT NULL,
   `batch_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `side_effects` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-given, 0-not given',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1-given, 0-not given',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `vacc2_months`
+--
+
+INSERT INTO `vacc2_months` (`id`, `baby_id`, `midwife_id`, `approved_doctor_id`, `vac_id`, `vac_name`, `date_given`, `batch_no`, `side_effects`, `status`, `created_at`, `updated_at`) VALUES
+(4, '001/02/2018/1000', 'midwife1', 'doctor1', 3, 'Pentavalent-1', NULL, NULL, NULL, 0, NULL, NULL),
+(5, '001/02/2018/1000', 'midwife1', 'doctor1', 4, 'OPV-1', NULL, NULL, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -433,7 +481,7 @@ CREATE TABLE `vacc3_years` (
   `date_given` date DEFAULT NULL,
   `batch_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `side_effects` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-given, 0-not given',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1-given, 0-not given',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -454,7 +502,7 @@ CREATE TABLE `vacc4_months` (
   `date_given` date DEFAULT NULL,
   `batch_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `side_effects` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-given, 0-not given',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1-given, 0-not given',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -475,7 +523,7 @@ CREATE TABLE `vacc5_years` (
   `date_given` date DEFAULT NULL,
   `batch_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `side_effects` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-given, 0-not given',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1-given, 0-not given',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -496,7 +544,7 @@ CREATE TABLE `vacc6_months` (
   `date_given` date DEFAULT NULL,
   `batch_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `side_effects` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-given, 0-not given',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1-given, 0-not given',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -517,7 +565,7 @@ CREATE TABLE `vacc9_months` (
   `date_given` date DEFAULT NULL,
   `batch_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `side_effects` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-given, 0-not given',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1-given, 0-not given',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -538,7 +586,7 @@ CREATE TABLE `vacc10_years` (
   `date_given` date DEFAULT NULL,
   `batch_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `side_effects` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-given, 0-not given',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1-given, 0-not given',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -559,7 +607,7 @@ CREATE TABLE `vacc11_years` (
   `date_given` date DEFAULT NULL,
   `batch_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `side_effects` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-given, 0-not given',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1-given, 0-not given',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -580,7 +628,7 @@ CREATE TABLE `vacc12_months` (
   `date_given` date DEFAULT NULL,
   `batch_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `side_effects` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-given, 0-not given',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1-given, 0-not given',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -601,7 +649,7 @@ CREATE TABLE `vacc18_months` (
   `date_given` date DEFAULT NULL,
   `batch_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `side_effects` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-given, 0-not given',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1-given, 0-not given',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -618,7 +666,7 @@ CREATE TABLE `vaccine_dates` (
   `midwife_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `vac_id` int(11) NOT NULL,
   `vac_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `giving_date` date NOT NULL,
+  `giving_date` date DEFAULT NULL,
   `approvel_status` int(11) NOT NULL DEFAULT 0 COMMENT '1-approved, 0-not approved',
   `given_status` int(11) NOT NULL DEFAULT 0 COMMENT '1-given, 0-not given',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -631,7 +679,8 @@ CREATE TABLE `vaccine_dates` (
 
 INSERT INTO `vaccine_dates` (`id`, `baby_id`, `midwife_id`, `vac_id`, `vac_name`, `giving_date`, `approvel_status`, `given_status`, `created_at`, `updated_at`) VALUES
 (1, '001/02/2018/1000', 'midwife1', 3, 'Pentavalent-1', '2018-08-12', 0, 0, NULL, NULL),
-(2, '001/02/2018/1000', 'midwife1', 4, 'OPV-1', '2018-08-14', 0, 0, NULL, NULL);
+(2, '001/02/2018/1000', 'midwife1', 4, 'OPV-1', '2018-08-14', 0, 0, NULL, NULL),
+(3, '001/02/2018/1000', 'midwife1', 2, 'BCG-2', NULL, 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -650,7 +699,7 @@ CREATE TABLE `vacc_births` (
   `batch_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `scar` int(11) NOT NULL DEFAULT 0 COMMENT '1-yes, 0-no',
   `side_effects` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-given, 0-not given',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1-given, 0-not given',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -663,7 +712,8 @@ INSERT INTO `vacc_births` (`id`, `baby_id`, `midwife_id`, `approved_doctor_id`, 
 (1, '001/02/2018/1000', 'midwife1', NULL, 1, 'BCG-1', '2018-02-02', 'EMZ1245', 0, NULL, 1, NULL, NULL),
 (2, '001/01/2020/1000', 'midwife1', NULL, 1, 'BCG-1', '2020-01-04', 'EMZ1245', 0, NULL, 1, NULL, NULL),
 (3, '001/01/2020/1000', 'midwife1', 'doctor1', 2, 'BCG-2', NULL, NULL, 0, NULL, 0, NULL, NULL),
-(4, '001/02/2020/1000', 'midwife1', NULL, 1, 'BCG-1', '2020-02-06', 'EMZ1248', 0, NULL, 1, NULL, NULL);
+(4, '001/02/2020/1000', 'midwife1', NULL, 1, 'BCG-1', '2020-02-06', 'EMZ1248', 0, NULL, 1, NULL, NULL),
+(5, '001/02/2018/1000', 'midwife1', 'doctor1', 2, 'BCG-2', NULL, NULL, 0, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -681,7 +731,7 @@ CREATE TABLE `vacc_others` (
   `date_given` date DEFAULT NULL,
   `batch_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `side_effects` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-given, 0-not given',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT '1-given, 0-not given',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -701,6 +751,12 @@ ALTER TABLE `babies`
 -- Indexes for table `birth_details`
 --
 ALTER TABLE `birth_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `child_health_notes`
+--
+ALTER TABLE `child_health_notes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -870,6 +926,12 @@ ALTER TABLE `birth_details`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `child_health_notes`
+--
+ALTER TABLE `child_health_notes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
@@ -909,7 +971,7 @@ ALTER TABLE `midwives`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `mothers`
@@ -933,7 +995,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vacc2_months`
 --
 ALTER TABLE `vacc2_months`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `vacc3_years`
@@ -993,13 +1055,13 @@ ALTER TABLE `vacc18_months`
 -- AUTO_INCREMENT for table `vaccine_dates`
 --
 ALTER TABLE `vaccine_dates`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `vacc_births`
 --
 ALTER TABLE `vacc_births`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `vacc_others`

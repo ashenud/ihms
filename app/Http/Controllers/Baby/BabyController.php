@@ -269,7 +269,6 @@ class BabyController extends Controller
         $data['baby_gender']=$baby[0]['baby_gender'];
 
         $all_vac_id = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
-        $vac_name1 = array("1"=>"BCG-1","2"=>"BCG-2","3"=>"Pentavalent 1","4"=>"OPV-1","5"=>"fIPV-1","6"=>"Pentavalent-2","7"=>"OVP-2","8"=>"fIPV-2","9"=>"Pentavalent-3","10"=>"OVP-3","11"=>"MMR-1","12"=>"Live JE","13"=>"DPT","14"=>"OVP-4","15"=>"MMR-2","16"=>"D.T","17"=>"OPV-5","18"=>"HPV-1","19"=>"HPV-2","20"=>"aTd");
         $vac_name = array("1"=>"බී.සී.ජී.\n(B.C.G.)","2"=>"බී.සී.ජී. දෙවන මාත්‍රාව\n(B.C.G. 2nd dose)","3"=>"පංච සං‍යුජ එන්නත 1\n(Pentavalent 1)","4"=>"මුඛ පෝලියෝ 1\n(OPV 1)","5"=>"අජීවී පෝලියෝ 1\n(fIPV 1)","6"=>"පංච සං‍යුජ එන්නත 2\n(Pentavalent 2)","7"=>"මුඛ පෝලියෝ 2\n(OPV 2)","8"=>"අජීවී පෝලියෝ 2\n(fIPV 2)","9"=>"පංච සං‍යුජ එන්නත 3\n(Pentavalent 3)","10"=>"මුඛ පෝලියෝ 3\n(OPV 3)","11"=>"සරම්ප, කම්මුල්ගාය,\nරුබෙල්ලා 1\n(MMR 1)","12"=>"ජපන් නිදිකර්පථප්‍රදාහය\n(Live JE)","13"=>"‍රිත්ව\n(DPT)","14"=>"මුඛ පෝලියෝ 4\n(OPV 4)","15"=>"සරම්ප, කම්මුල්ගාය,\nරුබෙල්ලා 2\n(MMR 2)","16"=>"ද්විත්ව\n(D.T)","17"=>"මුඛ පෝලියෝ 5\n(OPV 5)","18"=>"එච්. පී. වී. එන්නත 1\n(HPV Vaccine 1)","19"=>"එච්. පී. වී. එන්නත 2\n(HPV Vaccine 2)","20"=>"වැඩිහිටි පිටගැස්ම හා\nඩිප්තීරියා (aTd)");
         $query = array("1"=>DB::table('vacc_births'),"2"=>DB::table('vacc_births'),"3"=>DB::table('vacc2_months'),"4"=>DB::table('vacc2_months'),"5"=>DB::table('vacc2_months'),"6"=>DB::table('vacc4_months'),"7"=>DB::table('vacc4_months'),"8"=>DB::table('vacc4_months'),"9"=>DB::table('vacc6_months'),"10"=>DB::table('vacc6_months'),"11"=>DB::table('vacc9_months'),"12"=>DB::table('vacc12_months'),"13"=>DB::table('vacc18_months'),"14"=>DB::table('vacc18_months'),"15"=>DB::table('vacc5_years'),"16"=>DB::table('vacc5_years'),"17"=>DB::table('vacc5_years'),"18"=>DB::table('vacc10_years'),"19"=>DB::table('vacc10_years'),"20"=>DB::table('vacc11_years'));
         
@@ -282,7 +281,7 @@ class BabyController extends Controller
             for($i=0; $i<count($vac_data); $i++) {
                 if($vac_data[$i]['vac_id']==$j) {
                     array_push($vac_id, $j);
-                    $vaccine[$j]['name'] = $vac_data[$i]['vac_name'];
+                    $vaccine[$j]['name'] = $vac_name[$j];
                     $vaccine[$j]['giving_status'] = 1;
                     $vaccine[$j]['giving_date'] = $vac_data[$i]['giving_date'];
                     if($vac_data[$i]['given_status'] == 1 && $vac_data[$i]['approvel_status'] == 1) {

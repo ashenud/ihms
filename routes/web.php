@@ -29,6 +29,7 @@ Route::get('/admin/dashboard', 'App\Http\Controllers\Admin\AdminController@index
 Route::get('/doctor/dashboard', 'App\Http\Controllers\Doctor\DoctorController@index')->name('doctor')->middleware('doctor');
 Route::post('/doctor/baby-select', 'App\Http\Controllers\Doctor\DoctorController@babySelect')->middleware('doctor');
 Route::get('/doctor/vaccinations-permission', 'App\Http\Controllers\Doctor\DoctorController@vaccPermission')->name('vacc-permission')->middleware('doctor');
+Route::post('/doctor/vaccinations-permission-action', 'App\Http\Controllers\Doctor\DoctorController@vaccPermissionAction')->middleware('doctor');
 
 /* @@ sister controllers @@ */
 Route::get('/sister/dashboard', 'App\Http\Controllers\Sister\SisterController@index')->name('sister')->middleware('sister');

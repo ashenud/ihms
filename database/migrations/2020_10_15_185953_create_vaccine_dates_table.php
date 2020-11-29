@@ -19,7 +19,7 @@ class CreateVaccineDatesTable extends Migration
             $table->string('midwife_id');
             $table->integer('vac_id');
             $table->string('vac_name');
-            $table->date('giving_date');
+            $table->date('giving_date')->nullable();
             $table->integer('approvel_status')->default('0')->comment('1-approved, 0-not approved');
             $table->integer('given_status')->default('0')->comment('1-given, 0-not given');
             $table->timestamps();
