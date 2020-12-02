@@ -95,26 +95,7 @@
 @section('content')
 <div class="content">
           
-    <!-- alert section -->
-    <div class="alert-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    @if (Session::has('message'))
-                        <div class="alert {{Session::get('alert-class')}} alert-dismissible fade show animated fadeIn" data-auto-dismiss="2000" role="alert">
-                            <strong> {{Session::get('message')}} </strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true"> &times; </span>
-                            </button>
-                        </div>
-                    @endif
-                </div>
-                <div class="col-md-4"></div>
-            </div>
-        </div>
-    </div>
-    <!-- end of alert section -->
+    @include('layouts.alerts')
 
     <!-- vaccination timeline section -->
     <div class="container-fluid">
@@ -774,7 +755,7 @@
                                                     @php
                                                         $child_note_status6 = App\Models\Doctor\ChildHealthNote::where('baby_id',$data['baby_id'])->where('baby_age_group_id',6)->count();
                                                     @endphp
-                                                    @if ($child_note_status6 == 6)
+                                                    @if ($child_note_status6 == 0)
                                                         <button class="btn" id='vac-approvel-with-data' data-toggle='modal' href='#vac-confirm-with-data' data-baby='{{$data['baby_id']}}' data-vac='12'>
                                                             <span class="badge badge-off">එන්නත් කිරීමට අනුමැතිය දෙන්න</span>
                                                         </button>
@@ -1785,7 +1766,7 @@
                                                     @php
                                                         $child_note_status6 = App\Models\Doctor\ChildHealthNote::where('baby_id',$data['baby_id'])->where('baby_age_group_id',6)->count();
                                                     @endphp
-                                                    @if ($child_note_status6 == 6)
+                                                    @if ($child_note_status6 == 0)
                                                         <button class="btn" id='vac-approvel-with-data' data-toggle='modal' href='#vac-confirm-with-data' data-baby='{{$data['baby_id']}}' data-vac='12'>
                                                             <span class="badge badge-off">එන්නත් කිරීමට අනුමැතිය දෙන්න</span>
                                                         </button>

@@ -106,7 +106,7 @@
 
             @if (Auth::user()->role_id == '1')
                 <li>
-                    <a href="{{url('doctor/baby-data-page')}}" class="text-uppercase li-edit">
+                    <a href="{{url('doctor/child-health-note')}}" class="text-uppercase li-edit">
                         <span class="icon">
                             <i class="fas fa-file-medical-alt" aria-hidden="true"></i>
                         </span>

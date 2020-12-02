@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Baby\Baby;
 use App\Models\Doctor\DoctorMessage;
 use App\Models\Vaccine\VaccineDate;
+use App\Models\Doctor\ChildHealthNote;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
@@ -176,6 +177,8 @@ class DoctorController extends Controller
 
         $vac_name = array("1"=>"BCG-1","2"=>"BCG-2","3"=>"Pentavalent 1","4"=>"OPV-1","5"=>"fIPV-1","6"=>"Pentavalent-2","7"=>"OVP-2","8"=>"fIPV-2","9"=>"Pentavalent-3","10"=>"OVP-3","11"=>"MMR-1","12"=>"Live JE","13"=>"DPT","14"=>"OVP-4","15"=>"MMR-2","16"=>"D.T","17"=>"OPV-5","18"=>"HPV-1","19"=>"HPV-2","20"=>"aTd");
         $query = array("1"=>DB::table('vacc_births'),"2"=>DB::table('vacc_births'),"3"=>DB::table('vacc2_months'),"4"=>DB::table('vacc2_months'),"5"=>DB::table('vacc2_months'),"6"=>DB::table('vacc4_months'),"7"=>DB::table('vacc4_months'),"8"=>DB::table('vacc4_months'),"9"=>DB::table('vacc6_months'),"10"=>DB::table('vacc6_months'),"11"=>DB::table('vacc9_months'),"12"=>DB::table('vacc12_months'),"13"=>DB::table('vacc18_months'),"14"=>DB::table('vacc18_months'),"15"=>DB::table('vacc5_years'),"16"=>DB::table('vacc5_years'),"17"=>DB::table('vacc5_years'),"18"=>DB::table('vacc10_years'),"19"=>DB::table('vacc10_years'),"20"=>DB::table('vacc11_years'));
+        $age_groups = array("1"=>"1st Month","2"=>"1st Month","3"=>"After 2nd Month","4"=>"After 2nd Month","5"=>"After 2nd Month","6"=>"After 4th Month","7"=>"After 4th Month","8"=>"After 4th Month","9"=>"After 6th Month","10"=>"After 6th Month","11"=>"After 9th Month","12"=>"After 12th Month","13"=>"After 18th Month","14"=>"After 18th Month","15"=>"After 3rd Year","16"=>"After 5th Year","17"=>"After 5th Year","18"=>"After 10th Year","19"=>"After 10th Year","20"=>"After 11th Year");
+        $age_group_ids = array("1"=>1,"2"=>1,"3"=>2,"4"=>2,"5"=>2,"6"=>3,"7"=>3,"8"=>3,"9"=>4,"10"=>4,"11"=>5,"12"=>6,"13"=>7,"14"=>7,"15"=>8,"16"=>9,"17"=>9,"18"=>10,"19"=>10,"20"=>11);
         $status = 0;
         $approvel_status = 1;
 
@@ -213,8 +216,176 @@ class DoctorController extends Controller
             } 
             
         }
+        elseif($request->type == 2) {
 
-        dd($midwife_id,$doctor_id);
+            // dd($vac_id);
+
+            $clinic_date=$request->date_came;
+            $eye1=$request->eye1;
+            $eye2=$request->eye2;
+            $eye3=$request->eye3;
+            $eye4=$request->eye4;
+            $eye5=$request->eye5;
+            $hearing=$request->hearing;
+            $weight=$request->weight;
+            $height=$request->height;
+            $development=$request->development;
+            $heart=$request->heart;
+            $hip=$request->hip;
+            $other=$request->other;
+
+            try{
+
+                DB::beginTransaction();
+
+                if($vac_id == 1 ) {
+
+                    DB::table('child_health_notes')->insert(['baby_id'=>$baby_id,'midwife_id'=>$midwife_id,'doctor_id'=>$doctor_id,'baby_age_group'=>$age_groups[$vac_id],'baby_age_group_id'=>$age_group_ids[$vac_id],'eye_size'=>$eye1,'squint'=>$eye2,'retina'=>$eye3,'cornea'=>$eye4,'eye_movement'=>$eye5,'hearing'=>$hearing,'weight'=>$weight,'height'=>$height,'development'=>$development,'heart'=>$heart,'hip'=>$hip,'other'=>$other,'clinic_date'=>$clinic_date]);
+
+                    DB::commit();
+                    Session::flash('message', 'අනුමත කිරීම සාර්ථකයි !'); 
+                    Session::flash('alert-class', 'alert-success'); 
+                    return redirect()->route('vacc-permission');
+
+                }
+                elseif($vac_id == 3 || $vac_id == 6 || $vac_id == 9 || $vac_id == 11 || $vac_id == 12 || $vac_id == 13 || $vac_id == 15 || $vac_id == 16 || $vac_id == 18 || $vac_id == 20) {
+                    $query[$vac_id]->insert(['baby_id'=>$baby_id,'midwife_id'=>$midwife_id,'approved_doctor_id'=>$doctor_id,'vac_id'=>$vac_id,'vac_name'=>$vac_name[$vac_id],'status'=>$status]);
+                    DB::table('child_health_notes')->insert(['baby_id'=>$baby_id,'midwife_id'=>$midwife_id,'doctor_id'=>$doctor_id,'baby_age_group'=>$age_groups[$vac_id],'baby_age_group_id'=>$age_group_ids[$vac_id],'eye_size'=>$eye1,'squint'=>$eye2,'retina'=>$eye3,'cornea'=>$eye4,'eye_movement'=>$eye5,'hearing'=>$hearing,'weight'=>$weight,'height'=>$height,'development'=>$development,'heart'=>$heart,'hip'=>$hip,'other'=>$other,'clinic_date'=>$clinic_date]);
+                    $is_set_vac_date = DB::table('vaccine_dates')->where('baby_id',$baby_id)->where('midwife_id',$midwife_id)->where('vac_id',$vac_id)->count();
+
+                    if($is_set_vac_date == 0) {
+                        DB::table('vaccine_dates')->insert(['baby_id'=>$baby_id,'midwife_id'=>$midwife_id,'approvel_status'=>$approvel_status,'vac_id'=>$vac_id,'vac_name'=>$vac_name[$vac_id],'given_status'=>$status]);
+                    }
+                    else {
+                        DB::table('vaccine_dates')->where('baby_id',$baby_id)->where('vac_id',$vac_id)
+                                                  ->update(['approvel_status'=>$approvel_status]);
+                    }
+
+                    DB::commit();
+                    Session::flash('message', 'අනුමත කිරීම සාර්ථකයි !'); 
+                    Session::flash('alert-class', 'alert-success'); 
+                    return redirect()->route('vacc-permission');
+                }
+                
+            } catch(\Exception $e){
+
+                DB::rollBack();
+                Session::flash('message', 'අනුමත කිරීම අසාර්ථකයි !'); 
+                Session::flash('alert-class', 'alert-danger'); 
+                return redirect()->route('vacc-permission');
+            } 
+            
+        }
+        elseif($request->type == 3) {
+
+            // dd($vac_id);
+
+            $clinic_date=$request->date_came;
+            $eye1=$request->eye1;
+            $eye2=$request->eye2;
+            $eye3=$request->eye3;
+            $eye4=$request->eye4;
+            $eye5=$request->eye5;
+            $hearing=$request->hearing;
+            $weight=$request->weight;
+            $height=$request->height;
+            $development=$request->development;
+            $heart=$request->heart;
+            $hip=$request->hip;
+            $other=$request->other;
+
+            try{
+
+                DB::beginTransaction();
+
+                if($vac_id == 12 ) { //group of vacc-12 is age group 6
+
+                    DB::table('child_health_notes')->insert(['baby_id'=>$baby_id,'midwife_id'=>$midwife_id,'doctor_id'=>$doctor_id,'baby_age_group'=>$age_groups[$vac_id],'baby_age_group_id'=>$age_group_ids[$vac_id],'eye_size'=>$eye1,'squint'=>$eye2,'retina'=>$eye3,'cornea'=>$eye4,'eye_movement'=>$eye5,'hearing'=>$hearing,'weight'=>$weight,'height'=>$height,'development'=>$development,'heart'=>$heart,'hip'=>$hip,'other'=>$other,'clinic_date'=>$clinic_date]);
+
+                    DB::commit();
+                    Session::flash('message', 'අනුමත කිරීම සාර්ථකයි !'); 
+                    Session::flash('alert-class', 'alert-success'); 
+                    return redirect()->route('vacc-permission');
+
+                }
+                
+            } catch(\Exception $e){
+
+                DB::rollBack();
+                Session::flash('message', 'අනුමත කිරීම අසාර්ථකයි !'); 
+                Session::flash('alert-class', 'alert-danger'); 
+                return redirect()->route('vacc-permission');
+            } 
+            
+        }
+    }
+
+    public function childHealthNote() {
+
+        $baby_id=Session::get('baby_id');
+        $data = array();
+
+        $baby=Baby::where('baby_id',$baby_id)
+                    ->where('status',1)
+                    ->limit(1)
+                    ->get()
+                    ->toArray();
+
+        $birth_day = date_format(date_create($baby[0]['baby_dob']),'Y-m-d');
+        $today=date("Y-m-d");
+        $baby_age=date_diff(date_create($birth_day),date_create($today));
+        $baby_age_in_days=$baby_age->format('%a');
+
+        $is_group_5_note_is_set = ChildHealthNote::where('baby_id',$baby_id)->where('baby_age_group_id',5)->count();
+        $is_group_6_note_is_set = ChildHealthNote::where('baby_id',$baby_id)->where('baby_age_group_id',6)->count();$data['group_6_note'] = 1;
+
+        if ($baby_age_in_days > 365) {
+            if ($is_group_5_note_is_set == 1) {
+                if ($is_group_6_note_is_set == 0) {
+                    $data['group_6_note'] = 0;
+                }
+            }
+        }
+
+        $data['baby_id']=$baby[0]['baby_id'];
+        $data['baby_name']=$baby[0]['baby_first_name'].' '.$baby[0]['baby_last_name'];
+        $data['baby_gender']=$baby[0]['baby_gender'];
+
+        $health_note['clinic_date'] = array();
+        $health_note['eye_size'] = array();
+        $health_note['squint'] = array();
+        $health_note['retina'] = array();
+        $health_note['cornea'] = array();
+        $health_note['eye_movement'] = array();
+        $health_note['hearing'] = array();
+        $health_note['weight'] = array();
+        $health_note['height'] = array();
+        $health_note['development'] = array();
+        $health_note['heart'] = array();
+        $health_note['hip'] = array();
+
+        for ($i = 1; $i <= 9; $i++) {
+            $child_health_note = ChildHealthNote::where('baby_id',$baby_id)->where('baby_age_group_id',$i)->limit(1)->get();
+
+            if (count($child_health_note)>0) {
+                array_push($health_note['clinic_date'],$child_health_note[0]->clinic_date);
+                array_push($health_note['eye_size'],$child_health_note[0]->eye_size);
+                array_push($health_note['squint'],$child_health_note[0]->squint);
+                array_push($health_note['retina'],$child_health_note[0]->retina);
+                array_push($health_note['cornea'],$child_health_note[0]->cornea);
+                array_push($health_note['eye_movement'],$child_health_note[0]->eye_movement);
+                array_push($health_note['hearing'],$child_health_note[0]->hearing);
+                array_push($health_note['weight'],$child_health_note[0]->weight);
+                array_push($health_note['height'],$child_health_note[0]->height);
+                array_push($health_note['development'],$child_health_note[0]->development);
+                array_push($health_note['heart'],$child_health_note[0]->heart);
+                array_push($health_note['hip'],$child_health_note[0]->hip);
+            }            
+        }
+        
+        $data['health_note'] =$health_note;
+        // dd($data);
+        return view('Baby.child-health-note')->with('data', $data);
     }
     
 }

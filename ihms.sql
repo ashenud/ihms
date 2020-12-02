@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 192.168.1.101
--- Generation Time: Nov 30, 2020 at 02:19 AM
+-- Generation Time: Dec 03, 2020 at 12:05 AM
 -- Server version: 10.4.15-MariaDB-1:10.4.15+maria~bionic-log
 -- PHP Version: 7.4.11
 
@@ -108,7 +108,7 @@ CREATE TABLE `child_health_notes` (
   `development` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `heart` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `hip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `other` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `other` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `doctor_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `clinic_date` date NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -121,8 +121,17 @@ CREATE TABLE `child_health_notes` (
 --
 
 INSERT INTO `child_health_notes` (`id`, `baby_id`, `midwife_id`, `baby_age_group`, `baby_age_group_id`, `eye_size`, `squint`, `retina`, `cornea`, `eye_movement`, `hearing`, `weight`, `height`, `development`, `heart`, `hip`, `other`, `doctor_id`, `clinic_date`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, '001/02/2018/1000', 'midwife1', '1st Month', 1, 'O', 'O', 'O', 'O', 'O', 'O', 'N', 'NH', 'O', 'O', 'O', ' ', 'doctor1', '2018-02-04', NULL, NULL, NULL),
-(2, '001/02/2018/1000', 'midwife1', 'After 2nd Month', 2, 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'NH', 'O', 'O', 'O', ' ', 'doctor1', '2020-04-04', NULL, NULL, NULL);
+(1, '001/02/2018/1000', 'midwife1', '1st Month', 1, 'O', 'O', 'O', 'O', 'O', 'O', 'N', 'NH', 'O', 'O', 'O', NULL, 'doctor1', '2018-02-04', NULL, NULL, NULL),
+(2, '001/02/2018/1000', 'midwife1', 'After 2nd Month', 2, 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'NH', 'O', 'O', 'O', NULL, 'doctor1', '2020-04-04', NULL, NULL, NULL),
+(3, '001/02/2018/1000', 'midwife1', 'After 4th Month', 3, 'O', 'O', 'O', 'O', 'O', 'O', 'N', 'NH', 'O', 'O', 'O', NULL, 'doctor1', '2020-12-02', NULL, NULL, NULL),
+(4, '001/02/2018/1000', 'midwife1', 'After 6th Month', 4, 'O', 'O', 'O', 'O', 'O', 'O', 'N', 'NH', 'O', 'O', 'O', NULL, 'doctor1', '2020-12-02', NULL, NULL, NULL),
+(5, '001/02/2018/1000', 'midwife1', 'After 9th Month', 5, 'O', 'O', 'O', 'O', 'O', 'O', 'N', 'NH', 'O', 'O', 'O', NULL, 'doctor1', '2020-12-02', NULL, NULL, NULL),
+(6, '001/02/2018/1000', 'midwife1', 'After 18th Month', 7, 'O', 'O', 'X', 'O', 'X', 'O', 'N', 'S', 'O', 'O', 'X', NULL, 'doctor1', '2020-12-02', NULL, NULL, NULL),
+(7, '001/02/2018/1000', 'midwife1', 'After 12th Month', 6, 'O', 'X', 'O', 'X', 'O', 'O', 'O', 'NH', 'O', 'X', 'O', NULL, 'doctor1', '2020-12-01', NULL, NULL, NULL),
+(8, '001/02/2018/1000', 'midwife1', 'After 3rd Year', 8, 'O', 'X', 'O', 'O', 'X', 'O', 'N', 'NH', 'X', 'O', 'O', NULL, 'doctor1', '2020-11-30', NULL, NULL, NULL),
+(9, '001/02/2018/1000', 'midwife1', 'After 5th Year', 9, 'X', 'O', 'O', 'O', 'O', 'X', 'N', 'NH', 'O', 'X', 'X', NULL, 'doctor1', '2020-12-01', NULL, NULL, NULL),
+(10, '001/02/2018/1000', 'midwife1', 'After 11th Year', 11, 'O', 'O', 'O', 'X', 'O', 'O', 'OW', 'NH', 'O', 'O', 'X', NULL, 'doctor1', '2020-11-29', NULL, NULL, NULL),
+(11, '001/01/2020/1000', 'midwife1', '1st Month', 1, 'O', 'X', 'O', 'X', 'O', 'X', 'OW', 'S', 'O', 'X', 'O', NULL, 'doctor1', '2020-12-02', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -463,7 +472,8 @@ CREATE TABLE `vacc2_months` (
 
 INSERT INTO `vacc2_months` (`id`, `baby_id`, `midwife_id`, `approved_doctor_id`, `vac_id`, `vac_name`, `date_given`, `batch_no`, `side_effects`, `status`, `created_at`, `updated_at`) VALUES
 (4, '001/02/2018/1000', 'midwife1', 'doctor1', 3, 'Pentavalent-1', NULL, NULL, NULL, 0, NULL, NULL),
-(5, '001/02/2018/1000', 'midwife1', 'doctor1', 4, 'OPV-1', NULL, NULL, NULL, 0, NULL, NULL);
+(5, '001/02/2018/1000', 'midwife1', 'doctor1', 4, 'OPV-1', NULL, NULL, NULL, 0, NULL, NULL),
+(7, '001/02/2018/1000', 'midwife1', 'doctor1', 5, 'fIPV-1', NULL, NULL, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -507,6 +517,15 @@ CREATE TABLE `vacc4_months` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `vacc4_months`
+--
+
+INSERT INTO `vacc4_months` (`id`, `baby_id`, `midwife_id`, `approved_doctor_id`, `vac_id`, `vac_name`, `date_given`, `batch_no`, `side_effects`, `status`, `created_at`, `updated_at`) VALUES
+(3, '001/02/2018/1000', 'midwife1', 'doctor1', 6, 'Pentavalent-2', NULL, NULL, NULL, 0, NULL, NULL),
+(4, '001/02/2018/1000', 'midwife1', 'doctor1', 7, 'OVP-2', NULL, NULL, NULL, 0, NULL, NULL),
+(5, '001/02/2018/1000', 'midwife1', 'doctor1', 8, 'fIPV-2', NULL, NULL, NULL, 0, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -527,6 +546,15 @@ CREATE TABLE `vacc5_years` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `vacc5_years`
+--
+
+INSERT INTO `vacc5_years` (`id`, `baby_id`, `midwife_id`, `approved_doctor_id`, `vac_id`, `vac_name`, `date_given`, `batch_no`, `side_effects`, `status`, `created_at`, `updated_at`) VALUES
+(1, '001/02/2018/1000', 'midwife1', 'doctor1', 15, 'MMR-2', NULL, NULL, NULL, 0, NULL, NULL),
+(2, '001/02/2018/1000', 'midwife1', 'doctor1', 16, 'D.T', NULL, NULL, NULL, 0, NULL, NULL),
+(3, '001/02/2018/1000', 'midwife1', 'doctor1', 17, 'OPV-5', NULL, NULL, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -549,6 +577,14 @@ CREATE TABLE `vacc6_months` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `vacc6_months`
+--
+
+INSERT INTO `vacc6_months` (`id`, `baby_id`, `midwife_id`, `approved_doctor_id`, `vac_id`, `vac_name`, `date_given`, `batch_no`, `side_effects`, `status`, `created_at`, `updated_at`) VALUES
+(1, '001/02/2018/1000', 'midwife1', 'doctor1', 9, 'Pentavalent-3', NULL, NULL, NULL, 0, NULL, NULL),
+(2, '001/02/2018/1000', 'midwife1', 'doctor1', 10, 'OVP-3', NULL, NULL, NULL, 0, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -569,6 +605,13 @@ CREATE TABLE `vacc9_months` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `vacc9_months`
+--
+
+INSERT INTO `vacc9_months` (`id`, `baby_id`, `midwife_id`, `approved_doctor_id`, `vac_id`, `vac_name`, `date_given`, `batch_no`, `side_effects`, `status`, `created_at`, `updated_at`) VALUES
+(1, '001/02/2018/1000', 'midwife1', 'doctor1', 11, 'MMR-1', NULL, NULL, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -612,6 +655,13 @@ CREATE TABLE `vacc11_years` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `vacc11_years`
+--
+
+INSERT INTO `vacc11_years` (`id`, `baby_id`, `midwife_id`, `approved_doctor_id`, `vac_id`, `vac_name`, `date_given`, `batch_no`, `side_effects`, `status`, `created_at`, `updated_at`) VALUES
+(1, '001/02/2018/1000', 'midwife1', 'doctor1', 20, 'aTd', NULL, NULL, NULL, 0, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -633,6 +683,13 @@ CREATE TABLE `vacc12_months` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `vacc12_months`
+--
+
+INSERT INTO `vacc12_months` (`id`, `baby_id`, `midwife_id`, `approved_doctor_id`, `vac_id`, `vac_name`, `date_given`, `batch_no`, `side_effects`, `status`, `created_at`, `updated_at`) VALUES
+(1, '001/02/2018/1000', 'midwife1', 'doctor1', 12, 'Live JE', NULL, NULL, NULL, 0, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -653,6 +710,14 @@ CREATE TABLE `vacc18_months` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `vacc18_months`
+--
+
+INSERT INTO `vacc18_months` (`id`, `baby_id`, `midwife_id`, `approved_doctor_id`, `vac_id`, `vac_name`, `date_given`, `batch_no`, `side_effects`, `status`, `created_at`, `updated_at`) VALUES
+(1, '001/02/2018/1000', 'midwife1', 'doctor1', 13, 'DPT', NULL, NULL, NULL, 0, NULL, NULL),
+(2, '001/02/2018/1000', 'midwife1', 'doctor1', 14, 'OVP-4', NULL, NULL, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -678,9 +743,23 @@ CREATE TABLE `vaccine_dates` (
 --
 
 INSERT INTO `vaccine_dates` (`id`, `baby_id`, `midwife_id`, `vac_id`, `vac_name`, `giving_date`, `approvel_status`, `given_status`, `created_at`, `updated_at`) VALUES
-(1, '001/02/2018/1000', 'midwife1', 3, 'Pentavalent-1', '2018-08-12', 0, 0, NULL, NULL),
-(2, '001/02/2018/1000', 'midwife1', 4, 'OPV-1', '2018-08-14', 0, 0, NULL, NULL),
-(3, '001/02/2018/1000', 'midwife1', 2, 'BCG-2', NULL, 1, 0, NULL, NULL);
+(1, '001/02/2018/1000', 'midwife1', 3, 'Pentavalent-1', '2018-08-12', 1, 0, NULL, NULL),
+(2, '001/02/2018/1000', 'midwife1', 4, 'OPV-1', '2018-08-14', 1, 0, NULL, NULL),
+(3, '001/02/2018/1000', 'midwife1', 2, 'BCG-2', NULL, 1, 0, NULL, NULL),
+(4, '001/02/2018/1000', 'midwife1', 5, 'fIPV-1', NULL, 1, 0, NULL, NULL),
+(6, '001/02/2018/1000', 'midwife1', 6, 'Pentavalent-2', NULL, 1, 0, NULL, NULL),
+(7, '001/02/2018/1000', 'midwife1', 7, 'OVP-2', NULL, 1, 0, NULL, NULL),
+(8, '001/02/2018/1000', 'midwife1', 8, 'fIPV-2', NULL, 1, 0, NULL, NULL),
+(9, '001/02/2018/1000', 'midwife1', 9, 'Pentavalent-3', NULL, 1, 0, NULL, NULL),
+(10, '001/02/2018/1000', 'midwife1', 10, 'OVP-3', NULL, 1, 0, NULL, NULL),
+(11, '001/02/2018/1000', 'midwife1', 11, 'MMR-1', NULL, 1, 0, NULL, NULL),
+(12, '001/02/2018/1000', 'midwife1', 13, 'DPT', NULL, 1, 0, NULL, NULL),
+(13, '001/02/2018/1000', 'midwife1', 14, 'OVP-4', NULL, 1, 0, NULL, NULL),
+(14, '001/02/2018/1000', 'midwife1', 12, 'Live JE', NULL, 1, 0, NULL, NULL),
+(15, '001/02/2018/1000', 'midwife1', 15, 'MMR-2', NULL, 1, 0, NULL, NULL),
+(16, '001/02/2018/1000', 'midwife1', 16, 'D.T', NULL, 1, 0, NULL, NULL),
+(17, '001/02/2018/1000', 'midwife1', 17, 'OPV-5', NULL, 1, 0, NULL, NULL),
+(18, '001/02/2018/1000', 'midwife1', 20, 'aTd', NULL, 1, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -929,7 +1008,7 @@ ALTER TABLE `birth_details`
 -- AUTO_INCREMENT for table `child_health_notes`
 --
 ALTER TABLE `child_health_notes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `doctors`
@@ -995,7 +1074,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vacc2_months`
 --
 ALTER TABLE `vacc2_months`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `vacc3_years`
@@ -1007,25 +1086,25 @@ ALTER TABLE `vacc3_years`
 -- AUTO_INCREMENT for table `vacc4_months`
 --
 ALTER TABLE `vacc4_months`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `vacc5_years`
 --
 ALTER TABLE `vacc5_years`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `vacc6_months`
 --
 ALTER TABLE `vacc6_months`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `vacc9_months`
 --
 ALTER TABLE `vacc9_months`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `vacc10_years`
@@ -1037,25 +1116,25 @@ ALTER TABLE `vacc10_years`
 -- AUTO_INCREMENT for table `vacc11_years`
 --
 ALTER TABLE `vacc11_years`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `vacc12_months`
 --
 ALTER TABLE `vacc12_months`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `vacc18_months`
 --
 ALTER TABLE `vacc18_months`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `vaccine_dates`
 --
 ALTER TABLE `vaccine_dates`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `vacc_births`

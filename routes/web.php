@@ -30,6 +30,7 @@ Route::get('/doctor/dashboard', 'App\Http\Controllers\Doctor\DoctorController@in
 Route::post('/doctor/baby-select', 'App\Http\Controllers\Doctor\DoctorController@babySelect')->middleware('doctor');
 Route::get('/doctor/vaccinations-permission', 'App\Http\Controllers\Doctor\DoctorController@vaccPermission')->name('vacc-permission')->middleware('doctor');
 Route::post('/doctor/vaccinations-permission-action', 'App\Http\Controllers\Doctor\DoctorController@vaccPermissionAction')->middleware('doctor');
+Route::get('/doctor/child-health-note', 'App\Http\Controllers\Doctor\DoctorController@childHealthNote')->name('child-helth-note')->middleware('doctor');
 
 /* @@ sister controllers @@ */
 Route::get('/sister/dashboard', 'App\Http\Controllers\Sister\SisterController@index')->name('sister')->middleware('sister');

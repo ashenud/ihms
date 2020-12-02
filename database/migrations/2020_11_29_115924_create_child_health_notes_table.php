@@ -30,7 +30,7 @@ class CreateChildHealthNotesTable extends Migration
             $table->string('development');
             $table->string('heart');
             $table->string('hip');
-            $table->string('other');
+            $table->string('other')->nullable();
             $table->string('doctor_id');
             $table->date('clinic_date');
             $table->softDeletes('deleted_at');
