@@ -37,7 +37,10 @@ Route::get('/sister/dashboard', 'App\Http\Controllers\Sister\SisterController@in
 
 /* @@ midwife controllers @@ */
 Route::get('/midwife/dashboard', 'App\Http\Controllers\Midwife\MidwifeController@index')->name('midwife')->middleware('midwife');
+Route::post('/midwife/baby-select', 'App\Http\Controllers\Midwife\MidwifeController@babySelect')->middleware('midwife');
 Route::get('/midwife/vaccinations-mark', 'App\Http\Controllers\Midwife\MidwifeController@vaccMark')->name('vacc-mark')->middleware('midwife');
+Route::post('/midwife/vaccinations-mark-action', 'App\Http\Controllers\Midwife\MidwifeController@vaccMarkAction')->middleware('midwife');
+Route::post('/midwife/vaccinations-set-date-action', 'App\Http\Controllers\Midwife\MidwifeController@vaccSetDateAction')->middleware('midwife');
 
 /* @@ baby controllers @@ */
 Route::get('/baby/select', 'App\Http\Controllers\Baby\BabyController@select')->name('baby-select')->middleware('readonly');

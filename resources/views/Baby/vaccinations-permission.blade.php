@@ -5,7 +5,7 @@
 @endsection
 
 @section('style')
-<link rel="stylesheet" href="{{asset('css/baby/baby-vac-permission-style.css')}}">
+<link rel="stylesheet" href="{{asset('css/baby/baby-vaccinations-permission-style.css')}}">
 
     @if (($data['baby_gender'] == 'M'))
     <style>

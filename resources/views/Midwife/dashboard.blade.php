@@ -23,22 +23,7 @@
 <div class="content">
                
     <!-- alert section -->
-    <div class="alert-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4">
-                    <?php //include('./inc/alert-reminder-success.php'); ?>
-                    <?php //include('./inc/alert-reminder-error.php'); ?>
-                    <?php //include('./inc/alert-email-send-success.php'); ?>
-                    <?php //include('./inc/alert-email-send-error.php'); ?>
-                    <?php //include('./inc/alert-reminder-delete-success.php'); ?>
-                    <?php //include('./inc/alert-reminder-delete-error.php'); ?>
-                </div>
-                <div class="col-lg-4"></div>
-            </div>
-        </div>
-    </div>
+    @include('layouts.alerts')
     <!-- end of alert section -->
     
     <div class="container">
@@ -213,17 +198,18 @@
             <!-- search baby section -->
             <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 mb-3">
                 <div class="card search-babies">
-                    <form method="POST" action="/pages/midwife/php/mid-search-baby-by-mNIC.php">
+                    <form method="POST" action="{{url('midwife/baby-select')}}">
+                        @csrf
                         <div class="card-header">
                             <h6 class="font-weight-bold">ළදරුවන් නිරීක්ෂණය කිරීම</h6>
                         </div>
                         <div class="card-body">
                             <div class="search-input">
-                                <input type="text" name="searchUser" class="form-control" placeholder="සෙවීම සඳහා මවගේ හැඳුනුම් අංකය ඇතුළත් කරන්න..." required>
+                                <input type="text" name="mother_nic" class="form-control" placeholder="සෙවීම සඳහා මවගේ හැඳුනුම් අංකය ඇතුළත් කරන්න..." required>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <input type="submit" value="සොයන්න" class="btn btn-sm text-light" name="searchBabyUsingMnic">
+                            <input type="submit" value="සොයන්න" class="btn btn-sm text-light" name="submit">
                         </div>
                     </form>
                 </div>

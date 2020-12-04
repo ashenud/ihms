@@ -89,9 +89,14 @@ class DoctorController extends Controller
                 if($vac_data[$i]['vac_id']==$j) {
                     array_push($vac_id, $j);
                     $vaccine[$j]['name'] = $vac_name[$j];
-                    $vaccine[$j]['giving_status'] = 1;
-                    $vaccine[$j]['giving_date'] = $vac_data[$i]['giving_date'];
                     if($vac_data[$i]['given_status'] == 1 && $vac_data[$i]['approvel_status'] == 1) {
+                        if(isset($vac_data[$i]['giving_date'])) {
+                            $vaccine[$j]['giving_status'] = 1;
+                            $vaccine[$j]['giving_date'] = $vac_data[$i]['giving_date'];
+                        }
+                        else {
+                            $vaccine[$j]['giving_status'] = 0;
+                        }
                         $vaccine[$j]['given_status'] = 1;
                         $vaccine[$j]['approvel_status'] = 1;
                         $details = $query[$j]->where('baby_id',$baby_id)->where('vac_id',$j)->get();
@@ -106,12 +111,26 @@ class DoctorController extends Controller
                         }
                     }
                     elseif ($vac_data[$i]['given_status'] == 0 && $vac_data[$i]['approvel_status'] == 1) {
+                        if(isset($vac_data[$i]['giving_date'])) {
+                            $vaccine[$j]['giving_status'] = 1;
+                            $vaccine[$j]['giving_date'] = $vac_data[$i]['giving_date'];
+                        }
+                        else {
+                            $vaccine[$j]['giving_status'] = 0;
+                        }
                         $vaccine[$j]['given_status'] = 0;
                         $vaccine[$j]['approvel_status'] = 1;
                         $details = $query[$j]->where('baby_id',$baby_id)->where('vac_id',$j)->get();
                         $vaccine[$j]['approved_doctor_id'] = $details[0]->approved_doctor_id;
                     }
                     else {
+                        if(isset($vac_data[$i]['giving_date'])) {
+                            $vaccine[$j]['giving_status'] = 1;
+                            $vaccine[$j]['giving_date'] = $vac_data[$i]['giving_date'];
+                        }
+                        else {
+                            $vaccine[$j]['giving_status'] = 0;
+                        }
                         $vaccine[$j]['given_status'] = 0;
                         $vaccine[$j]['approvel_status'] = 0;
                     }
@@ -144,6 +163,7 @@ class DoctorController extends Controller
                         else {
                             $vaccine[$k]['name'] = $vac_name[$k];
                             $vaccine[$k]['giving_status'] = 0;
+                            $vaccine[$k]['giving_status'] = 0;
                             $vaccine[$k]['given_status'] = 0;
                             $vaccine[$k]['approvel_status'] = 0;
                             $vaccine[$k]['scar'] = 0;
@@ -151,6 +171,7 @@ class DoctorController extends Controller
                     }
                     else {
                         $vaccine[$k]['name'] = $vac_name[$k];
+                        $vaccine[$k]['giving_status'] = 0;
                         $vaccine[$k]['giving_status'] = 0;
                         $vaccine[$k]['given_status'] = 0;
                         $vaccine[$k]['approvel_status'] = 0;
