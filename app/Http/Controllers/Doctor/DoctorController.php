@@ -146,23 +146,31 @@ class DoctorController extends Controller
                     if ($k == 1) {
                         $details = $query[$k]->where('baby_id',$baby_id)->where('vac_id',$k)->get();
                         // dd($details);
-                        if ($details[0]->status == 1) {
-                            $vaccine[$k]['name'] = $vac_name[$k];
-                            $vaccine[$k]['given_status'] = 1;
-                            $vaccine[$k]['date_given'] = $details[0]->date_given;
-                            $vaccine[$k]['batch_no'] = $details[0]->batch_no;
-                            $vaccine[$k]['approved_doctor_id'] = "";
-                            $vaccine[$k]['scar'] = $details[0]->scar;
-                            if(!isset($details[0]->side_effects)) {
-                                $vaccine[$k]['side_effects'] = "නැත";
+                        if(count($details) > 0) {
+                            if ($details[0]->status == 1) {
+                                $vaccine[$k]['name'] = $vac_name[$k];
+                                $vaccine[$k]['given_status'] = 1;
+                                $vaccine[$k]['date_given'] = $details[0]->date_given;
+                                $vaccine[$k]['batch_no'] = $details[0]->batch_no;
+                                $vaccine[$k]['approved_doctor_id'] = "";
+                                $vaccine[$k]['scar'] = $details[0]->scar;
+                                if(!isset($details[0]->side_effects)) {
+                                    $vaccine[$k]['side_effects'] = "නැත";
+                                }
+                                else {
+                                    $vaccine[$k]['side_effects'] = $details[0]->side_effects;
+                                }
                             }
                             else {
-                                $vaccine[$k]['side_effects'] = $details[0]->side_effects;
+                                $vaccine[$k]['name'] = $vac_name[$k];
+                                $vaccine[$k]['giving_status'] = 0;
+                                $vaccine[$k]['given_status'] = 0;
+                                $vaccine[$k]['approvel_status'] = 0;
+                                $vaccine[$k]['scar'] = 0;
                             }
                         }
                         else {
                             $vaccine[$k]['name'] = $vac_name[$k];
-                            $vaccine[$k]['giving_status'] = 0;
                             $vaccine[$k]['giving_status'] = 0;
                             $vaccine[$k]['given_status'] = 0;
                             $vaccine[$k]['approvel_status'] = 0;
@@ -171,7 +179,6 @@ class DoctorController extends Controller
                     }
                     else {
                         $vaccine[$k]['name'] = $vac_name[$k];
-                        $vaccine[$k]['giving_status'] = 0;
                         $vaccine[$k]['giving_status'] = 0;
                         $vaccine[$k]['given_status'] = 0;
                         $vaccine[$k]['approvel_status'] = 0;

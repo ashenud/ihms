@@ -8,75 +8,61 @@
 <link rel="stylesheet" href="{{asset('css/baby/baby-vaccinations-permission-style.css')}}">
 
     @if (($data['baby_gender'] == 'M'))
-    <style>
-        .main-timeline:before {
-            background: #c2255c;
-        }
-        .main-timeline .timeline {
-            border-top: 7px solid #084772;
-            border-right: 7px solid #084772;
-        }
-        .main-timeline .icon {
-            background: #17a2b8;
-        }
-        .main-timeline .timeline-content {
-            background: #bac8ff;
-        }
-        .main-timeline .timeline-content:before,
-        .main-timeline .timeline-content:after {
-            background: #bac8ff;
-        }
-        .main-timeline .timeline:nth-child(2n) {
-            border-left: 7px solid #084772;
-        }
-    </style>
-
-    <!--male badge color-->
-    <style>
-        .color-given 
-        {
-            background: linear-gradient(60deg, #fdd835, #ffbb33);
-        }
-        .badge-secondary
-        {
-            background: linear-gradient(60deg, #929fba, #7283a7);
-        }            
-    </style>    
+        <!--male badge color-->
+        <style>
+            .main-timeline:before {
+                background: #c2255c;
+            }
+            .main-timeline .timeline {
+                border-top: 7px solid #084772;
+                border-right: 7px solid #084772;
+            }
+            .main-timeline .icon {
+                background: #17a2b8;
+            }
+            .main-timeline .timeline-content {
+                background: #bac8ff;
+            }
+            .main-timeline .timeline-content:before,
+            .main-timeline .timeline-content:after {
+                background: #bac8ff;
+            }
+            .main-timeline .timeline:nth-child(2n) {
+                border-left: 7px solid #084772;
+            }
+            .badge-secondary
+            {
+                background: linear-gradient(60deg, #929fba, #7283a7);
+            }            
+        </style>    
     @else
-    <style>
-        .main-timeline:before {
-            background: #084772;
-        }
-        .main-timeline .timeline {
-            border-top: 7px solid #bd477d;
-            border-right: 7px solid #bd477d;
-        }
-        .main-timeline .icon {
-            background: #ea6aa5;
-        }
-        .main-timeline .timeline-content {
-            background: #f8bbd0;
-        }
-        .main-timeline .timeline-content:before,
-        .main-timeline .timeline-content:after {
-            background: #f8bbd0;
-        }
-        .main-timeline .timeline:nth-child(2n) {
-            border-left: 7px solid #bd477d;
-        }
-    </style>
-
-    <!--female badge color-->
-    <style>
-        .color-given 
-        {
-            background: linear-gradient(60deg, #fdd835, #ffbb33);
-        }
-        .badge-secondary
-        {
-            background: linear-gradient(60deg, #929fba, #7283a7);
-        }            
-    </style>
+        <!--female badge color-->
+        <style>
+            .main-timeline:before {
+                background: #084772;
+            }
+            .main-timeline .timeline {
+                border-top: 7px solid #bd477d;
+                border-right: 7px solid #bd477d;
+            }
+            .main-timeline .icon {
+                background: #ea6aa5;
+            }
+            .main-timeline .timeline-content {
+                background: #f8bbd0;
+            }
+            .main-timeline .timeline-content:before,
+            .main-timeline .timeline-content:after {
+                background: #f8bbd0;
+            }
+            .main-timeline .timeline:nth-child(2n) {
+                border-left: 7px solid #bd477d;
+            }
+            .badge-secondary
+            {
+                background: linear-gradient(60deg, #929fba, #7283a7);
+            }            
+        </style>
     @endif
 
 @endsection
@@ -2446,6 +2432,13 @@
         $("#vaccine-with-data").val(getVac);
     });
     // <!-- end of send data to modal scripts -->
+
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideToggle(500, function(){
+            $(this).remove();
+        });
+    }, 3500);
+
 </script>
 
 @endsection

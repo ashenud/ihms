@@ -275,13 +275,11 @@
                                             <div class="form-row">
                                                 <div class="form-group col-sm-12 col-md-4 col-lg-4 col-xl-4">
                                                     <label>Baby ID:</label>
-                                                    <input type="text" name="baby_id" class="form-control" id="bId" onkeyup="check_babyId();"
-                                                    placeholder="<?php
-                                                       /*  $query1="SELECT MAX(baby_id) FROM baby_register WHERE baby_id LIKE'%".$_SESSION['GnDivision']."'";
-                                                        $result1=mysqli_query($conn,$query1) ;
-                                                        $row1 = mysqli_fetch_assoc($result1) ;
-                                                        echo "last_id : ".$row1["MAX(baby_id)"]; */
-                                                    ?>">
+                                                    @php
+                                                        $max_id = App\Models\Baby\Baby::where('baby_id','like', '%1000')->max('baby_id');
+                                                        // echo "last_id : ".$max_id;
+                                                    @endphp
+                                                    <input type="text" name="baby_id" class="form-control" id="bId" onkeyup="check_babyId();" placeholder="{{'last_id : '.$max_id}}">
                                                     <div id="baby-id-error" style="color: red; font-size: 9px; margin-top: -14px; z-index: 10; position: absolute;"></div>
                                                     <span id="input6" class="error-tooltip tp-error">
                                                         <i class="fas fa-exclamation-circle" data-toggle="tooltip" data-placement="top" data-html="true" 
@@ -1106,6 +1104,19 @@
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideToggle(500, function(){
+            $(this).remove();
+        });
+    }, 3500);
+
+    @if(isset($max_id))
+        $("#bId").focus(function(event) { 
+            $('#bId').val("{{$max_id}}"); 
+        });
+    @endif
+
 </script>
 
 @endsection

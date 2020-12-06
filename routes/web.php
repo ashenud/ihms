@@ -46,6 +46,8 @@ Route::post('/midwife/baby-register', 'App\Http\Controllers\Midwife\MidwifeContr
 Route::get('/midwife/baby-register-with-mother', 'App\Http\Controllers\Midwife\MidwifeController@babyRegisterWithMother')->middleware('midwife');
 Route::get('/midwife/baby-registration-reset', 'App\Http\Controllers\Midwife\MidwifeController@babyRegistrationReset')->middleware('midwife'); // Baby register form session values reset
 Route::post('/midwife/baby-register-action', 'App\Http\Controllers\Midwife\MidwifeController@babyRegisterAction')->middleware('midwife');
+Route::get('/midwife/view-babies', 'App\Http\Controllers\Midwife\MidwifeController@viewBabies')->name('view-babies')->middleware('midwife');
+Route::post('/midwife/inactivate-baby-action', 'App\Http\Controllers\Midwife\MidwifeController@inactivateBabyAction')->middleware('midwife');
 
 /* @@ baby controllers @@ */
 Route::get('/baby/select', 'App\Http\Controllers\Baby\BabyController@select')->name('baby-select')->middleware('readonly');

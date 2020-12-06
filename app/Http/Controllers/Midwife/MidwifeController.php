@@ -20,7 +20,13 @@ use Illuminate\Support\Facades\Hash;
 class MidwifeController extends Controller
 {
     public function index() {
-        return view('Midwife.dashboard');
+
+        $user_id = Auth::user()->user_id;
+        $data = array();
+
+        $data['midwife_name'] = Auth::user()->midwife->midwife_name;
+
+        return view('Midwife.dashboard')->with('data',$data);
     }
 
     public function babySelect(Request $request) {
@@ -140,18 +146,27 @@ class MidwifeController extends Controller
                     if ($k == 1) {
                         $details = $query[$k]->where('baby_id',$baby_id)->where('vac_id',$k)->get();
                         // dd($details);
-                        if ($details[0]->status == 1) {
-                            $vaccine[$k]['name'] = $vac_name[$k];
-                            $vaccine[$k]['given_status'] = 1;
-                            $vaccine[$k]['date_given'] = $details[0]->date_given;
-                            $vaccine[$k]['batch_no'] = $details[0]->batch_no;
-                            $vaccine[$k]['approved_doctor_id'] = "";
-                            $vaccine[$k]['scar'] = $details[0]->scar;
-                            if(!isset($details[0]->side_effects)) {
-                                $vaccine[$k]['side_effects'] = "නැත";
+                        if(count($details) > 0) {
+                            if ($details[0]->status == 1) {
+                                $vaccine[$k]['name'] = $vac_name[$k];
+                                $vaccine[$k]['given_status'] = 1;
+                                $vaccine[$k]['date_given'] = $details[0]->date_given;
+                                $vaccine[$k]['batch_no'] = $details[0]->batch_no;
+                                $vaccine[$k]['approved_doctor_id'] = "";
+                                $vaccine[$k]['scar'] = $details[0]->scar;
+                                if(!isset($details[0]->side_effects)) {
+                                    $vaccine[$k]['side_effects'] = "නැත";
+                                }
+                                else {
+                                    $vaccine[$k]['side_effects'] = $details[0]->side_effects;
+                                }
                             }
                             else {
-                                $vaccine[$k]['side_effects'] = $details[0]->side_effects;
+                                $vaccine[$k]['name'] = $vac_name[$k];
+                                $vaccine[$k]['giving_status'] = 0;
+                                $vaccine[$k]['given_status'] = 0;
+                                $vaccine[$k]['approvel_status'] = 0;
+                                $vaccine[$k]['scar'] = 0;
                             }
                         }
                         else {
@@ -196,7 +211,7 @@ class MidwifeController extends Controller
 
             DB::beginTransaction();
             if($vac_id == 1) {
-                $query[$vac_id]->insert(['baby_id'=>$baby_id,'midwife_id'=>$midwife_id,'date_given'=>$date_given,'vac_id'=>$vac_id,'vac_name'=>$vac_name[$vac_id],'status'=>$status]);
+                $query[$vac_id]->insert(['baby_id'=>$baby_id,'midwife_id'=>$midwife_id,'date_given'=>$date_given,'batch_no'=>$batch_no,'vac_id'=>$vac_id,'vac_name'=>$vac_name[$vac_id],'status'=>$status]);
                 
                 DB::commit();
                 Session::flash('message', 'එන්නත් ලබාදීම සලකුණු කරන ලදී !'); 
@@ -270,7 +285,13 @@ class MidwifeController extends Controller
     }
 
     public function addBabies() {
-        return view('Midwife.add-babies');
+
+        $user_id = Auth::user()->user_id;
+        $data = array();
+
+        $data['midwife_name'] = Auth::user()->midwife->midwife_name;
+
+        return view('Midwife.add-babies')->with('data',$data);
     }
 
     public function babyRegister(Request $request) {
@@ -298,7 +319,7 @@ class MidwifeController extends Controller
             Session::flash('alert-class', 'alert-danger'); 
         }
         
-        return view('Midwife.add-babies');
+        return redirect()->route('add-babies');
     }
 
     public function babyRegisterWithMother() {
@@ -310,7 +331,7 @@ class MidwifeController extends Controller
         Session::flash('message', 'Continue registration here !'); 
         Session::flash('alert-class', 'alert-success'); 
          
-        return view('Midwife.add-babies');
+        return redirect()->route('add-babies');
     }
 
     public function babyRegisterAction(Request $request) {
@@ -326,7 +347,7 @@ class MidwifeController extends Controller
             if ($validator->fails()) {
                 Session::flash('message', $validator->errors()->first()); 
                 Session::flash('alert-class', 'alert-danger'); 
-                return view('Midwife.add-babies');
+                return redirect()->route('add-babies');
             }
             else {
 
@@ -373,14 +394,14 @@ class MidwifeController extends Controller
                     Session::forget('mother_data');
                     Session::flash('message', 'Registration Completed !'); 
                     Session::flash('alert-class', 'alert-success'); 
-                    return view('Midwife.add-babies');
+                    return redirect()->route('add-babies');
 
                 } catch (\Exception $e) {
                     DB::rollback();
                     Session::forget('mother_data');
                     Session::flash('message', 'Error While Registration !'); 
                     Session::flash('alert-class', 'alert-danger'); 
-                    return view('Midwife.add-babies');
+                    return redirect()->route('add-babies');
                 }
 
             }
@@ -398,7 +419,7 @@ class MidwifeController extends Controller
             if ($validator->fails()) {
                 Session::flash('message', $validator->errors()->first()); 
                 Session::flash('alert-class', 'alert-danger'); 
-                return view('Midwife.add-babies');
+                return redirect()->route('add-babies');
             }
             else {
 
@@ -407,8 +428,8 @@ class MidwifeController extends Controller
                     DB::beginTransaction();
                     $mother = new Mother;
                     $mother->mother_nic = $request->mother_nic;
-                    $mother->midwife_id = $request->mName;
-                    $mother->mother_name = $request->midId;
+                    $mother->midwife_id = $request->midId;
+                    $mother->mother_name = $request->mName;
                     $mother->address = $request->address;
                     $mother->telephone = $request->telephone;
                     $mother->email = $request->email;
@@ -463,6 +484,7 @@ class MidwifeController extends Controller
                     
                     $location = new Location();
                     $location->user_id = $request->mother_nic;
+                    $location->name = $request->mName;
                     $location->midwife_id = $request->midId;
                     $location->address = $request->address;
                     $location->lat = $request->latInput;
@@ -473,14 +495,14 @@ class MidwifeController extends Controller
                     Session::forget('mother_data');
                     Session::flash('message', 'Registration Completed !'); 
                     Session::flash('alert-class', 'alert-success'); 
-                    return view('Midwife.add-babies');
+                    return redirect()->route('add-babies');
 
                 } catch (\Exception $e) {
                     DB::rollback();
                     Session::forget('mother_data');
                     Session::flash('message', 'Error While Registration !'); 
                     Session::flash('alert-class', 'alert-danger'); 
-                    return view('Midwife.add-babies');
+                    return redirect()->route('add-babies');
                 }
 
             }
@@ -493,7 +515,94 @@ class MidwifeController extends Controller
 
         Session::forget('mother_data');
         Session::forget('message');
-        return view('Midwife.add-babies');
+        return redirect()->route('add-babies');
+    }
+
+    public function viewBabies() {
+
+        $user_id = Auth::user()->user_id;
+        $data = array();
+
+        $data['midwife_name'] = Auth::user()->midwife->midwife_name;
+
+        $babies = Baby::select('id',
+                               'mother_nic',
+                               'baby_id',
+                               'baby_first_name',
+                               'baby_last_name',
+                               'baby_dob',
+                               'status')
+                        ->where('midwife_id',Auth::user()->user_id)->get();
+
+        $data['babies'] = $babies;
+
+        // dd($data);
+        return view('Midwife.view-babies')->with('data',$data);
+
+    }
+
+    /* @@ both activation and inactivation @@ */
+    public function inactivateBabyAction(Request $request) {
+
+        if($request->type == 0) {
+
+            try {
+
+                DB::beginTransaction();
+
+                $baby = Baby::find($request->baby_id);
+                $baby->status = 0;
+                $baby->save();    
+                
+                DB::commit();
+                return response()->json([
+                    'result' => true,
+                    'message' => 'Baby Inactivate Successfully',
+                    'add_class' => 'inactive-btn',
+                    'remove_class' => 'remove-btn',
+                ]);
+
+            } catch (\Exception $e) {
+                DB::rollback();    
+                return response()->json([
+                    'result' => false,
+                    'message' => 'Error while Inactivation',
+                ]);
+            }
+
+        }
+        else if ($request->type == 1) {
+            try {
+
+                DB::beginTransaction();
+
+                $baby = Baby::find($request->baby_id);
+                $baby->status = 1;
+                $baby->save();    
+                
+                DB::commit();
+                return response()->json([
+                    'result' => true,
+                    'message' => 'Baby Activate Successfully',
+                    'add_class' => 'remove-btn',
+                    'remove_class' => 'inactive-btn',
+                ]);
+
+            } catch (\Exception $e) {
+                DB::rollback();    
+                return response()->json([
+                    'result' => false,
+                    'message' => 'Error While Inactivation',
+                ]);
+            }
+        }
+        else {
+            return response()->json([
+                'result' => false,
+                'message' => 'Request Error',
+            ]);
+        }
+
     }
 
 }
