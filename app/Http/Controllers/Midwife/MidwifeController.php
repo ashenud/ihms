@@ -4,11 +4,18 @@ namespace App\Http\Controllers\Midwife;
 
 use App\Models\Baby\Baby;
 use App\Models\Vaccine\VaccineDate;
+use App\Models\Mother\Mother;
+use App\Models\Baby\BirthDetail;
+use App\Models\Baby\Growth;
+use App\Models\Location;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class MidwifeController extends Controller
 {
@@ -260,6 +267,233 @@ class MidwifeController extends Controller
             return redirect()->route('vacc-mark');
         } 
             
+    }
+
+    public function addBabies() {
+        return view('Midwife.add-babies');
+    }
+
+    public function babyRegister(Request $request) {
+
+        Session::forget('mother_data');
+        $mother_nic = $request->mother_nic;
+
+        $mother = Mother::where('mother_nic',$mother_nic)->limit(1)->get();
+        if(count($mother)>0) {
+            $mother_data['creating'] = true;
+            $mother_data['mName'] = $mother[0]->mother_name;
+            $mother_data['mNic'] = $mother[0]->mother_nic;
+            $mother_data['addr'] = $mother[0]->address;
+            $mother_data['tel'] = $mother[0]->telephone;
+            $mother_data['email'] = $mother[0]->email;
+            $mother_data['GnDivision'] = $mother[0]->gn_division;
+            $mother_data['location'] = true;
+
+            Session::put('mother_data', $mother_data);
+            Session::flash('message', 'Continue registration here !'); 
+            Session::flash('alert-class', 'alert-success'); 
+        }
+        else {
+            Session::flash('message', 'මවගේ තොරතුරු නොගැලපේ !'); 
+            Session::flash('alert-class', 'alert-danger'); 
+        }
+        
+        return view('Midwife.add-babies');
+    }
+
+    public function babyRegisterWithMother() {
+
+        Session::forget('mother_data');
+        $mother_data['creating'] = true;
+        Session::put('mother_data',$mother_data);
+        
+        Session::flash('message', 'Continue registration here !'); 
+        Session::flash('alert-class', 'alert-success'); 
+         
+        return view('Midwife.add-babies');
+    }
+
+    public function babyRegisterAction(Request $request) {
+
+        // dd($request);
+
+        if(Session::has('mother_data.mNic')) {
+
+            $validator = Validator::make($request->all(), [
+                'baby_id' => 'unique:babies,baby_id'
+            ]);
+    
+            if ($validator->fails()) {
+                Session::flash('message', $validator->errors()->first()); 
+                Session::flash('alert-class', 'alert-danger'); 
+                return view('Midwife.add-babies');
+            }
+            else {
+
+                try {
+
+                    DB::beginTransaction();
+                    $baby = new Baby;
+                    $baby->baby_id = $request->baby_id;
+                    $baby->baby_first_name = $request->bfName;
+                    $baby->baby_last_name = $request->blName;
+                    $baby->baby_dob = $request->dob;
+                    $baby->baby_gender = $request->bGen;
+                    $baby->register_date = $request->rDate;
+                    $baby->midwife_id = $request->midId;
+                    $baby->mother_nic = $request->mother_nic;
+                    $baby->mother_age = $request->mAge;
+                    $baby->status = 1;
+                    $baby->save();
+                    
+                    $birth_details = new BirthDetail;
+                    $birth_details->baby_id = $request->baby_id;
+                    $birth_details->midwife_id = $request->midId;
+                    $birth_details->birth_weight = $request->bWeight;
+                    $birth_details->birth_length = $request->bLength;
+                    $birth_details->health_states = $request->hStates;
+                    $birth_details->apgar1 = $request->apgar1;
+                    $birth_details->apgar2 = $request->apgar2;
+                    $birth_details->apgar3 = $request->apgar3;
+                    $birth_details->circumference_of_head = $request->circumHead;
+                    $birth_details->vitamin_K_status = $request->vitaminK;
+                    $birth_details->eye_contact = $request->eyeContact;
+                    $birth_details->milk_position = $request->mPosition;
+                    $birth_details->save();
+                    
+                    $growth = new Growth();
+                    $growth->baby_id = $request->baby_id;
+                    $growth->midwife_id = $request->midId;
+                    $growth->weight = $request->bWeight;
+                    $growth->height = $request->bLength;
+                    $growth->baby_age_in_months = 0;
+                    $growth->save();
+
+                    DB::commit();
+                    Session::forget('mother_data');
+                    Session::flash('message', 'Registration Completed !'); 
+                    Session::flash('alert-class', 'alert-success'); 
+                    return view('Midwife.add-babies');
+
+                } catch (\Exception $e) {
+                    DB::rollback();
+                    Session::forget('mother_data');
+                    Session::flash('message', 'Error While Registration !'); 
+                    Session::flash('alert-class', 'alert-danger'); 
+                    return view('Midwife.add-babies');
+                }
+
+            }
+
+        }
+        else {
+
+            $validator = Validator::make($request->all(), [
+                'mother_nic' => 'unique:mothers,mother_nic',
+                'telephone' => 'unique:mothers,telephone',
+                'email' => 'unique:mothers,email',
+                'baby_id' => 'unique:babies,baby_id'
+            ]);
+    
+            if ($validator->fails()) {
+                Session::flash('message', $validator->errors()->first()); 
+                Session::flash('alert-class', 'alert-danger'); 
+                return view('Midwife.add-babies');
+            }
+            else {
+
+                try {
+
+                    DB::beginTransaction();
+                    $mother = new Mother;
+                    $mother->mother_nic = $request->mother_nic;
+                    $mother->midwife_id = $request->mName;
+                    $mother->mother_name = $request->midId;
+                    $mother->address = $request->address;
+                    $mother->telephone = $request->telephone;
+                    $mother->email = $request->email;
+                    $mother->gn_division = $request->gnDivision;
+                    $mother->status = 1;
+                    $mother->save();
+
+                    $user = new User;
+                    $user->user_id = $request->mother_nic;
+                    $user->role = 'mother';
+                    $user->role_id = 4;
+                    $user->password = Hash::make($request->pwd);
+                    $user->email = $request->email;
+                    $user->status = 1;
+                    $user->save();
+                    
+                    $baby = new Baby;
+                    $baby->baby_id = $request->baby_id;
+                    $baby->baby_first_name = $request->bfName;
+                    $baby->baby_last_name = $request->blName;
+                    $baby->baby_dob = $request->dob;
+                    $baby->baby_gender = $request->bGen;
+                    $baby->register_date = $request->rDate;
+                    $baby->midwife_id = $request->midId;
+                    $baby->mother_nic = $request->mother_nic;
+                    $baby->mother_age = $request->mAge;
+                    $baby->status = 1;
+                    $baby->save();
+                    
+                    $birth_details = new BirthDetail;
+                    $birth_details->baby_id = $request->baby_id;
+                    $birth_details->midwife_id = $request->midId;
+                    $birth_details->birth_weight = $request->bWeight;
+                    $birth_details->birth_length = $request->bLength;
+                    $birth_details->health_states = $request->hStates;
+                    $birth_details->apgar1 = $request->apgar1;
+                    $birth_details->apgar2 = $request->apgar2;
+                    $birth_details->apgar3 = $request->apgar3;
+                    $birth_details->circumference_of_head = $request->circumHead;
+                    $birth_details->vitamin_K_status = $request->vitaminK;
+                    $birth_details->eye_contact = $request->eyeContact;
+                    $birth_details->milk_position = $request->mPosition;
+                    $birth_details->save();
+                    
+                    $growth = new Growth();
+                    $growth->baby_id = $request->baby_id;
+                    $growth->midwife_id = $request->midId;
+                    $growth->weight = $request->bWeight;
+                    $growth->height = $request->bLength;
+                    $growth->baby_age_in_months = 0;
+                    $growth->save();
+                    
+                    $location = new Location();
+                    $location->user_id = $request->mother_nic;
+                    $location->midwife_id = $request->midId;
+                    $location->address = $request->address;
+                    $location->lat = $request->latInput;
+                    $location->lng = $request->longInput;
+                    $location->save();
+
+                    DB::commit();
+                    Session::forget('mother_data');
+                    Session::flash('message', 'Registration Completed !'); 
+                    Session::flash('alert-class', 'alert-success'); 
+                    return view('Midwife.add-babies');
+
+                } catch (\Exception $e) {
+                    DB::rollback();
+                    Session::forget('mother_data');
+                    Session::flash('message', 'Error While Registration !'); 
+                    Session::flash('alert-class', 'alert-danger'); 
+                    return view('Midwife.add-babies');
+                }
+
+            }
+
+        }
+        
+    }
+
+    public function babyRegistrationReset() {
+
+        Session::forget('mother_data');
+        Session::forget('message');
+        return view('Midwife.add-babies');
     }
 
 }

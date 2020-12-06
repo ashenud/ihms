@@ -3,18 +3,12 @@
 
         <div class="user-area pb-2 mb-3">
             @yield('user-area')
-            <?php
-            /*  $query1 = "SELECT * FROM midwife WHERE midwife_id='".$_SESSION['midwife_id']."'";
-                $result1= mysqli_query($conn,$query1);
-                $row=mysqli_fetch_assoc($result1); */
-            ?>
-            <a href="#"> <span><?php //echo $row['midwife_name'];?></span> </a>
         </div>
 
         <!--sidebar items-->
         <ul>
             <li>
-                <a href="/midwife/dashboard" class="text-uppercase d-dash">
+                <a href="{{url('midwife/dashboard')}}" class="text-uppercase li-dash">
                     <span class="icon">
                         <i class="fas fa-chart-pie" aria-hidden="true"></i>
                     </span>
@@ -31,7 +25,7 @@
             </li>
             <div class="collapse collapse-manage" id="manage">
                 <li>
-                    <a href="/midwife/add-babies" class="text-uppercase drop mm-add">
+                    <a href="{{url('midwife/add-babies')}}" class="text-uppercase drop li-add">
                         <span class="icon">
                             <i class="fas fa-user-plus" aria-hidden="true"></i>
                         </span>
@@ -39,7 +33,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/midwife/view-babies" class="text-uppercase drop mm-view">
+                    <a href="{{url('midwife/view-babies')}}" class="text-uppercase drop li-view">
                         <span class="icon">
                             <i class="fas fa-search" aria-hidden="true"></i>
                         </span>
@@ -48,7 +42,7 @@
                 </li>
             </div>
             <li>
-                <a href="/midwife/reports" class="text-uppercase mm-chart">
+                <a href="{{url('midwife/reports')}}" class="text-uppercase li-chart">
                     <span class="icon">
                         <i class="fas fa-copy" aria-hidden="true"></i>
                     </span>
@@ -56,28 +50,28 @@
                 </a>
             </li>
             <li>
-                <a href="/midwife/inbox" class="text-uppercase mm-inbox">
+                <a href="{{url('midwife/inbox')}}" class="text-uppercase li-inbox">
                     <span class="icon">
                         <i class="fas fa-inbox" aria-hidden="true"></i>
 
-                        <?php 
-                            /* include "php/selectdb.php";
-                            $sql001="SELECT COUNT(status) AS unreadSMS FROM midwife_message WHERE status='unread' AND midwife_id='".$_SESSION['midwife_id']."'";
-                            $run001=mysqli_query($conn,$sql001);
-                            $row001=mysqli_fetch_assoc($run001);
-                            $count=$row001['unreadSMS'];
+                        @php
+                            $msg_count = DB::table('midwife_messages')->where('midwife_id', Auth::user()->user_id)
+                                                        ->where('read_status',1)
+                                                        ->where('status',1)
+                                                        ->count();
+                        @endphp
 
-                            if(0<$count && $count<=9) {
-                                echo "<span class='badge badge-danger'>";
-                                echo $count;
-                                echo "</span>";
-                            }
-                            else if($count>9) {
-                                echo "<span class='badge badge-danger'>";
-                                echo "9+";
-                                echo "</span>";
-                            } */
-                        ?>
+                        @if ($msg_count > 0)
+                            @if ($msg_count >= 10)
+                                <span class='badge badge-danger'>
+                                    9+
+                                </span>
+                            @else
+                                <span class='badge badge-danger'>
+                                    {{ $msg_count }}
+                                </span>
+                            @endif
+                        @endif
 
                     </span>
                     <span class="list">එන පණිවිඩ</span>
@@ -93,7 +87,7 @@
             </li>
             <div class="collapse collapse-location" id="location">
                 <li>
-                    <a href="/midwife/visit-today" class="text-uppercase drop mm-visit">
+                    <a href="{{url('midwife/visit-today')}}" class="text-uppercase drop li-visit">
                         <span class="icon">
                             <i class="fas fa-map-pin" aria-hidden="true"></i>
                         </span>
@@ -101,7 +95,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/midwife/give-directions" class="text-uppercase drop mm-direc">
+                    <a href="{{url('midwife/give-directions')}}" class="text-uppercase drop li-direc">
                         <span class="icon">
                             <i class="fas fa-map-signs" aria-hidden="true"></i>
                         </span>
@@ -109,7 +103,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/midwife/show-all-locations" class="text-uppercase drop mm-all">
+                    <a href="{{url('midwife/show-all-locations')}}" class="text-uppercase drop li-all">
                         <span class="icon">
                             <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         </span>
@@ -118,7 +112,7 @@
                 </li>
             </div>
             <li>
-                <a href="/midwife/visiting-record" class="text-uppercase mm-record">
+                <a href="{{url('midwife/visiting-record')}}" class="text-uppercase li-record">
                     <span class="icon">
                         <i class="fas fa-location-arrow" aria-hidden="true"></i>
                     </span>

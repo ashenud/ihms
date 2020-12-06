@@ -41,6 +41,11 @@ Route::post('/midwife/baby-select', 'App\Http\Controllers\Midwife\MidwifeControl
 Route::get('/midwife/vaccinations-mark', 'App\Http\Controllers\Midwife\MidwifeController@vaccMark')->name('vacc-mark')->middleware('midwife');
 Route::post('/midwife/vaccinations-mark-action', 'App\Http\Controllers\Midwife\MidwifeController@vaccMarkAction')->middleware('midwife');
 Route::post('/midwife/vaccinations-set-date-action', 'App\Http\Controllers\Midwife\MidwifeController@vaccSetDateAction')->middleware('midwife');
+Route::get('/midwife/add-babies', 'App\Http\Controllers\Midwife\MidwifeController@addBabies')->name('add-babies')->middleware('midwife');
+Route::post('/midwife/baby-register', 'App\Http\Controllers\Midwife\MidwifeController@babyRegister')->middleware('midwife');
+Route::get('/midwife/baby-register-with-mother', 'App\Http\Controllers\Midwife\MidwifeController@babyRegisterWithMother')->middleware('midwife');
+Route::get('/midwife/baby-registration-reset', 'App\Http\Controllers\Midwife\MidwifeController@babyRegistrationReset')->middleware('midwife'); // Baby register form session values reset
+Route::post('/midwife/baby-register-action', 'App\Http\Controllers\Midwife\MidwifeController@babyRegisterAction')->middleware('midwife');
 
 /* @@ baby controllers @@ */
 Route::get('/baby/select', 'App\Http\Controllers\Baby\BabyController@select')->name('baby-select')->middleware('readonly');
@@ -50,3 +55,9 @@ Route::get('/baby/charts-height', 'App\Http\Controllers\Baby\BabyController@char
 Route::get('/baby/charts-weight', 'App\Http\Controllers\Baby\BabyController@chartsWeight')->name('charts-weight')->middleware('readonly');
 Route::get('/baby/charts-bmi', 'App\Http\Controllers\Baby\BabyController@chartsBmi')->name('charts-bmi')->middleware('readonly');
 Route::get('/baby/vaccinations-view', 'App\Http\Controllers\Baby\BabyController@vaccView')->name('vacc-view')->middleware('mother');
+
+/* @@ validation routes @@ */
+Route::get('/baby-id-validation', 'App\Http\Controllers\ValidationController@BabyIdValidation');
+Route::get('/mother-nic-validation', 'App\Http\Controllers\ValidationController@MotherNicValidation');
+Route::get('/mother-tpnbr-validation', 'App\Http\Controllers\ValidationController@MotherTpNbrValidation');
+Route::get('/mother-email-validation', 'App\Http\Controllers\ValidationController@MotherEmailValidation');

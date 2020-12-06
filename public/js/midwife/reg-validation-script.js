@@ -298,17 +298,45 @@ $("#bId").focusout(function(){
 });
 
 function check_babyId() {
-    $('#baby-id-error').load("/pages/midwife/php/validation/baby-id-validation.php", {'baby_id': $('#bId').val(), 'type': 'add'});
+    $.ajax({
+        type:'GET',
+        url:'../baby-id-validation',
+        data: { baby_id : $('#bId').val() },
+        success:function(data) {
+           $("#baby-id-error").html(data);
+        }
+     });
 }
 
 function check_mNic() {
-    $('#m-nic-error').load("/pages/midwife/php/validation/m-nic-validation.php", {'m_nic': $('#mNic').val(), 'type': 'add'});
+    $.ajax({
+        type:'GET',
+        url:'../mother-nic-validation',
+        data: { m_nic: $('#mNic').val() },
+        success:function(data) {
+           $("#m-nic-error").html(data);
+        }
+    });
 }
 
 function check_tpNbr() {
-    $('#tpnbr-error').load("/pages/midwife/php/validation/tpnbr-validation.php", {'tp_no': $('#tp').val(), 'type': 'add'});
+    $.ajax({
+        type:'GET',
+        url:'../mother-tpnbr-validation',
+        data: { tp_no: $('#tp').val() },
+        success:function(data) {
+           $("#tpnbr-error").html(data);
+        }
+    });
 }
 
 function check_email() {
-    $('#email-error').load("/pages/midwife/php/validation/email-validation.php", {'email': $('#email').val(), 'type': 'add'});
+    $.ajax({
+        type:'GET',
+        url:'../mother-email-validation',
+        data: { email: $('#email').val() },
+        success:function(data) {
+           $("#email-error").html(data);
+        }
+    });
 }

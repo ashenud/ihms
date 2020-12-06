@@ -60,7 +60,7 @@ function initMap() {
 
         // Dynamic to set marker based on click event
         let icon = {
-            url: '/pages/midwife/img/home-map.png',
+            url: '../../img/midwife/home-map.png',
             scaledSize: {
                 width: 26,
                 height: 43,
