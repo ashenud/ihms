@@ -24,7 +24,7 @@ class CreateBabiesTable extends Migration
             $table->string('midwife_id');
             $table->string('mother_nic');
             $table->integer('mother_age');
-            $table->integer('status')->default('1');
+            $table->integer('status')->default('1')->comment('1-active, 0-inactive');
             $table->timestamps();
         });
     }

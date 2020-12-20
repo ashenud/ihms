@@ -132,7 +132,7 @@
             </div>
             
             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mb-2">
-                <a class="text-decoration-none" href="/midwife/contact-staff">
+            <a class="text-decoration-none" href="{{url('/midwife/send-messages')}}">
                     <div class="card card-stats">
                         <!-- Card body -->
                         <div class="card-body">

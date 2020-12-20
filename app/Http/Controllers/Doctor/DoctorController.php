@@ -7,8 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Baby\Baby;
 use App\Models\Doctor\DoctorMessage;
+use App\Models\Sister\SisterMessage;
+use App\Models\Midwife\MidwifeMessage;
 use App\Models\Vaccine\VaccineDate;
 use App\Models\Doctor\ChildHealthNote;
+use App\Models\Doctor\Doctor;
+use App\Models\Sister\Sister;
+use App\Models\Midwife\Midwife;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
@@ -414,6 +419,96 @@ class DoctorController extends Controller
         $data['health_note'] =$health_note;
         // dd($data);
         return view('Baby.child-health-note')->with('data', $data);
+    }
+
+    public function sendMessages() {
+
+        $user_id = Auth::user()->user_id;
+        $data = array();
+
+        $data['doctor_name'] = Auth::user()->doctor->doctor_name;
+
+        $doctor = Doctor::where('doctor_id',$user_id)->limit(1)->get();
+        
+        $sisters = Sister::where('moh_division',$doctor[0]->moh_division)
+                         ->where('status',1)->get();
+        
+        $midwives = Midwife::where('moh_division',$doctor[0]->moh_division)
+                           ->where('status',1)->get();
+        $data['sisters'] = $sisters;
+        $data['midwives'] = $midwives;
+        // dd(count($sisters));
+
+        return view('Doctor..send-messages')->with('data',$data);
+    }
+
+    public function sendMessagesAction(Request $request) {
+
+        $user_id = Auth::user()->user_id;
+
+        if($request->type == 2) {
+
+            try {
+
+                DB::beginTransaction();
+
+                $sister_msg = new SisterMessage();
+                $sister_msg->sister_id = $request->receiver_id;
+                $sister_msg->sender = $user_id;
+                $sister_msg->message = $request->msg_body;
+                $sister_msg->save();    
+                
+                DB::commit();
+                return response()->json([
+                    'result' => true,
+                    'message' => 'පනිවිඩය යැවීම සාර්ථකයී',
+                    'add_class' => 'alert-success',
+                ]);
+
+            } catch (\Exception $e) {
+                DB::rollback();    
+                return response()->json([
+                    'result' => false,
+                    'message' => 'පනිවිඩය යැවීම අසාර්ථකයී',
+                    'add_class' => 'alert-danger',
+                ]);
+            }
+
+        }
+        else if ($request->type == 3) {
+            try {
+
+                DB::beginTransaction();
+
+                $midwife_msg = new MidwifeMessage();
+                $midwife_msg->midwife_id = $request->receiver_id;
+                $midwife_msg->sender = $user_id;
+                $midwife_msg->message = $request->msg_body;
+                $midwife_msg->save();  
+                
+                DB::commit();
+                return response()->json([
+                    'result' => true,
+                    'message' => 'පනිවිඩය යැවීම සාර්ථකයී',
+                    'add_class' => 'alert-success',
+                ]);
+
+            } catch (\Exception $e) {
+                DB::rollback();    
+                return response()->json([
+                    'result' => false,
+                    'message' => 'පනිවිඩය යැවීම අසාර්ථකයී',
+                    'add_class' => 'alert-danger',
+                ]);
+            }
+        }
+        else {
+            return response()->json([
+                'result' => false,
+                'message' => 'පනිවිඩය යැවීම අසාර්ථකයී',
+                'add_class' => 'alert-danger',
+            ]);
+        }
     }
     
 }

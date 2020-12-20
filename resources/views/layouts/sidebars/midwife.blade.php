@@ -78,6 +78,14 @@
                 </a>
             </li>
             <li>
+                <a href="{{url('midwife/send-messages')}}" class="text-uppercase li-send">
+                    <span class="icon">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                    </span>
+                    <span class="list">පණිවිඩ යවන්න</span>
+                </a>
+            </li>
+            <li>
                 <a class="text-uppercase" data-toggle="collapse" href="#location" id="map-location">
                     <span class="icon">
                         <i class="fas fa-map-marked-alt" aria-hidden="true"></i>

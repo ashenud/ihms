@@ -31,6 +31,8 @@ Route::post('/doctor/baby-select', 'App\Http\Controllers\Doctor\DoctorController
 Route::get('/doctor/vaccinations-permission', 'App\Http\Controllers\Doctor\DoctorController@vaccPermission')->name('vacc-permission')->middleware('doctor');
 Route::post('/doctor/vaccinations-permission-action', 'App\Http\Controllers\Doctor\DoctorController@vaccPermissionAction')->middleware('doctor');
 Route::get('/doctor/child-health-note', 'App\Http\Controllers\Doctor\DoctorController@childHealthNote')->name('child-helth-note')->middleware('doctor');
+Route::get('/doctor/send-messages', 'App\Http\Controllers\Doctor\DoctorController@sendMessages')->name('doc-send-messages')->middleware('doctor');
+Route::post('/doctor/send-messages-action', 'App\Http\Controllers\Doctor\DoctorController@sendMessagesAction')->middleware('doctor');
 
 /* @@ sister controllers @@ */
 Route::get('/sister/dashboard', 'App\Http\Controllers\Sister\SisterController@index')->name('sister')->middleware('sister');
@@ -48,6 +50,8 @@ Route::get('/midwife/baby-registration-reset', 'App\Http\Controllers\Midwife\Mid
 Route::post('/midwife/baby-register-action', 'App\Http\Controllers\Midwife\MidwifeController@babyRegisterAction')->middleware('midwife');
 Route::get('/midwife/view-babies', 'App\Http\Controllers\Midwife\MidwifeController@viewBabies')->name('view-babies')->middleware('midwife');
 Route::post('/midwife/inactivate-baby-action', 'App\Http\Controllers\Midwife\MidwifeController@inactivateBabyAction')->middleware('midwife');
+Route::get('/midwife/send-messages', 'App\Http\Controllers\Midwife\MidwifeController@sendMessages')->name('mid-send-messages')->middleware('midwife');
+Route::post('/midwife/send-messages-action', 'App\Http\Controllers\Midwife\MidwifeController@sendMessagesAction')->middleware('midwife');
 
 /* @@ baby controllers @@ */
 Route::get('/baby/select', 'App\Http\Controllers\Baby\BabyController@select')->name('baby-select')->middleware('readonly');

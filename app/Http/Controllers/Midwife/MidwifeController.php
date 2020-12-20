@@ -7,6 +7,11 @@ use App\Models\Vaccine\VaccineDate;
 use App\Models\Mother\Mother;
 use App\Models\Baby\BirthDetail;
 use App\Models\Baby\Growth;
+use App\Models\Midwife\Midwife;
+use App\Models\Doctor\Doctor;
+use App\Models\Doctor\DoctorMessage;
+use App\Models\Sister\Sister;
+use App\Models\Sister\SisterMessage;
 use App\Models\Location;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -603,6 +608,96 @@ class MidwifeController extends Controller
             ]);
         }
 
+    }
+
+    public function sendMessages() {
+
+        $user_id = Auth::user()->user_id;
+        $data = array();
+
+        $data['midwife_name'] = Auth::user()->midwife->midwife_name;
+
+        $midwife = Midwife::where('midwife_id',$user_id)->limit(1)->get();
+        
+        $sisters = Sister::where('moh_division',$midwife[0]->moh_division)
+                         ->where('status',1)->get();
+        
+        $doctors = Doctor::where('moh_division',$midwife[0]->moh_division)
+                           ->where('status',1)->get();
+        $data['sisters'] = $sisters;
+        $data['doctors'] = $doctors;
+        // dd(count($sisters));
+
+        return view('Midwife..send-messages')->with('data',$data);
+    }
+
+    public function sendMessagesAction(Request $request) {
+
+        $user_id = Auth::user()->user_id;
+
+        if($request->type == 2) {
+
+            try {
+
+                DB::beginTransaction();
+
+                $sister_msg = new SisterMessage();
+                $sister_msg->sister_id = $request->receiver_id;
+                $sister_msg->sender = $user_id;
+                $sister_msg->message = $request->msg_body;
+                $sister_msg->save();    
+                
+                DB::commit();
+                return response()->json([
+                    'result' => true,
+                    'message' => 'පනිවිඩය යැවීම සාර්ථකයී',
+                    'add_class' => 'alert-success',
+                ]);
+
+            } catch (\Exception $e) {
+                DB::rollback();    
+                return response()->json([
+                    'result' => false,
+                    'message' => 'පනිවිඩය යැවීම අසාර්ථකයී',
+                    'add_class' => 'alert-danger',
+                ]);
+            }
+
+        }
+        else if ($request->type == 1) {
+            try {
+
+                DB::beginTransaction();
+
+                $doctor_msg = new DoctorMessage();
+                $doctor_msg->doctor_id = $request->receiver_id;
+                $doctor_msg->sender = $user_id;
+                $doctor_msg->message = $request->msg_body;
+                $doctor_msg->save();  
+                
+                DB::commit();
+                return response()->json([
+                    'result' => true,
+                    'message' => 'පනිවිඩය යැවීම සාර්ථකයී',
+                    'add_class' => 'alert-success',
+                ]);
+
+            } catch (\Exception $e) {
+                DB::rollback();    
+                return response()->json([
+                    'result' => false,
+                    'message' => 'පනිවිඩය යැවීම අසාර්ථකයී',
+                    'add_class' => 'alert-danger',
+                ]);
+            }
+        }
+        else {
+            return response()->json([
+                'result' => false,
+                'message' => 'පනිවිඩය යැවීම අසාර්ථකයී',
+                'add_class' => 'alert-danger',
+            ]);
+        }
     }
 
 }

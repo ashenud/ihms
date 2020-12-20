@@ -23,7 +23,7 @@ class CreateMothersTable extends Migration
             $table->string('email');
             $table->string('gn_division')->nullable();
             $table->string('moh_division')->nullable();
-            $table->integer('status')->default('1');
+            $table->integer('status')->default('1')->comment('1-active, 0-inactive');
             $table->timestamps();
         });
     }
