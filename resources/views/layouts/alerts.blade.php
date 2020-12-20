@@ -14,8 +14,8 @@
                 @endif
                 {{-- @@ javascript alert @@ --}}
                 <div class="alert alert-dismissible fade show animated fadeIn" id="js-alert" data-auto-dismiss="2000" role="alert" style="display:none ">
-                    <strong id="alert-message"> asdfsgsfgfsg</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <strong id="alert-message"></strong>
+                    <button type="button" class="close" onclick="removeJsAlert()" aria-label="Close">
                         <span aria-hidden="true"> &times; </span>
                     </button>
                 </div>

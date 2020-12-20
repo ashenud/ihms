@@ -14,7 +14,7 @@
         <!--sidebar items-->
         <ul>
             <li>
-                <a href="/sister/dashboard" class="text-uppercase ss-dash">
+                <a href="{{url('sister/dashboard')}}" class="text-uppercase li-dash">
                     <span class="icon">
                         <i class="fas fa-chart-pie" aria-hidden="true"></i>
                     </span>
@@ -31,7 +31,7 @@
             </li>
             <div class="collapse collapse-manage" id="manage">
                 <li>
-                    <a href="/sister/add-midwife" class="text-uppercase drop ss-add">
+                    <a href="{{url('sister/add-midwife')}}" class="text-uppercase drop li-add">
                         <span class="icon-active">
                             <i class="fas fa-user-plus" aria-hidden="true"></i>
                         </span>
@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/sister/view-midwife" class="text-uppercase drop ss-viewm">
+                    <a href="{{url('sister/view-midwife')}}" class="text-uppercase drop li-view-mid">
                         <span class="icon">
                             <i class="fas fa-search" aria-hidden="true"></i>
                         </span>
@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/sister/view-babies" class="text-uppercase drop ss-viewb">
+                    <a href="{{url('sister/view-babies')}}" class="text-uppercase drop li-view-baby">
                         <span class="icon">
                             <i class="fas fa-search" aria-hidden="true"></i>
                         </span>
@@ -56,7 +56,7 @@
                 </li>
             </div>
             <li>
-                <a href="/sister/reports" class="text-uppercase ss-table">
+                <a href="{{url('sister/reports')}}" class="text-uppercase li-report">
                     <span class="icon">
                         <i class="fas fa-file-medical-alt" aria-hidden="true"></i>
                     </span>
@@ -64,33 +64,35 @@
                 </a>
             </li>
             <li>
-                <a href="/sister/inbox" class="text-uppercase ss-inbox">
+                <a href="{{url('sister/inbox')}}" class="text-uppercase li-inbox">
                     <span class="icon">
                         <i class="fas fa-inbox" aria-hidden="true"></i>
 
-                        <?php
-                           /*  $sql001="SELECT COUNT(status) AS unreadSMS FROM sister_message WHERE status='unread' AND sister_id='".$_SESSION['sister_id']."'";
-                            $run001=mysqli_query($conn,$sql001);
-                            $row001=mysqli_fetch_assoc($run001);
-                            $count=$row001['unreadSMS'];
+                        @php
+                            $msg_count = DB::table('sister_messages')->where('sister_id', Auth::user()->user_id)
+                                                        ->where('read_status',1)
+                                                        ->where('status',1)
+                                                        ->count();
+                        @endphp
 
-                            if(0<$count && $count<=9) {
-                                echo "<span class='badge badge-danger'>";
-                                echo $count;
-                                echo "</span>";
-                            }
-                            else if($count>9) {
-                                echo "<span class='badge badge-danger'>";
-                                echo "9+";
-                                echo "</span>";
-                            } */
-                        ?>
+                        @if ($msg_count > 0)
+                            @if ($msg_count >= 10)
+                                <span class='badge badge-danger'>
+                                    9+
+                                </span>
+                            @else
+                                <span class='badge badge-danger'>
+                                    {{ $msg_count }}
+                                </span>
+                            @endif
+                        @endif
+
                     </span>
                     <span class="list">එන පණිවිඩ</span>
                 </a>
             </li>
             <li>
-                <a href="/sister/send-messages" class="text-uppercase ss-send">
+                <a href="{{url('sister/send-messages')}}" class="text-uppercase li-send">
                     <span class="icon">
                         <i class="fas fa-envelope" aria-hidden="true"></i>
                     </span>
@@ -117,7 +119,7 @@
                 </span>
             </div>
         </div>
-        <!--end ofnormal and mobile hamburgers-->
+        <!--end of normal and mobile hamburgers-->
 
     </div>
 </div>

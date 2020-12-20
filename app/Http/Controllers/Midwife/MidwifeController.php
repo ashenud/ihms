@@ -8,6 +8,7 @@ use App\Models\Mother\Mother;
 use App\Models\Baby\BirthDetail;
 use App\Models\Baby\Growth;
 use App\Models\Midwife\Midwife;
+use App\Models\Midwife\MidwifeMessage;
 use App\Models\Doctor\Doctor;
 use App\Models\Doctor\DoctorMessage;
 use App\Models\Sister\Sister;
@@ -695,6 +696,77 @@ class MidwifeController extends Controller
             return response()->json([
                 'result' => false,
                 'message' => 'පනිවිඩය යැවීම අසාර්ථකයී',
+                'add_class' => 'alert-danger',
+            ]);
+        }
+    }
+
+    public function inbox() {
+
+        $user_id = Auth::user()->user_id;
+        $data = array();
+
+        $data['midwife_name'] = Auth::user()->midwife->midwife_name;
+
+        $data['recieved_messages'] = MidwifeMessage::where('midwife_id', $user_id)->where('status',1)->get();
+
+        // dd($data);
+        return view('Midwife.inbox')->with('data',$data);
+    }
+
+    public function readMessageAction(Request $request) {
+
+        try {
+
+            DB::beginTransaction();
+
+            $message = MidwifeMessage::find($request->message_id);
+            $message->read_status = 0;
+            $message->save();    
+            
+            DB::commit();
+            return response()->json([
+                'result' => true,
+                'message' => 'පනිවිඩය කියවූ ලෙස සලකුණු කරන ලදී',
+                'table_row' => $request->message_tr,
+                'add_class' => 'alert-success',
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollback();    
+            return response()->json([
+                'result' => false,
+                'message' => 'සලකුණු කිරීම අසාර්ථකයී',
+                'table_row' => $request->message_tr,
+                'add_class' => 'alert-danger',
+            ]);
+        }
+    }
+
+    public function deleteMessageAction(Request $request) {
+
+        try {
+
+            DB::beginTransaction();
+
+            $message = MidwifeMessage::find($request->message_id);
+            $message->status = 0;
+            $message->save();    
+            
+            DB::commit();
+            return response()->json([
+                'result' => true,
+                'message' => 'පනිවිඩය මැකීම සාර්ථකයී',
+                'table_row' => $request->message_tr,
+                'add_class' => 'alert-success',
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollback();    
+            return response()->json([
+                'result' => false,
+                'message' => 'පනිවිඩය මැකීම අසාර්ථකයී',
+                'table_row' => $request->message_tr,
                 'add_class' => 'alert-danger',
             ]);
         }

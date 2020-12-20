@@ -22,6 +22,10 @@
 
 @section('content')
 <div class="content">
+
+    <!-- alert section -->
+    @include('layouts.alerts')
+    <!-- end of alert section -->
                
     <div class="container">
     
@@ -145,7 +149,7 @@
 
 <script>
     $(function() {
-        $('.inner-sidebar-menu ul li a.d-dash').addClass('active');
+        $('.inner-sidebar-menu ul li a.li-dash').addClass('active');
     }); 
 </script>
 

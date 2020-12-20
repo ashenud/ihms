@@ -33,9 +33,17 @@ Route::post('/doctor/vaccinations-permission-action', 'App\Http\Controllers\Doct
 Route::get('/doctor/child-health-note', 'App\Http\Controllers\Doctor\DoctorController@childHealthNote')->name('child-helth-note')->middleware('doctor');
 Route::get('/doctor/send-messages', 'App\Http\Controllers\Doctor\DoctorController@sendMessages')->name('doc-send-messages')->middleware('doctor');
 Route::post('/doctor/send-messages-action', 'App\Http\Controllers\Doctor\DoctorController@sendMessagesAction')->middleware('doctor');
+Route::get('/doctor/inbox', 'App\Http\Controllers\Doctor\DoctorController@inbox')->name('doc-inbox')->middleware('doctor');
+Route::post('/doctor/messages-read', 'App\Http\Controllers\Doctor\DoctorController@readMessageAction')->middleware('doctor');
+Route::post('/doctor/messages-delete', 'App\Http\Controllers\Doctor\DoctorController@deleteMessageAction')->middleware('doctor');
 
 /* @@ sister controllers @@ */
 Route::get('/sister/dashboard', 'App\Http\Controllers\Sister\SisterController@index')->name('sister')->middleware('sister');
+Route::get('/sister/send-messages', 'App\Http\Controllers\Sister\SisterController@sendMessages')->name('sis-send-messages')->middleware('sister');
+Route::post('/sister/send-messages-action', 'App\Http\Controllers\Sister\SisterController@sendMessagesAction')->middleware('sister');
+Route::get('/sister/inbox', 'App\Http\Controllers\Sister\SisterController@inbox')->name('sis-inbox')->middleware('sister');
+Route::post('/sister/messages-read', 'App\Http\Controllers\Sister\SisterController@readMessageAction')->middleware('sister');
+Route::post('/sister/messages-delete', 'App\Http\Controllers\Sister\SisterController@deleteMessageAction')->middleware('sister');
 
 /* @@ midwife controllers @@ */
 Route::get('/midwife/dashboard', 'App\Http\Controllers\Midwife\MidwifeController@index')->name('midwife')->middleware('midwife');
@@ -52,6 +60,9 @@ Route::get('/midwife/view-babies', 'App\Http\Controllers\Midwife\MidwifeControll
 Route::post('/midwife/inactivate-baby-action', 'App\Http\Controllers\Midwife\MidwifeController@inactivateBabyAction')->middleware('midwife');
 Route::get('/midwife/send-messages', 'App\Http\Controllers\Midwife\MidwifeController@sendMessages')->name('mid-send-messages')->middleware('midwife');
 Route::post('/midwife/send-messages-action', 'App\Http\Controllers\Midwife\MidwifeController@sendMessagesAction')->middleware('midwife');
+Route::get('/midwife/inbox', 'App\Http\Controllers\Midwife\MidwifeController@inbox')->name('mid-inbox')->middleware('midwife');
+Route::post('/midwife/messages-read', 'App\Http\Controllers\Midwife\MidwifeController@readMessageAction')->middleware('midwife');
+Route::post('/midwife/messages-delete', 'App\Http\Controllers\Midwife\MidwifeController@deleteMessageAction')->middleware('midwife');
 
 /* @@ baby controllers @@ */
 Route::get('/baby/select', 'App\Http\Controllers\Baby\BabyController@select')->name('baby-select')->middleware('readonly');

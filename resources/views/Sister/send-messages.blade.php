@@ -1,22 +1,22 @@
 @extends('layouts.app')
 
 @section('title')
-<title>Midwife Dashboard</title>
+<title>Sister Dashboard</title>
 @endsection
 
 @section('style')
-<link rel="stylesheet" href="{{asset('css/midwife/mid-send-messages-style.css')}}">
+<link rel="stylesheet" href="{{asset('css/sister/sis-send-messages-style.css')}}">
 @endsection
 
 @section('user-area')
-    <img src="{{asset('img/midwife/midwife.png')}}" class="rounded-circle">
+    <img src="{{asset('img/sister/sister.png')}}" class="rounded-circle">   
     @isset($data)
-    <a href="#"> <span>{{$data['midwife_name']}}</span> </a>
+        <a href="#"> <span>{{$data['sister_name']}}</span> </a>
     @endisset
 @endsection
 
 @section('sidebar')
-@include('layouts.sidebars.midwife')
+@include('layouts.sidebars.sister')
 @endsection
 
 @section('content')
@@ -25,10 +25,10 @@
     <!-- alert section -->
     @include('layouts.alerts')
     <!-- end of alert section -->
-    
+
     <div class="container">
         
-        <!-- Send SMS to doctor section -->
+        <!-- Send SMS to Doctor section -->
         <div class="row d-flex justify-content-center mt-5">
             <div class="col-md-8">
                 <div class="card card-send-msg">
@@ -71,37 +71,36 @@
                 </div>
             </div>
         </div>
-
-        <!-- Send SMS to sister section -->
-        <div class="row d-flex justify-content-center">
+        
+        <!-- Send SMS to Midwife section -->
+        <div class="row d-flex justify-content-center mt-5">
             <div class="col-md-8">
                 <div class="card card-send-msg">
                     <div class="card-header">
-                        <h3>හෙදියක්(Sister) හට පණිවිඩයක් යවන්න</h3>
+                        <h3>වින්නඹුවක්(Midwife) හට පණිවිඩයක් යවන්න</h3>
                     </div>
                     <div class="card-body">
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-4 img-col">
                                     <div class="img-area">
-                                        <img src="{{asset('img/midwife/sister.png')}}" alt="midwife" width="110px" height="115px">
+                                        <img src="{{asset('img/doctor/midwife.png')}}" alt="midwife" width="110px" height="115px">
                                     </div>
                                 </div>
                                 <div class="col-lg-8">
                                     <div class="b_table">
                                         <table class="table table-responsive-xl">
-                                            @if(count($data['sisters']) > 0)
-                                                @foreach ($data['sisters'] as $sister)
+                                            @if(count($data['midwives']) > 0)
+                                                @foreach ($data['midwives'] as $midwife)
                                                 <tr>
                                                     <td class="content">
                                                         <div class="data-receiver">
-                                                            {{$sister->sister_name}}
+                                                            {{$midwife->midwife_name}}
                                                         </div>
-                                                        
                                                     </td>
                                                     <td class="content">
                                                         <div class="data-btn">
-                                                            <input type='button' name='smsSister' class='btn btn-success btn-sm' id='send_sis_msg_btn' data-toggle='modal' href='#msg-model' data-id='{{$sister->sister_id}}' value='යවන්න'>
+                                                            <input type='button' class='btn btn-success btn-sm' id='send_mid_msg_btn' data-toggle='modal' href='#msg-model' data-id='{{$midwife->midwife_id}}' value='යවන්න'>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -131,7 +130,7 @@
                         <div class='row d-flex justify-content-around'>
                             <div class='col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
                                 <lable>විසින්:</lable>
-                                <input type='text' class='form-control mb-2' name='sender' value='{{ $data['midwife_name'] }}' readonly>
+                                <input type='text' class='form-control mb-2' name='sender' value='{{ $data['sister_name'] }}' readonly>
                             </div>
                         </div>
                         {{-- @@ javascript error alert @@ --}}
@@ -152,10 +151,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
-    </div>              
-    
+        </div>        
+                       
+    </div>
+
 </div>
 @endsection
 
@@ -172,10 +171,10 @@
         $("#type").val(1); //doctor
     });
     
-    $(document).on("click", "#send_sis_msg_btn", function () {
+    $(document).on("click", "#send_mid_msg_btn", function () {
         var getId = $(this).data('id');
         $("#receiver_id").val(getId);
-        $("#type").val(2); //sister
+        $("#type").val(3); //midwife
     });
 
     function removeJsAlert() {
@@ -200,7 +199,7 @@
                 }
             });
             $.ajax({
-                url: '{{url("/midwife/send-messages-action")}}',
+                url: '{{url("/sister/send-messages-action")}}',
                 type: 'POST',
                 data: {
                     receiver_id:receiver_id,

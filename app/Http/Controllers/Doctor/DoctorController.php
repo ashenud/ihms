@@ -510,5 +510,76 @@ class DoctorController extends Controller
             ]);
         }
     }
+
+    public function inbox() {
+
+        $user_id = Auth::user()->user_id;
+        $data = array();
+
+        $data['doctor_name'] = Auth::user()->doctor->doctor_name;
+
+        $data['recieved_messages'] = DoctorMessage::where('doctor_id', $user_id)->where('status',1)->get();
+
+        // dd($data);
+        return view('Doctor.inbox')->with('data',$data);
+    }
+
+    public function readMessageAction(Request $request) {
+
+        try {
+
+            DB::beginTransaction();
+
+            $message = DoctorMessage::find($request->message_id);
+            $message->read_status = 0;
+            $message->save();    
+            
+            DB::commit();
+            return response()->json([
+                'result' => true,
+                'message' => 'පනිවිඩය කියවූ ලෙස සලකුණු කරන ලදී',
+                'table_row' => $request->message_tr,
+                'add_class' => 'alert-success',
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollback();    
+            return response()->json([
+                'result' => false,
+                'message' => 'සලකුණු කිරීම අසාර්ථකයී',
+                'table_row' => $request->message_tr,
+                'add_class' => 'alert-danger',
+            ]);
+        }
+    }
+
+    public function deleteMessageAction(Request $request) {
+
+        try {
+
+            DB::beginTransaction();
+
+            $message = DoctorMessage::find($request->message_id);
+            $message->status = 0;
+            $message->save();    
+            
+            DB::commit();
+            return response()->json([
+                'result' => true,
+                'message' => 'පනිවිඩය මැකීම සාර්ථකයී',
+                'table_row' => $request->message_tr,
+                'add_class' => 'alert-success',
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollback();    
+            return response()->json([
+                'result' => false,
+                'message' => 'පනිවිඩය මැකීම අසාර්ථකයී',
+                'table_row' => $request->message_tr,
+                'add_class' => 'alert-danger',
+            ]);
+        }
+    }
     
 }

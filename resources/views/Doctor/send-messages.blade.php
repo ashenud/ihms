@@ -178,6 +178,10 @@
         $("#type").val(2); //sister
     });
 
+    function removeJsAlert() {
+        $('#js-alert').hide('slow');
+    }
+
     function removeAlert() {
         $('#js-alert-error').hide('slow');
     }

@@ -1,5 +1,6 @@
 /* alert section */
 .alert-section {
+    font-family: sans-serif;
     position: fixed;
     z-index: 2;
     width: calc(100% - 250px);
@@ -14,18 +15,30 @@
     display: flex;
 }
 
+.model-send-msg .alert,
 .alert-section .alert {
     padding-left: 25px;
     border-radius: 15px;
 }
 
+.model-send-msg .alert strong,
 .alert-section .alert strong {
     font-family: 'abhaya';
 }
 
+.model-send-msg .alert button,
 .alert-section .alert button {
     margin-right: 2px;
     outline: none;
+}
+
+.model-send-msg .alert {
+    padding: 2px 0 2px 25px;
+}
+
+.model-send-msg .close {
+    font-size: 18px;
+    margin-top: -4px;
 }
 
 @media screen and (max-width:768px) {
@@ -39,7 +52,8 @@
 }
 /* end of alert section */
 
-.card-inbox {
+
+.card-send-msg {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     border-radius: 0;
 }
@@ -57,31 +71,14 @@
     margin-left: 10px;
 }
 
-.b_table .table tr td .data-sender,
-.b_table .table tr td .data-msg,
-.b_table .table tr td .data-date,
-.b_table .table tr td .data {
-    font-size: 13px;
+.b_table .table tr td .data-receiver {
+    font-size: 14px;
     position: relative;
     top: 2px;
 }
 
-.b_table .table tr td .data-sender {
-    max-width: 100px;
-}
-
-.b_table .table tr td .data-msg {
-    max-width: 492px;
-}
-
-.b_table .table tr td .data-date {
-    max-width: 190px;
-}
-
-.b_table .table tr td i {
-    font-size: 16px;
-    margin-right: 8px;
-    margin-left: 5px;
+.b_table .table tr td .data-receiver {
+    min-width: 120px;
 }
 
 .table td,
@@ -90,17 +87,17 @@
     vertical-align: middle;
 }
 
-td.tbl_content div {
+td.content div {
     width: 100%;
     height: 100%;
     overflow:hidden;
 }
 
-td.tbl_content {
-    height: 35px;
+td.content {
+    height: 36px;
 }
 
-td.tbl_content .data-btn .btn{
+td.content .data-btn .btn{
     font-family: 'abhaya';
     padding: 0px;
     border-radius: 0;
@@ -109,18 +106,18 @@ td.tbl_content .data-btn .btn{
     top: -1px;
 }
 
-td.tbl_content .data-btn .btn:focus {
+td.content .data-btn .btn:focus {
     box-shadow: none;
 }
 
 
 /* modal */
 
-.modal-read {
+.model-send-msg {
     color: #636363;
 }
 
-.modal-read .modal-content {
+.model-send-msg .modal-content {
     color: #000;
     padding: 20px;
     border-radius: 5px;
@@ -128,7 +125,7 @@ td.tbl_content .data-btn .btn:focus {
     font-size: 13px;
 }
 
-.modal-read .modal-header {
+.model-send-msg .modal-header {
 
     border-bottom: none;
     position: relative;
@@ -136,25 +133,30 @@ td.tbl_content .data-btn .btn:focus {
     justify-content: center;
 }
 
-.modal-read .modal-header h5 {
+.model-send-msg .modal-header h5 {
     font-family: 'yaldevicolombo';
 }
 
-.modal-read .close {
+.model-send-msg .close {
     position: absolute;
     top: -5px;
     right: -2px;
     outline: none;
 }
 
-.modal-read .modal-body .form-control {
+.model-send-msg lable {
+    font-family: 'abhaya';
+    margin-left: 2px;
+}
+
+.model-send-msg .modal-body .form-control {
     box-shadow: none;
     font-family: 'abhaya';
     font-size: 0.8rem;
     color: #000;
 }
 
-.modal-read .modal-footer {
+.model-send-msg .modal-footer {
     border: none;
     text-align: center;
     border-radius: 5px;
@@ -163,7 +165,7 @@ td.tbl_content .data-btn .btn:focus {
     justify-content: center;
 }
 
-.modal-read .btn {
+.model-send-msg .btn {
     color: #000;
     font-family: 'abhaya';
     font-size: 14px;
@@ -174,27 +176,18 @@ td.tbl_content .data-btn .btn:focus {
     margin: 0 5px;
 }
 
-.modal-read .btn-reader {
-    min-width: 154px !important;
-}
-
-.modal-read .btn-info {
+.model-send-msg .btn-info {
     background: #c1c1c1;
 }
 
-.modal-read .btn-info:hover,
-.modal-read .btn-info:focus {
+.model-send-msg .btn-info:hover,
+.model-send-msg .btn-info:focus {
     background: #a8a8a8;
     box-shadow: none;
 }
 
-.modal-read .btn-danger {
-    background: #f15e5e;
-}
-
-.modal-read .btn-danger:hover,
-.modal-read .btn-danger:focus {
-    background: #ee3535;    
+.model-send-msg .btn-success:hover,
+.model-send-msg .btn-success:focus {
     box-shadow: none;
 }
 
@@ -202,11 +195,8 @@ td.tbl_content .data-btn .btn:focus {
 
 
 
-
-
-@media screen and (max-width:576px) {
-    .b_table .table tr td .data-sender,
-    .b_table .table tr td .data-date {
+@media screen and (max-width:992px) {
+    .img-col {
         display: none;
     }
 }
@@ -215,26 +205,21 @@ td.tbl_content .data-btn .btn:focus {
     .wrapper.mob-active .b_table .table {
         display: none;
     }
-    .wrapper.mob-active .card-inbox {
+    .wrapper.mob-active .card-send-msg {
         margin-top: 25px;
     }
     .card-header h3 {
-        font-size: 1.3rem;
+        font-size: 1rem;
     }
-    .b_table .table tr td i {
-        margin: 0;
+    .b_table .table tr td .data-receiver {
+        min-width: 98px;
     }
     td.content .data-btn .btn {
         font-size: 0.75rem;
         width: 52px;
     }
-    .modal-read .btn {
+    .model-send-msg .btn {
         font-size: 10px;
         min-width: 110px;
     }
 }
-
-
-
-
-
