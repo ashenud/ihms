@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 192.168.1.101
--- Generation Time: Dec 03, 2020 at 12:05 AM
+-- Generation Time: Dec 22, 2020 at 01:35 AM
 -- Server version: 10.4.15-MariaDB-1:10.4.15+maria~bionic-log
 -- PHP Version: 7.4.11
 
@@ -38,7 +38,7 @@ CREATE TABLE `babies` (
   `midwife_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mother_nic` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mother_age` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-active, 0-inactive	',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -48,9 +48,11 @@ CREATE TABLE `babies` (
 --
 
 INSERT INTO `babies` (`id`, `baby_id`, `baby_first_name`, `baby_last_name`, `baby_dob`, `baby_gender`, `register_date`, `midwife_id`, `mother_nic`, `mother_age`, `status`, `created_at`, `updated_at`) VALUES
-(1, '001/01/2020/1000', 'Ama', 'Charuni', '2020-01-03', 'F', '2020-08-12', 'midwife1', '920000000', 27, 1, NULL, NULL),
-(2, '001/02/2018/1000', 'Hasitha', 'Bhagya', '2018-02-02', 'M', '2020-08-11', 'midwife1', '920000000', 25, 1, NULL, NULL),
-(3, '001/02/2020/1000', 'Samith', 'Chandula', '2020-02-06', 'M', '2020-08-12', 'midwife1', '950000000', 25, 1, NULL, NULL);
+(1, '001/01/2020/1000', 'Ama', 'Charuni', '2020-01-03', 'F', '2020-08-12', 'midwife1', '920000000', 27, 0, NULL, '2020-12-06 08:32:53'),
+(2, '001/02/2018/1000', 'Hasitha', 'Bhagya', '2018-02-02', 'M', '2020-08-11', 'midwife1', '920000000', 25, 1, NULL, '2020-12-06 08:30:57'),
+(3, '001/02/2020/1000', 'Samith', 'Chandula', '2020-02-06', 'M', '2020-08-12', 'midwife1', '950000000', 25, 1, NULL, NULL),
+(4, '001/12/2020/1000', 'Sachini', 'Ashinka', '2020-12-04', 'F', '2020-12-06', 'midwife1', '920000000', 30, 0, '2020-12-05 18:44:09', '2020-12-06 08:34:53'),
+(6, '002/12/2020/1000', 'Tharaka', 'Praveen', '2020-12-06', 'M', '2020-12-06', 'midwife1', '950000001', 26, 1, '2020-12-06 01:24:25', '2020-12-06 01:24:25');
 
 -- --------------------------------------------------------
 
@@ -83,7 +85,9 @@ CREATE TABLE `birth_details` (
 INSERT INTO `birth_details` (`id`, `baby_id`, `midwife_id`, `birth_weight`, `birth_length`, `health_states`, `apgar1`, `apgar2`, `apgar3`, `circumference_of_head`, `vitamin_K_status`, `eye_contact`, `milk_position`, `created_at`, `updated_at`) VALUES
 (1, '001/02/2018/1000', 'midwife1', 4.00, 50.00, 'Good', 1, 2, 1, 28.00, 'Yes', 'Normal', 'Cradle position', NULL, NULL),
 (2, '001/01/2020/1000', 'midwife1', 2.20, 50.00, 'Good', 2, 1, 1, 24.00, 'Yes', 'Good', 'Cross-cradle position', NULL, NULL),
-(3, '001/02/2020/1000', 'midwife1', 5.50, 45.00, 'Good', 0, 2, 0, 25.00, 'No', 'Good', 'Cradle position', NULL, NULL);
+(3, '001/02/2020/1000', 'midwife1', 5.50, 45.00, 'Good', 0, 2, 0, 25.00, 'No', 'Good', 'Cradle position', NULL, NULL),
+(4, '001/12/2020/1000', 'midwife1', 4.50, 52.00, 'Good', 1, 0, 1, 16.00, 'Yes', 'Good', 'Cradle position', '2020-12-05 18:44:09', '2020-12-05 18:44:09'),
+(6, '002/12/2020/1000', 'midwife1', 4.90, 56.00, 'Good', 1, 2, 1, 18.00, 'Yes', 'Normal', 'Clutch position', '2020-12-06 01:24:25', '2020-12-06 01:24:25');
 
 -- --------------------------------------------------------
 
@@ -131,7 +135,9 @@ INSERT INTO `child_health_notes` (`id`, `baby_id`, `midwife_id`, `baby_age_group
 (8, '001/02/2018/1000', 'midwife1', 'After 3rd Year', 8, 'O', 'X', 'O', 'O', 'X', 'O', 'N', 'NH', 'X', 'O', 'O', NULL, 'doctor1', '2020-11-30', NULL, NULL, NULL),
 (9, '001/02/2018/1000', 'midwife1', 'After 5th Year', 9, 'X', 'O', 'O', 'O', 'O', 'X', 'N', 'NH', 'O', 'X', 'X', NULL, 'doctor1', '2020-12-01', NULL, NULL, NULL),
 (10, '001/02/2018/1000', 'midwife1', 'After 11th Year', 11, 'O', 'O', 'O', 'X', 'O', 'O', 'OW', 'NH', 'O', 'O', 'X', NULL, 'doctor1', '2020-11-29', NULL, NULL, NULL),
-(11, '001/01/2020/1000', 'midwife1', '1st Month', 1, 'O', 'X', 'O', 'X', 'O', 'X', 'OW', 'S', 'O', 'X', 'O', NULL, 'doctor1', '2020-12-02', NULL, NULL, NULL);
+(11, '001/01/2020/1000', 'midwife1', '1st Month', 1, 'O', 'X', 'O', 'X', 'O', 'X', 'OW', 'S', 'O', 'X', 'O', NULL, 'doctor1', '2020-12-02', NULL, NULL, NULL),
+(17, '001/01/2020/1000', 'midwife1', 'After 2nd Month', 2, 'O', 'O', 'O', 'O', 'O', 'O', 'N', 'NH', 'O', 'O', 'O', NULL, 'doctor1', '2020-12-02', NULL, NULL, NULL),
+(18, '002/12/2020/1000', 'midwife1', '1st Month', 1, 'O', 'O', 'O', 'O', 'O', 'O', 'N', 'NH', 'O', 'O', 'O', NULL, 'doctor1', '2020-12-01', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -145,7 +151,7 @@ CREATE TABLE `doctors` (
   `doctor_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gn_division` int(11) DEFAULT NULL,
   `moh_division` int(11) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-active, 0-inactive',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -174,6 +180,50 @@ CREATE TABLE `doctor_messages` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `doctor_messages`
+--
+
+INSERT INTO `doctor_messages` (`id`, `doctor_id`, `sender`, `message`, `date`, `read_status`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'doctor1', 'midwife1', 'hellow', '2020-12-20 11:47:22', 0, 0, '2020-12-20 06:17:22', '2020-12-20 12:33:41'),
+(2, 'doctor1', 'midwife1', 'hi3', '2020-12-20 11:50:07', 0, 0, '2020-12-20 06:20:07', '2020-12-20 09:36:47'),
+(3, 'doctor1', 'midwife1', 'hi3', '2020-12-20 11:50:32', 0, 0, '2020-12-20 06:20:32', '2020-12-20 09:36:36'),
+(4, 'doctor1', 'midwife1', 'hi6', '2020-12-20 12:27:19', 0, 0, '2020-12-20 06:57:19', '2020-12-20 09:36:20'),
+(5, 'doctor1', 'sister1', 'adooo', '2020-12-20 12:53:38', 0, 0, '2020-12-20 07:23:38', '2020-12-20 12:33:45'),
+(6, 'doctor1', 'sister1', 'xzcvzvsdf', '2020-12-20 12:54:49', 0, 0, '2020-12-20 07:24:49', '2020-12-20 12:33:48'),
+(7, 'doctor1', 'midwife1', 'sdfadsfsdf', '2020-12-20 18:06:24', 1, 1, '2020-12-20 12:36:24', '2020-12-20 12:36:24'),
+(8, 'doctor1', 'midwife1', 'helooww', '2020-12-20 18:07:19', 0, 1, '2020-12-20 12:37:19', '2020-12-20 12:43:54'),
+(9, 'doctor1', 'midwife1', 'hey', '2020-12-20 18:08:53', 1, 1, '2020-12-20 12:38:53', '2020-12-20 12:38:53'),
+(10, 'doctor1', 'midwife1', 'hey man', '2020-12-20 18:09:21', 1, 1, '2020-12-20 12:39:21', '2020-12-20 12:39:21'),
+(11, 'doctor1', 'midwife1', 'het', '2020-12-20 18:09:57', 0, 1, '2020-12-20 12:39:57', '2020-12-20 12:44:16'),
+(12, 'doctor1', 'midwife1', 'hey man', '2020-12-20 18:13:20', 1, 1, '2020-12-20 12:43:20', '2020-12-20 12:43:20'),
+(13, 'doctor1', 'sister1', 'hey man 2', '2020-12-20 18:14:54', 0, 1, '2020-12-20 12:44:54', '2020-12-20 12:46:37'),
+(14, 'doctor1', 'sister1', 'hey man 3', '2020-12-20 18:15:13', 1, 1, '2020-12-20 12:45:13', '2020-12-20 12:45:13'),
+(15, 'doctor1', 'midwife1', 'hey man 4', '2020-12-20 18:16:07', 1, 1, '2020-12-20 12:46:07', '2020-12-20 12:46:07');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doctor_reminders`
+--
+
+CREATE TABLE `doctor_reminders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `doctor_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reminder` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` datetime NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `doctor_reminders`
+--
+
+INSERT INTO `doctor_reminders` (`id`, `doctor_id`, `reminder`, `date`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 'doctor1', 'meeting 1', '2020-12-23 09:35:00', NULL, '2020-12-21 14:35:36', '2020-12-21 14:35:36');
 
 -- --------------------------------------------------------
 
@@ -260,7 +310,35 @@ INSERT INTO `growths` (`id`, `baby_id`, `midwife_id`, `weight`, `height`, `baby_
 (44, '001/02/2020/1000', 'midwife1', 7.80, 50.00, 3, '2020-05-02 18:36:41', NULL, NULL),
 (45, '001/02/2020/1000', 'midwife1', 9.20, 51.00, 4, '2020-06-01 18:36:56', NULL, NULL),
 (46, '001/02/2020/1000', 'midwife1', 10.10, 52.50, 5, '2020-06-30 18:37:54', NULL, NULL),
-(47, '001/02/2020/1000', 'midwife1', 11.50, 55.00, 6, '2020-08-03 18:39:12', NULL, NULL);
+(47, '001/02/2020/1000', 'midwife1', 11.50, 55.00, 6, '2020-08-03 18:39:12', NULL, NULL),
+(48, '001/12/2020/1000', 'midwife1', 4.50, 52.00, 0, '2020-12-06 00:14:10', '2020-12-05 18:44:10', '2020-12-05 18:44:10'),
+(50, '002/12/2020/1000', 'midwife1', 4.90, 56.00, 0, '2020-12-06 06:54:25', '2020-12-06 01:24:25', '2020-12-06 01:24:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `locations`
+--
+
+CREATE TABLE `locations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `midwife_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lat` decimal(18,15) NOT NULL,
+  `lng` decimal(18,15) NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `locations`
+--
+
+INSERT INTO `locations` (`id`, `user_id`, `name`, `midwife_id`, `address`, `lat`, `lng`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, '950000001', 'Rashmi Ishuwara', 'midwife1', '13/B, Moraketiya, Pannipitiya.', '6.841425070668852', '79.956888578444930', NULL, '2020-12-06 01:24:25', '2020-12-06 01:24:25');
 
 -- --------------------------------------------------------
 
@@ -280,6 +358,36 @@ CREATE TABLE `midwife_messages` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `midwife_messages`
+--
+
+INSERT INTO `midwife_messages` (`id`, `midwife_id`, `sender`, `message`, `date`, `read_status`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'midwife1', 'doctor1', 'hi', '2020-12-20 10:29:16', 0, 0, '2020-12-20 04:59:16', '2020-12-20 12:03:25'),
+(2, 'midwife1', 'doctor1', 'hello sister', '2020-12-20 10:47:32', 0, 0, '2020-12-20 05:17:32', '2020-12-20 12:35:28'),
+(3, 'midwife1', 'sister1', 'asfagfss', '2020-12-20 12:54:41', 0, 0, '2020-12-20 07:24:41', '2020-12-20 12:35:32'),
+(4, 'midwife1', 'doctor1', 'test2', '2020-12-20 17:53:25', 0, 0, '2020-12-20 12:23:25', '2020-12-20 12:35:36'),
+(5, 'midwife1', 'doctor1', 'test 4', '2020-12-20 17:53:41', 0, 0, '2020-12-20 12:23:41', '2020-12-20 12:35:46'),
+(6, 'midwife1', 'sister1', 'hey girl', '2020-12-20 18:15:05', 1, 1, '2020-12-20 12:45:05', '2020-12-20 12:45:05'),
+(7, 'midwife1', 'sister1', 'hey girl 3', '2020-12-20 18:15:23', 0, 1, '2020-12-20 12:45:23', '2020-12-20 12:48:05'),
+(8, 'midwife1', 'doctor1', 'hoy aru', '2020-12-20 18:17:37', 1, 1, '2020-12-20 12:47:37', '2020-12-20 12:47:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `midwife_reminders`
+--
+
+CREATE TABLE `midwife_reminders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `midwife_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reminder` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` datetime NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- --------------------------------------------------------
 
 --
@@ -292,7 +400,7 @@ CREATE TABLE `midwives` (
   `midwife_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gn_division` int(11) DEFAULT NULL,
   `moh_division` int(11) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-active, 0-inactive	',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -346,7 +454,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (23, '2020_10_16_180920_create_vacc9_months_table', 1),
 (24, '2020_10_16_181355_create_vacc3_years_table', 1),
 (25, '2020_10_16_181624_create_vacc11_years_table', 1),
-(27, '2020_11_29_115924_create_child_health_notes_table', 2);
+(27, '2020_11_29_115924_create_child_health_notes_table', 2),
+(28, '2020_12_05_234523_create_locations_table', 3),
+(29, '2020_12_20_101823_create_sister_messages_table', 4),
+(44, '2020_12_21_150553_create_midwife_reminders_table', 5),
+(45, '2020_12_21_160645_create_sister_reminders_table', 5),
+(46, '2020_12_21_160710_create_doctor_reminders_table', 5);
 
 -- --------------------------------------------------------
 
@@ -364,7 +477,7 @@ CREATE TABLE `mothers` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gn_division` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `moh_division` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-active, 0-inactive	',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -375,7 +488,8 @@ CREATE TABLE `mothers` (
 
 INSERT INTO `mothers` (`id`, `mother_nic`, `mother_name`, `midwife_id`, `address`, `telephone`, `email`, `gn_division`, `moh_division`, `status`, `created_at`, `updated_at`) VALUES
 (1, '920000000', 'Dilsha Udani', 'midwife1', 'Koulwewa, Narammala', '0700000000', 'priyasad994@gmail.com', '1', '1', 1, NULL, NULL),
-(2, '950000000', 'Chandi Rupasinha', 'midwife1', 'Uhumiya, Narammala', '0710000000', 'mother2@ihms.com', '1', '1', 1, NULL, NULL);
+(2, '950000000', 'Chandi Rupasinha', 'midwife1', 'Uhumiya, Narammala', '0710000000', 'mother2@ihms.com', '1', '1', 1, NULL, NULL),
+(4, '950000001', 'Rashmi Ishuwara', 'midwife1', '13/B, Moraketiya, Pannipitiya.', '0711652720', 'rashmi@gmail.com', '1', NULL, 1, '2020-12-06 01:24:25', '2020-12-06 01:24:25');
 
 -- --------------------------------------------------------
 
@@ -401,7 +515,7 @@ CREATE TABLE `sisters` (
   `sister_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gn_division` int(11) DEFAULT NULL,
   `moh_division` int(11) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-active, 0-inactive	',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -412,6 +526,58 @@ CREATE TABLE `sisters` (
 
 INSERT INTO `sisters` (`id`, `sister_id`, `sister_name`, `gn_division`, `moh_division`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'sister1', 'Dilini Lakmali', 1, 1, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sister_messages`
+--
+
+CREATE TABLE `sister_messages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `sister_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sender` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `read_status` int(11) NOT NULL DEFAULT 1 COMMENT '1-unread, 0-read',
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-active, 0-delete',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sister_messages`
+--
+
+INSERT INTO `sister_messages` (`id`, `sister_id`, `sender`, `message`, `date`, `read_status`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'sister1', 'doctor1', 'hi', '2020-12-20 10:28:12', 0, 0, '2020-12-20 04:58:12', '2020-12-20 12:27:48'),
+(2, 'sister1', 'doctor1', 'hello sister', '2020-12-20 10:46:54', 0, 0, '2020-12-20 05:16:54', '2020-12-20 12:24:47'),
+(3, 'sister1', 'doctor1', 'whats up', '2020-12-20 10:49:03', 0, 0, '2020-12-20 05:19:03', '2020-12-20 12:27:37'),
+(4, 'sister1', 'midwife1', 'helooww sis', '2020-12-20 11:48:29', 0, 0, '2020-12-20 06:18:29', '2020-12-20 12:24:41'),
+(5, 'sister1', 'midwife1', 'hi', '2020-12-20 11:49:44', 0, 0, '2020-12-20 06:19:44', '2020-12-20 12:24:44'),
+(6, 'sister1', 'midwife1', 'hi2', '2020-12-20 11:49:53', 0, 0, '2020-12-20 06:19:53', '2020-12-20 12:24:53'),
+(7, 'sister1', 'midwife1', 'hi5', '2020-12-20 12:27:10', 0, 0, '2020-12-20 06:57:10', '2020-12-20 12:24:36'),
+(8, 'sister1', 'doctor1', 'test1', '2020-12-20 17:53:16', 0, 0, '2020-12-20 12:23:16', '2020-12-20 12:27:40'),
+(9, 'sister1', 'doctor1', 'test 3', '2020-12-20 17:53:33', 0, 0, '2020-12-20 12:23:33', '2020-12-20 12:24:50'),
+(10, 'sister1', 'midwife1', 'hellw', '2020-12-20 18:13:11', 0, 1, '2020-12-20 12:43:11', '2020-12-20 12:44:43'),
+(11, 'sister1', 'midwife1', 'hey girl 4', '2020-12-20 18:16:00', 1, 1, '2020-12-20 12:46:00', '2020-12-20 12:46:00'),
+(12, 'sister1', 'doctor1', 'hey dili', '2020-12-20 18:17:28', 1, 1, '2020-12-20 12:47:28', '2020-12-20 12:47:28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sister_reminders`
+--
+
+CREATE TABLE `sister_reminders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `sister_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reminder` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` datetime NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -427,7 +593,7 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1-active, 0-inactive	',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -443,7 +609,8 @@ INSERT INTO `users` (`id`, `user_id`, `role`, `role_id`, `email`, `email_verifie
 (3, 'admin1', 'admin', 5, 'admin@admin.com', NULL, '$2y$12$soJwqhpkBK7UhZyboDTx9eEkho3qn0lL2VFscXRCoaM8K3HHMEhTa', 1, NULL, NULL, NULL),
 (4, 'doctor1', 'doctor', 1, 'doctor@ihms.com', NULL, '$2y$12$soJwqhpkBK7UhZyboDTx9eEkho3qn0lL2VFscXRCoaM8K3HHMEhTa', 1, NULL, NULL, NULL),
 (5, 'midwife1', 'midwife', 3, 'midwife1@ihms.com', NULL, '$2y$12$soJwqhpkBK7UhZyboDTx9eEkho3qn0lL2VFscXRCoaM8K3HHMEhTa', 1, NULL, NULL, NULL),
-(6, 'sister1', 'sister', 2, 'sister1@ihms.com', NULL, '$2y$12$soJwqhpkBK7UhZyboDTx9eEkho3qn0lL2VFscXRCoaM8K3HHMEhTa', 1, NULL, NULL, NULL);
+(6, 'sister1', 'sister', 2, 'sister1@ihms.com', NULL, '$2y$12$soJwqhpkBK7UhZyboDTx9eEkho3qn0lL2VFscXRCoaM8K3HHMEhTa', 1, NULL, NULL, NULL),
+(8, '950000001', 'mother', 4, 'rashmi@gmail.com', NULL, '$2y$10$8DyqT/htL3tu3R.vlR3MqORn2QTPDri8I74DMTvjzWvPY8BW90kAW', 1, NULL, '2020-12-06 01:24:25', '2020-12-06 01:24:25');
 
 -- --------------------------------------------------------
 
@@ -471,9 +638,11 @@ CREATE TABLE `vacc2_months` (
 --
 
 INSERT INTO `vacc2_months` (`id`, `baby_id`, `midwife_id`, `approved_doctor_id`, `vac_id`, `vac_name`, `date_given`, `batch_no`, `side_effects`, `status`, `created_at`, `updated_at`) VALUES
-(4, '001/02/2018/1000', 'midwife1', 'doctor1', 3, 'Pentavalent-1', NULL, NULL, NULL, 0, NULL, NULL),
-(5, '001/02/2018/1000', 'midwife1', 'doctor1', 4, 'OPV-1', NULL, NULL, NULL, 0, NULL, NULL),
-(7, '001/02/2018/1000', 'midwife1', 'doctor1', 5, 'fIPV-1', NULL, NULL, NULL, 0, NULL, NULL);
+(4, '001/02/2018/1000', 'midwife1', 'doctor1', 3, 'Pentavalent-1', '2020-12-04', 'EMZ1587', NULL, 1, NULL, NULL),
+(5, '001/02/2018/1000', 'midwife1', 'doctor1', 4, 'OPV-1', '2020-12-04', 'EMZ1522', NULL, 1, NULL, NULL),
+(7, '001/02/2018/1000', 'midwife1', 'doctor1', 5, 'fIPV-1', '2020-12-02', 'EMZ1584', NULL, 1, NULL, NULL),
+(8, '001/01/2020/1000', 'midwife1', 'doctor1', 3, 'Pentavalent 1', '2020-12-04', 'EMZ1584', NULL, 1, NULL, NULL),
+(9, '001/01/2020/1000', 'midwife1', 'doctor1', 4, 'OPV-1', '2020-12-02', 'EMZ1584', NULL, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -522,8 +691,8 @@ CREATE TABLE `vacc4_months` (
 --
 
 INSERT INTO `vacc4_months` (`id`, `baby_id`, `midwife_id`, `approved_doctor_id`, `vac_id`, `vac_name`, `date_given`, `batch_no`, `side_effects`, `status`, `created_at`, `updated_at`) VALUES
-(3, '001/02/2018/1000', 'midwife1', 'doctor1', 6, 'Pentavalent-2', NULL, NULL, NULL, 0, NULL, NULL),
-(4, '001/02/2018/1000', 'midwife1', 'doctor1', 7, 'OVP-2', NULL, NULL, NULL, 0, NULL, NULL),
+(3, '001/02/2018/1000', 'midwife1', 'doctor1', 6, 'Pentavalent-2', '2020-11-30', 'EMZ1587', NULL, 1, NULL, NULL),
+(4, '001/02/2018/1000', 'midwife1', 'doctor1', 7, 'OVP-2', '2020-12-01', 'EMZ1522', NULL, 1, NULL, NULL),
 (5, '001/02/2018/1000', 'midwife1', 'doctor1', 8, 'fIPV-2', NULL, NULL, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -743,13 +912,13 @@ CREATE TABLE `vaccine_dates` (
 --
 
 INSERT INTO `vaccine_dates` (`id`, `baby_id`, `midwife_id`, `vac_id`, `vac_name`, `giving_date`, `approvel_status`, `given_status`, `created_at`, `updated_at`) VALUES
-(1, '001/02/2018/1000', 'midwife1', 3, 'Pentavalent-1', '2018-08-12', 1, 0, NULL, NULL),
-(2, '001/02/2018/1000', 'midwife1', 4, 'OPV-1', '2018-08-14', 1, 0, NULL, NULL),
-(3, '001/02/2018/1000', 'midwife1', 2, 'BCG-2', NULL, 1, 0, NULL, NULL),
-(4, '001/02/2018/1000', 'midwife1', 5, 'fIPV-1', NULL, 1, 0, NULL, NULL),
-(6, '001/02/2018/1000', 'midwife1', 6, 'Pentavalent-2', NULL, 1, 0, NULL, NULL),
-(7, '001/02/2018/1000', 'midwife1', 7, 'OVP-2', NULL, 1, 0, NULL, NULL),
-(8, '001/02/2018/1000', 'midwife1', 8, 'fIPV-2', NULL, 1, 0, NULL, NULL),
+(1, '001/02/2018/1000', 'midwife1', 3, 'Pentavalent-1', '2018-08-12', 1, 1, NULL, NULL),
+(2, '001/02/2018/1000', 'midwife1', 4, 'OPV-1', '2018-08-14', 1, 1, NULL, NULL),
+(3, '001/02/2018/1000', 'midwife1', 2, 'BCG-2', '2020-12-08', 1, 1, NULL, NULL),
+(4, '001/02/2018/1000', 'midwife1', 5, 'fIPV-1', '2020-12-07', 1, 1, NULL, NULL),
+(6, '001/02/2018/1000', 'midwife1', 6, 'Pentavalent-2', '2020-12-16', 1, 1, NULL, NULL),
+(7, '001/02/2018/1000', 'midwife1', 7, 'OVP-2', '2020-12-07', 1, 1, NULL, NULL),
+(8, '001/02/2018/1000', 'midwife1', 8, 'fIPV-2', '2020-12-10', 1, 0, NULL, NULL),
 (9, '001/02/2018/1000', 'midwife1', 9, 'Pentavalent-3', NULL, 1, 0, NULL, NULL),
 (10, '001/02/2018/1000', 'midwife1', 10, 'OVP-3', NULL, 1, 0, NULL, NULL),
 (11, '001/02/2018/1000', 'midwife1', 11, 'MMR-1', NULL, 1, 0, NULL, NULL),
@@ -759,7 +928,11 @@ INSERT INTO `vaccine_dates` (`id`, `baby_id`, `midwife_id`, `vac_id`, `vac_name`
 (15, '001/02/2018/1000', 'midwife1', 15, 'MMR-2', NULL, 1, 0, NULL, NULL),
 (16, '001/02/2018/1000', 'midwife1', 16, 'D.T', NULL, 1, 0, NULL, NULL),
 (17, '001/02/2018/1000', 'midwife1', 17, 'OPV-5', NULL, 1, 0, NULL, NULL),
-(18, '001/02/2018/1000', 'midwife1', 20, 'aTd', NULL, 1, 0, NULL, NULL);
+(18, '001/02/2018/1000', 'midwife1', 20, 'aTd', NULL, 1, 0, NULL, NULL),
+(19, '001/01/2020/1000', 'midwife1', 2, 'BCG-2', '2020-12-08', 1, 1, NULL, NULL),
+(20, '001/01/2020/1000', 'midwife1', 3, 'Pentavalent 1', '2020-12-09', 1, 1, NULL, NULL),
+(21, '001/01/2020/1000', 'midwife1', 4, 'OPV-1', '2020-12-15', 1, 1, NULL, NULL),
+(22, '002/12/2020/1000', 'midwife1', 3, 'Pentavalent 1', '2021-01-14', 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -790,9 +963,11 @@ CREATE TABLE `vacc_births` (
 INSERT INTO `vacc_births` (`id`, `baby_id`, `midwife_id`, `approved_doctor_id`, `vac_id`, `vac_name`, `date_given`, `batch_no`, `scar`, `side_effects`, `status`, `created_at`, `updated_at`) VALUES
 (1, '001/02/2018/1000', 'midwife1', NULL, 1, 'BCG-1', '2018-02-02', 'EMZ1245', 0, NULL, 1, NULL, NULL),
 (2, '001/01/2020/1000', 'midwife1', NULL, 1, 'BCG-1', '2020-01-04', 'EMZ1245', 0, NULL, 1, NULL, NULL),
-(3, '001/01/2020/1000', 'midwife1', 'doctor1', 2, 'BCG-2', NULL, NULL, 0, NULL, 0, NULL, NULL),
+(3, '001/01/2020/1000', 'midwife1', 'doctor1', 2, 'BCG-2', '2020-12-03', 'EMZ1587', 0, NULL, 1, NULL, NULL),
 (4, '001/02/2020/1000', 'midwife1', NULL, 1, 'BCG-1', '2020-02-06', 'EMZ1248', 0, NULL, 1, NULL, NULL),
-(5, '001/02/2018/1000', 'midwife1', 'doctor1', 2, 'BCG-2', NULL, NULL, 0, NULL, 0, NULL, NULL);
+(5, '001/02/2018/1000', 'midwife1', 'doctor1', 2, 'BCG-2', '2020-12-04', 'EMZ1581', 0, NULL, 1, NULL, NULL),
+(6, '001/01/2020/1000', 'midwife1', 'doctor1', 2, 'BCG-2', '2020-12-03', 'EMZ1587', 0, NULL, 1, NULL, NULL),
+(7, '002/12/2020/1000', 'midwife1', NULL, 1, 'BCG-1', '2020-12-06', 'EMZ1587', 0, NULL, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -852,6 +1027,12 @@ ALTER TABLE `doctor_messages`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `doctor_reminders`
+--
+ALTER TABLE `doctor_reminders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -865,9 +1046,21 @@ ALTER TABLE `growths`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `locations`
+--
+ALTER TABLE `locations`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `midwife_messages`
 --
 ALTER TABLE `midwife_messages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `midwife_reminders`
+--
+ALTER TABLE `midwife_reminders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -901,6 +1094,18 @@ ALTER TABLE `password_resets`
 ALTER TABLE `sisters`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `sisters_sister_id_unique` (`sister_id`);
+
+--
+-- Indexes for table `sister_messages`
+--
+ALTER TABLE `sister_messages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sister_reminders`
+--
+ALTER TABLE `sister_reminders`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -996,19 +1201,19 @@ ALTER TABLE `vacc_others`
 -- AUTO_INCREMENT for table `babies`
 --
 ALTER TABLE `babies`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `birth_details`
 --
 ALTER TABLE `birth_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `child_health_notes`
 --
 ALTER TABLE `child_health_notes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `doctors`
@@ -1020,7 +1225,13 @@ ALTER TABLE `doctors`
 -- AUTO_INCREMENT for table `doctor_messages`
 --
 ALTER TABLE `doctor_messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `doctor_reminders`
+--
+ALTER TABLE `doctor_reminders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1032,12 +1243,24 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `growths`
 --
 ALTER TABLE `growths`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT for table `locations`
+--
+ALTER TABLE `locations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `midwife_messages`
 --
 ALTER TABLE `midwife_messages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `midwife_reminders`
+--
+ALTER TABLE `midwife_reminders`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -1050,13 +1273,13 @@ ALTER TABLE `midwives`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `mothers`
 --
 ALTER TABLE `mothers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sisters`
@@ -1065,16 +1288,28 @@ ALTER TABLE `sisters`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `sister_messages`
+--
+ALTER TABLE `sister_messages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `sister_reminders`
+--
+ALTER TABLE `sister_reminders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `vacc2_months`
 --
 ALTER TABLE `vacc2_months`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `vacc3_years`
@@ -1134,13 +1369,13 @@ ALTER TABLE `vacc18_months`
 -- AUTO_INCREMENT for table `vaccine_dates`
 --
 ALTER TABLE `vaccine_dates`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `vacc_births`
 --
 ALTER TABLE `vacc_births`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `vacc_others`

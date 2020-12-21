@@ -313,7 +313,7 @@
                         if(loading_rem_count == 0) {
                             $('#table-container').html('<p id="count_p" class="count">ඔබට සිහිකැදවීම් 1ක් ඇත.</p>'+
                                                         '<table class="table table-reminder table-responsive-xl">'+
-                                                            '<tbody>'+
+                                                            '<tbody id="rem_tbl_body">'+
                                                                 '<tr id="tr_'+new_tr_count+'">'+                                
                                                                     '<td>'+
                                                                         '<img class="media-photo" src="{{asset('img/doctor/reminder-icon.webp')}}">'+
@@ -330,6 +330,8 @@
                                                                 '</tr>'+
                                                             '</tbody>'+
                                                         '</table>');
+
+                            $('#loading_rem_count').val(new_tr_count);
                         }
                         else {
                             $('#rem_tbl_body').append('<tr id="tr_'+new_tr_count+'">'+                                
