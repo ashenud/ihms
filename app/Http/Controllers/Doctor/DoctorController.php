@@ -5,15 +5,16 @@ namespace App\Http\Controllers\Doctor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Baby\Baby;
-use App\Models\Doctor\DoctorMessage;
-use App\Models\Sister\SisterMessage;
-use App\Models\Midwife\MidwifeMessage;
-use App\Models\Vaccine\VaccineDate;
-use App\Models\Doctor\ChildHealthNote;
 use App\Models\Doctor\Doctor;
-use App\Models\Sister\Sister;
+use App\Models\Doctor\ChildHealthNote;
+use App\Models\Doctor\DoctorReminder;
+use App\Models\Doctor\DoctorMessage;
+use App\Models\Baby\Baby;
 use App\Models\Midwife\Midwife;
+use App\Models\Midwife\MidwifeMessage;
+use App\Models\Sister\SisterMessage;
+use App\Models\Sister\Sister;
+use App\Models\Vaccine\VaccineDate;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
@@ -29,6 +30,7 @@ class DoctorController extends Controller
         $data['babies_count'] = Baby::where('status',1)->count();
 
         $data['msg_count'] = DoctorMessage::where('doctor_id', $user_id)->where('read_status',1)->where('status',1)->count();
+        $data['reminders'] = DoctorReminder::where('doctor_id', $user_id)->get();
 
         // dd($data);
         return view('Doctor.dashboard')->with('data',$data);
@@ -577,6 +579,67 @@ class DoctorController extends Controller
                 'result' => false,
                 'message' => 'පනිවිඩය මැකීම අසාර්ථකයී',
                 'table_row' => $request->message_tr,
+                'add_class' => 'alert-danger',
+            ]);
+        }
+    }
+
+    public function reminderAddAction(Request $request) {
+
+        $user_id = Auth::user()->user_id;
+
+        try {
+
+            DB::beginTransaction();
+
+            $reminder = new DoctorReminder();
+            $reminder->doctor_id = $user_id;
+            $reminder->reminder = $request->reminder;
+            $reminder->date = $request->dateTime;
+            $reminder->save();
+            $inserted_id = $reminder->id;
+            
+            DB::commit();
+            return response()->json([
+                'result' => true,
+                'message' => 'සිහිකැදවීම එක්කිරීම සාර්ථකයී',
+                'reminder_id' => $inserted_id,
+                'reminder' => $request->reminder,
+                'date' => $request->dateTime,
+                'add_class' => 'alert-success',
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollback();    
+            return response()->json([
+                'result' => false,
+                'message' => 'සිහිකැදවීම එක්කිරීම අසාර්ථකයී',
+                'add_class' => 'alert-danger',
+            ]);
+        }
+    }
+
+    public function reminderDeleteAction(Request $request) {
+
+        try {
+
+            DB::beginTransaction();
+
+            $reminder = DoctorReminder::find($request->reminder_id);
+            $reminder->delete();
+            
+            DB::commit();
+            return response()->json([
+                'result' => true,
+                'message' => 'සිහිකැදවීම මැකීම සාර්ථකයී',
+                'add_class' => 'alert-success',
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollback();    
+            return response()->json([
+                'result' => false,
+                'message' => 'සිහිකැදවීම මැකීම අසාර්ථකයී',
                 'add_class' => 'alert-danger',
             ]);
         }

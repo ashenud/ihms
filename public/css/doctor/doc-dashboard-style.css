@@ -279,7 +279,7 @@
 .modal-reminder .modal-content {
     border-radius: 1px;
     border: none;
-    background-image: linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 100%), url('../../../assets/img/modal_background.jpg');
+    background-image: linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 100%), url('../../img/doctor/modal-background.jpg');
     background-position: center;
     background-repeat: no-repeat; 
     background-size: cover;

@@ -65,7 +65,7 @@
                             <i class="fas fa-stethoscope"></i>
                         </div>
                         <p class="card-category">සිහි කැඳවීම්</p>
-                        <h3 class="card-title"><span id="reminder-count" class="counter"></span></h3>
+                        <h3 class="card-title"><span id="reminder-count" class="counter">{{ count($data['reminders']) }}</span></h3>
                     </div>
                 </div>
             </div>
@@ -125,9 +125,42 @@
                         <h6 class="font-weight-bold float-left">සිහි කැඳවීම්(Reminders)</h6>
                         <button data-toggle="modal" href="#reminderModal" class="float-right btn btn-sm text-light">එක් කරන්න</button>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body">                  
+                        <input type="hidden" id="loading_rem_count" value="{{count($data['reminders'])}}">
+                        <input type="hidden" id="rem_count" value="{{count($data['reminders'])}}">
+                        <input type="hidden" id="tr_count" value="{{count($data['reminders'])}}">
+
                         <div id="table-container" class="table-container">
-                            
+                            @if (count($data['reminders']) >= 5)
+                                <p id="count_p" class='count'>ඔබට සිහිකැදවීම් 5+ ඇත.</p>
+                            @elseif(count($data['reminders']) > 0)
+                                <p id="count_p" class='count'>ඔබට සිහිකැදවීම් {{count($data['reminders'])}}ක් ඇත.</p>
+                            @else
+                                <p id="count_p" class='count'>ඔබට සිහිකැදවීම් කිසිවක් නැත.</p>
+                            @endif
+
+                            @if(count($data['reminders']) > 0)
+                                <table class="table table-reminder table-responsive-xl">
+                                    <tbody id="rem_tbl_body">                                
+                                        @foreach ($data['reminders'] as $key => $reminder)
+                                            <tr id="tr_{{$key +1}}">                                
+                                                <td>
+                                                    <img class="media-photo" src="{{asset('img/doctor/reminder-icon.webp')}}">
+                                                </td>
+                                                <td>
+                                                    <span class="discription">{{$reminder->reminder}}</span>
+                                                </td>
+                                                <td>
+                                                    <span class="date pull-right">{{$reminder->date}}</span>
+                                                </td>
+                                                <td>
+                                                    <input type='button' class='btn btn-success btn-sm' id='del_rem_btn' data-toggle='modal' href='#del-reminder-model' data-id="{{$reminder->id}}" data-row="{{$key+1}}" value='මකන්න'>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @endif      
                         </div>
                     </div>
                 </div>
@@ -153,7 +186,7 @@
 
                                     <div class="clearfix">
                                         <label class="text-uppercase">දිනය සහ වෙලාව</label>
-                                        <input type="datetime-local" id="dateTime" min="<?php //echo date('Y-m-d').'T'.date("H:i"); ?>" placeholder="දිනය සහ වෙලාව ඇතුල් කරන්න" name="dateTime" class="form-control" required>
+                                        <input type="datetime-local" id="dateTime" min="{{ date('Y-m-d').'T'.date("H:i") }}" placeholder="දිනය සහ වෙලාව ඇතුල් කරන්න" name="dateTime" class="form-control" required>
                                     </div>
 
                                 </div>
@@ -165,6 +198,28 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Modal for delete Reminders -->
+            <div id="del-reminder-model" class="modal fade">
+                <div class="modal-dialog modal-confirm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>එන්නත අනුමත කිරීමට 'අනුමත කරන්න' හෝ අවලංගු කිරීමට 'ඉවත් වන්න' ක්ලික් කරන්න</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">ඉවත් වන්න</button>
+                                <input type="hidden" id="delete_id" name="delete_id">
+                                <input type="hidden" id="tbl_row" name="tbl_row">
+                                <button onclick="delete_reminder()" id="delete-reminder" type="button" class="btn btn-danger">අනුමත කරන්න</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- model end -->
             
         </div> 
@@ -214,13 +269,167 @@
         $('.inner-sidebar-menu ul li a.li-dash').addClass('active');
     }); 
 
-    $(document).ready(function() {            
-        //counting up
+    $(document).ready(function() { 
         $('.counter').counterUp({
             delay: 10,
             time: 1000
         });
     });
+
+    function removeJsAlert() {
+        $('#js-alert').hide('slow');
+    }
+
+    $(document).on("click", "#del_rem_btn", function () {
+        var getId = $(this).data('id');
+        var getRow = $(this).data('row');
+        $("#delete_id").val(getId);
+        $("#tbl_row").val(getRow);
+    });
+
+    $("#submit-reminder").click(function(e) {
+        e.preventDefault();
+        
+        if ( $("#reminder").val().length !== 0 && $("#dateTime").val().length !== 0 ){
+
+            $('#reminderModal').modal('hide');
+            var form_data = $('#reminder-form').serialize();
+            var loading_rem_count = parseFloat($('#loading_rem_count').val());
+            var new_rem_count = (parseFloat($('#rem_count').val())+1);
+            var new_tr_count = (parseFloat($('#tr_count').val())+1);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '{{url("/doctor/reminder-add")}}',
+                type: 'POST',
+                data: form_data,
+                dataType: 'JSON',
+                success: function (data) { 
+                    if(data.result == true) {
+                        console.log(data);
+                        if(loading_rem_count == 0) {
+                            $('#table-container').html('<p id="count_p" class="count">ඔබට සිහිකැදවීම් 1ක් ඇත.</p>'+
+                                                        '<table class="table table-reminder table-responsive-xl">'+
+                                                            '<tbody>'+
+                                                                '<tr id="tr_'+new_tr_count+'">'+                                
+                                                                    '<td>'+
+                                                                        '<img class="media-photo" src="{{asset('img/doctor/reminder-icon.webp')}}">'+
+                                                                    '</td>'+
+                                                                    '<td>'+
+                                                                        '<span class="discription">'+data.reminder+'</span>'+
+                                                                    '</td>'+
+                                                                    '<td>'+
+                                                                        '<span class="date pull-right">'+data.date+'</span>'+
+                                                                    '</td>'+
+                                                                    '<td>'+
+                                                                        '<input type="button" class="btn btn-success btn-sm" id="del_rem_btn" data-toggle="modal" href="#del-reminder-model" data-id="'+data.reminder_id+'" data-row="'+new_tr_count+'" value="මකන්න">'+
+                                                                    '</td>'+
+                                                                '</tr>'+
+                                                            '</tbody>'+
+                                                        '</table>');
+                        }
+                        else {
+                            $('#rem_tbl_body').append('<tr id="tr_'+new_tr_count+'">'+                                
+                                                            '<td>'+
+                                                                '<img class="media-photo" src="{{asset('img/doctor/reminder-icon.webp')}}">'+
+                                                            '</td>'+
+                                                            '<td>'+
+                                                                '<span class="discription">'+data.reminder+'</span>'+
+                                                            '</td>'+
+                                                            '<td>'+
+                                                                '<span class="date pull-right">'+data.date+'</span>'+
+                                                            '</td>'+
+                                                            '<td>'+
+                                                                '<input type="button" class="btn btn-success btn-sm" id="del_rem_btn" data-toggle="modal" href="#del-reminder-model" data-id="'+data.reminder_id+'" data-row="'+new_tr_count+'" value="මකන්න">'+
+                                                            '</td>'+
+                                                        '</tr>');
+
+                            if(new_rem_count >= 5) {
+                                $('#count_p').html('ඔබට සිහිකැදවීම් 5+ ඇත.');
+                            }
+                            else if(new_rem_count > 0) {
+                                $('#count_p').html('ඔබට සිහිකැදවීම් '+new_rem_count+'ක් ඇත.');
+                            }
+                            else {
+                                $('#count_p').html('ඔබට සිහිකැදවීම් කිසිවක් නොමැත.');
+                            }
+                        }
+
+                        $('#reminder').val('');
+                        $('#dateTime').val('');
+
+                        $('#rem_count').val(new_rem_count);
+                        $('#tr_count').val(new_tr_count);
+                        $('#reminder-count').html(new_rem_count);
+                        $('#alert-message').html(data.message);
+                        $('#js-alert').addClass(data.add_class);
+                        $('#js-alert').show();
+                    }
+                    else {
+                        $('#alert-message').html(data.message);
+                        $('#js-alert').addClass(data.add_class);
+                        $('#js-alert').show();
+                    }                      
+                }
+            });
+
+        }
+        else {
+            alert("දත්ත ඇතුලත් කරන්න");
+        }
+        
+    });
+
+    function delete_reminder(){
+        var reminder_id = $('#delete_id').val();
+        var reminder_tr = $('#tbl_row').val();
+
+        $('#del-reminder-model').modal('toggle');
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '{{url("/doctor/reminder-delete")}}',
+            type: 'POST',
+            data: {
+                reminder_id:reminder_id
+            },
+            dataType: 'JSON',
+            success: function (data) { 
+                if(data.result == true) {
+                    console.log(data);
+
+                    var new_rem_count = (parseFloat($('#reminder-count').html())-1);
+                    if(new_rem_count >= 5) {
+                        $('#count_p').html('ඔබට සිහිකැදවීම් 5+ ඇත.');
+                    }
+                    else if(new_rem_count > 0) {
+                        $('#count_p').html('ඔබට සිහිකැදවීම් '+new_rem_count+'ක් ඇත.');
+                    }
+                    else {
+                        $('#count_p').html('ඔබට සිහිකැදවීම් කිසිවක් නොමැත.');
+                    }
+                    $('#reminder-count').html(new_rem_count);
+                    $('#rem_count').val(new_rem_count);
+                    $('#tr_'+reminder_tr).remove();
+                    $('#alert-message').html(data.message);
+                    $('#js-alert').addClass(data.add_class);
+                    $('#js-alert').show();
+                }
+                else {
+                    $('#alert-message').html(data.message);
+                    $('#js-alert').addClass(data.add_class);
+                    $('#js-alert').show();
+                }                      
+            }
+        });
+    }
 
 </script>
 
