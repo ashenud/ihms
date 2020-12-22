@@ -5,12 +5,21 @@
 @endsection
 
 @section('style')
-<link rel="stylesheet" href="{{asset('css/midwife/mid-view-babies-style.css')}}">
-<style>
-    .collapse-manage {
-        display: block !important;
-    }
-</style>
+    <link rel="stylesheet" href="{{asset('css/midwife/mid-view-babies-style.css')}}">
+    <style>
+        .collapse-manage {
+            display: block !important;
+        }
+        .swal-title {
+            font-family: 'yaldevicolombo';
+            font-size: 30px;
+        }
+        .swal-text {
+            font-family: 'abhaya';
+            font-size: 18px;
+            color: black;
+        }
+    </style>
 @endsection
 
 @section('user-area')
@@ -26,10 +35,6 @@
 
 @section('content')
 <div class="content">
-               
-    <!-- alert section -->
-    @include('layouts.alerts')
-    <!-- end of alert section -->
     
     <div class="container">
         <div class="row">
@@ -80,7 +85,7 @@
                                                 <button id="baby_btn_{{$key+1}}" onclick="inactiveBaby({{$key+1}})" class="btn remove-btn"><i class="fas fa-user-slash" aria-hidden="true"></i><span>INACTIVE</span></button>
                                             @else
                                                 <input type="hidden" id="type_{{$key+1}}" value="1">
-                                                <button id="baby_btn_{{$key+1}}" onclick="inactiveBaby({{$key+1}})" class="btn inactive-btn"><i class="fas fa-user-plus" aria-hidden="true"></i><span>ACTIVE</span></button>
+                                                <button id="baby_btn_{{$key+1}}" onclick="activeBaby({{$key+1}})" class="btn inactive-btn"><i class="fas fa-user-plus" aria-hidden="true"></i><span>ACTIVE</span></button>
                                             @endif
                                             {{-- <button onclick="inactiveMother('{{$baby->mother_nic}}')" class="btn remove-btn ml-2"><i class="fas fa-user-slash" aria-hidden="true"></i><span>MOTHER</span></button> --}}
                                         </td>
@@ -118,18 +123,12 @@
         $('#manage').toggleClass('collapse-manage d-none');
     }); 
 
-    window.setTimeout(function() {
-        $(".alert").fadeTo(500, 0).slideToggle(500, function(){
-            $(this).remove();
-        });
-    }, 3500);
-
-    function inactiveBaby(row) {
+    function activeBaby(row) {
         var baby_id = $('#baby_'+row).val();
         var type = $('#type_'+row).val();
         swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will be able to recover this baby details!",
+            title: "ඔබට විශ්වාසද?",
+            text: "මෙම ගිණුම සක්‍රීය කිරීමට !",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -152,12 +151,64 @@
                             console.log(data);
                             $('#baby_btn_'+row).addClass(data.add_class);
                             $('#baby_btn_'+row).removeClass(data.remove_class);
-                            swal("Poof! "+data.message, {
+                            $('#baby_btn_'+row).attr('onclick', 'inactiveBaby('+row+')');
+                            $('#baby_btn_'+row).html('<i class="fas fa-user-slash" aria-hidden="true"></i><span>INACTIVE</span>');
+                            $('#type_'+row).val(0);
+                            swal(data.message, {
                                 icon: "success",
                             });
                         }
                         else {
-                            swal("Poof! "+data.message, {
+                            swal(data.message, {
+                                icon: "success",
+                            });
+                        }                      
+                    }
+                });
+                
+            } else {
+                swal("Your imaginary file is safe!");
+            }
+        });
+    }
+
+    function inactiveBaby(row) {
+        var baby_id = $('#baby_'+row).val();
+        var type = $('#type_'+row).val();
+        swal({
+            title: "ඔබට විශ්වාසද?",
+            text: "මෙම ගිණුම අක්‍රීය කිරීමට !",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '{{url("/midwife/inactivate-baby-action")}}',
+                    type: 'POST',
+                    data: {baby_id:baby_id,type:type},
+                    dataType: 'JSON',
+                    success: function (data) { 
+                        if(data.result == true) {
+                            console.log(data);
+                            $('#baby_btn_'+row).addClass(data.add_class);
+                            $('#baby_btn_'+row).removeClass(data.remove_class);
+                            $('#baby_btn_'+row).attr('onclick', 'activeBaby('+row+')');
+                            $('#baby_btn_'+row).html('<i class="fas fa-user-plus" aria-hidden="true"></i><span>ACTIVE</span>');
+                            $('#type_'+row).val(1);
+                            swal(data.message, {
+                                icon: "success",
+                            });
+                        }
+                        else {
+                            swal(data.message, {
                                 icon: "success",
                             });
                         }                      

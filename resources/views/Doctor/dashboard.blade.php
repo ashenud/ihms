@@ -140,26 +140,28 @@
                             @endif
 
                             @if(count($data['reminders']) > 0)
-                                <table class="table table-reminder table-responsive-xl">
-                                    <tbody id="rem_tbl_body">                                
-                                        @foreach ($data['reminders'] as $key => $reminder)
-                                            <tr id="tr_{{$key +1}}">                                
-                                                <td>
-                                                    <img class="media-photo" src="{{asset('img/doctor/reminder-icon.webp')}}">
-                                                </td>
-                                                <td>
-                                                    <span class="discription">{{$reminder->reminder}}</span>
-                                                </td>
-                                                <td>
-                                                    <span class="date pull-right">{{$reminder->date}}</span>
-                                                </td>
-                                                <td>
-                                                    <input type='button' class='btn btn-success btn-sm' id='del_rem_btn' data-toggle='modal' href='#del-reminder-model' data-id="{{$reminder->id}}" data-row="{{$key+1}}" value='මකන්න'>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                <div class="tbl-rem-area">
+                                    <table class="table table-reminder table-responsive-xl">
+                                        <tbody id="rem_tbl_body">                                
+                                            @foreach ($data['reminders'] as $key => $reminder)
+                                                <tr id="tr_{{$key +1}}">                                
+                                                    <td width="50">
+                                                        <img class="media-photo" src="{{asset('img/doctor/reminder-icon.webp')}}">
+                                                    </td>
+                                                    <td width="200">
+                                                        <span class="discription">{{$reminder->reminder}}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="date pull-right">{{$reminder->date}}</span>
+                                                    </td>
+                                                    <td>
+                                                        <input type='button' class='btn btn-success btn-sm' id='del_rem_btn' data-toggle='modal' href='#del-reminder-model' data-id="{{$reminder->id}}" data-row="{{$key+1}}" value='මකන්න'>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             @endif      
                         </div>
                     </div>
@@ -207,7 +209,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
-                            <p>එන්නත අනුමත කිරීමට 'අනුමත කරන්න' හෝ අවලංගු කිරීමට 'ඉවත් වන්න' ක්ලික් කරන්න</p>
+                            <p>සිහි කැඳවීම් මැකීමට 'අනුමත කරන්න' ක්ලික් කරන්න</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-info" data-dismiss="modal">ඉවත් වන්න</button>
@@ -312,33 +314,35 @@
                         console.log(data);
                         if(loading_rem_count == 0) {
                             $('#table-container').html('<p id="count_p" class="count">ඔබට සිහිකැදවීම් 1ක් ඇත.</p>'+
-                                                        '<table class="table table-reminder table-responsive-xl">'+
-                                                            '<tbody id="rem_tbl_body">'+
-                                                                '<tr id="tr_'+new_tr_count+'">'+                                
-                                                                    '<td>'+
-                                                                        '<img class="media-photo" src="{{asset('img/doctor/reminder-icon.webp')}}">'+
-                                                                    '</td>'+
-                                                                    '<td>'+
-                                                                        '<span class="discription">'+data.reminder+'</span>'+
-                                                                    '</td>'+
-                                                                    '<td>'+
-                                                                        '<span class="date pull-right">'+data.date+'</span>'+
-                                                                    '</td>'+
-                                                                    '<td>'+
-                                                                        '<input type="button" class="btn btn-success btn-sm" id="del_rem_btn" data-toggle="modal" href="#del-reminder-model" data-id="'+data.reminder_id+'" data-row="'+new_tr_count+'" value="මකන්න">'+
-                                                                    '</td>'+
-                                                                '</tr>'+
-                                                            '</tbody>'+
-                                                        '</table>');
+                                                        '<div class="tbl-rem-area">'+
+                                                            '<table class="table table-reminder table-responsive-xl">'+
+                                                                '<tbody id="rem_tbl_body">'+
+                                                                    '<tr id="tr_'+new_tr_count+'">'+                                
+                                                                        '<td width="35">'+
+                                                                            '<img class="media-photo" src="{{asset('img/doctor/reminder-icon.webp')}}">'+
+                                                                        '</td>'+
+                                                                        '<td width="200">'+
+                                                                            '<span class="discription">'+data.reminder+'</span>'+
+                                                                        '</td>'+
+                                                                        '<td>'+
+                                                                            '<span class="date pull-right">'+data.date+'</span>'+
+                                                                        '</td>'+
+                                                                        '<td>'+
+                                                                            '<input type="button" class="btn btn-success btn-sm" id="del_rem_btn" data-toggle="modal" href="#del-reminder-model" data-id="'+data.reminder_id+'" data-row="'+new_tr_count+'" value="මකන්න">'+
+                                                                        '</td>'+
+                                                                    '</tr>'+
+                                                                '</tbody>'+
+                                                            '</table>'+
+                                                        '</div>');
 
                             $('#loading_rem_count').val(new_tr_count);
                         }
                         else {
                             $('#rem_tbl_body').append('<tr id="tr_'+new_tr_count+'">'+                                
-                                                            '<td>'+
+                                                            '<td width="35">'+
                                                                 '<img class="media-photo" src="{{asset('img/doctor/reminder-icon.webp')}}">'+
                                                             '</td>'+
-                                                            '<td>'+
+                                                            '<td width="200">'+
                                                                 '<span class="discription">'+data.reminder+'</span>'+
                                                             '</td>'+
                                                             '<td>'+

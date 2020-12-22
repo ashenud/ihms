@@ -38,6 +38,9 @@ Route::post('/doctor/messages-read', 'App\Http\Controllers\Doctor\DoctorControll
 Route::post('/doctor/messages-delete', 'App\Http\Controllers\Doctor\DoctorController@deleteMessageAction')->middleware('doctor');
 Route::post('/doctor/reminder-add', 'App\Http\Controllers\Doctor\DoctorController@reminderAddAction')->middleware('doctor');
 Route::post('/doctor/reminder-delete', 'App\Http\Controllers\Doctor\DoctorController@reminderDeleteAction')->middleware('doctor');
+Route::get('/doctor/view-babies', 'App\Http\Controllers\Doctor\DoctorController@viewBabies')->name('doc-view-babies')->middleware('doctor');
+Route::get('/doctor/view-sisters', 'App\Http\Controllers\Doctor\DoctorController@viewSisters')->name('doc-view-sisters')->middleware('doctor');
+Route::post('/doctor/inactivate-sister-action', 'App\Http\Controllers\Doctor\DoctorController@inactivateSisterAction')->middleware('doctor');
 
 /* @@ sister controllers @@ */
 Route::get('/sister/dashboard', 'App\Http\Controllers\Sister\SisterController@index')->name('sister')->middleware('sister');

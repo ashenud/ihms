@@ -644,5 +644,106 @@ class DoctorController extends Controller
             ]);
         }
     }
+
+    public function viewBabies() {
+
+        $data = array();
+
+        $data['doctor_name'] = Auth::user()->doctor->doctor_name;
+
+        $babies = Baby::select('id',
+                               'mother_nic',
+                               'baby_id',
+                               'baby_first_name',
+                               'baby_last_name',
+                               'baby_dob')
+                        ->where('status',1)->get();
+
+        $data['babies'] = $babies;
+
+        // dd($data);
+        return view('Doctor.view-babies')->with('data',$data);
+
+    }
+
+    public function viewSisters() {
+
+        $user_id = Auth::user()->user_id;
+        $data = array();
+
+        $data['doctor_name'] = Auth::user()->doctor->doctor_name;
+
+        $sisters = Sister::get();
+
+        $data['sisters'] = $sisters;
+
+        // dd($data);
+        return view('Doctor.view-sisters')->with('data',$data);
+
+    }
+
+    /* @@ both activation and inactivation @@ */
+    public function inactivateSisterAction(Request $request) {
+
+        if($request->type == 0) {
+
+            try {
+
+                DB::beginTransaction();
+
+                $sister = Sister::find($request->sister_id);
+                $sister->status = 0;
+                $sister->save();    
+                
+                DB::commit();
+                return response()->json([
+                    'result' => true,
+                    'message' => 'ගිණුම අක්‍රීය කිරීම සාර්ථකයි',
+                    'add_class' => 'inactive-btn',
+                    'remove_class' => 'remove-btn',
+                ]);
+
+            } catch (\Exception $e) {
+                DB::rollback();    
+                return response()->json([
+                    'result' => false,
+                    'message' => 'ගිණුම අක්‍රීය කිරීම අසාර්ථකයි',
+                ]);
+            }
+
+        }
+        else if ($request->type == 1) {
+            try {
+
+                DB::beginTransaction();
+
+                $sister = Sister::find($request->sister_id);
+                $sister->status = 1;
+                $sister->save();    
+                
+                DB::commit();
+                return response()->json([
+                    'result' => true,
+                    'message' => 'ගිණුම සක්‍රීය කිරීම සාර්ථකයි',
+                    'add_class' => 'remove-btn',
+                    'remove_class' => 'inactive-btn',
+                ]);
+
+            } catch (\Exception $e) {
+                DB::rollback();    
+                return response()->json([
+                    'result' => false,
+                    'message' => 'ගිණුම සක්‍රීය කිරීම අසාර්ථකයි',
+                ]);
+            }
+        }
+        else {
+            return response()->json([
+                'result' => false,
+                'message' => 'Request Error',
+            ]);
+        }
+
+    }
     
 }

@@ -259,6 +259,12 @@
     border-radius: 0;
     text-transform: uppercase;
     line-height: normal;
+    border-color: #d9534f;
+}
+
+.view-reminders .tbl-rem-area {
+    height: 75px;
+    overflow-y: scroll;
 }
 
 
@@ -379,6 +385,89 @@
 }
 /* end of reminder modal section */
 
+
+/* modal delete confirmaion */
+
+.modal-confirm {
+    color: #636363;
+    max-width: 400px;
+}
+
+.modal-confirm .modal-content {
+    color: #000;
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 13px;
+}
+
+.modal-confirm .modal-header {
+    border-bottom: none;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-confirm .close {
+    position: absolute;
+    top: -5px;
+    right: -2px;
+    outline: none;
+}
+
+.modal-confirm .modal-body p{
+    box-shadow: none;
+    font-family: 'abhaya';
+    font-size: 0.8rem;
+    color: #000;
+}
+
+.modal-confirm .modal-footer {
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 13px;
+    padding: 10px 15px 25px;
+    justify-content: center;
+}
+
+.modal-confirm .btn {
+    color: #000;
+    font-family: 'abhaya';
+    font-size: 14px;
+    border-radius: 2px;
+    min-width: 120px;
+    border: none;
+    max-height: 40px;
+    margin: 0 5px;
+}
+
+.modal-confirm .btn-info {
+    background: #c1c1c1;
+}
+
+.modal-confirm .btn-info:hover,
+.modal-confirm .btn-info:focus {
+    background: #a8a8a8;
+    box-shadow: none;
+}
+
+.modal-confirm .btn-danger {
+    background: #f15e5e;
+}
+
+.modal-confirm .btn-danger:hover,
+.modal-confirm .btn-danger:focus {
+    background: #ee3535;    
+    box-shadow: none;
+}
+
+.trigger-btn {
+    display: inline-block;
+    margin: 100px auto;
+}
+
+/* end modal */
 
 .card-chart {
     height: 100%;

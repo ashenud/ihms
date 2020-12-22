@@ -563,7 +563,7 @@ class MidwifeController extends Controller
                 DB::commit();
                 return response()->json([
                     'result' => true,
-                    'message' => 'Baby Inactivate Successfully',
+                    'message' => 'ගිණුම අක්‍රීය කිරීම සාර්ථකයි',
                     'add_class' => 'inactive-btn',
                     'remove_class' => 'remove-btn',
                 ]);
@@ -572,7 +572,7 @@ class MidwifeController extends Controller
                 DB::rollback();    
                 return response()->json([
                     'result' => false,
-                    'message' => 'Error while Inactivation',
+                    'message' => 'ගිණුම අක්‍රීය කිරීම අසාර්ථකයි',
                 ]);
             }
 
@@ -589,7 +589,7 @@ class MidwifeController extends Controller
                 DB::commit();
                 return response()->json([
                     'result' => true,
-                    'message' => 'Baby Activate Successfully',
+                    'message' => 'ගිණුම සක්‍රීය කිරීම සාර්ථකයි',
                     'add_class' => 'remove-btn',
                     'remove_class' => 'inactive-btn',
                 ]);
@@ -598,7 +598,7 @@ class MidwifeController extends Controller
                 DB::rollback();    
                 return response()->json([
                     'result' => false,
-                    'message' => 'Error While Inactivation',
+                    'message' => 'ගිණුම සක්‍රීය කිරීම අසාර්ථකයි',
                 ]);
             }
         }
