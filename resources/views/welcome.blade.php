@@ -551,7 +551,7 @@
                             <p><i class="fa fa-home"></i> Medical Officer of Health (MOH) Office - Narammala</p>
                         </div>
                         <div class="col-md-3">
-                            <h4>Follow us on</h4>
+                            <h4>Follow us</h4>
                             <p><i class="fab fa-facebook"></i> Facebook</p>
                             <p><i class="fab fa-youtube"></i> Youtube</p>
                             <p><i class="fab fa-twitter"></i> Twitter</p>
