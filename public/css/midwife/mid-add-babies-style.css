@@ -1,0 +1,633 @@
+/* alert section */
+.alert-section {
+    font-family: sans-serif;
+    position: fixed;
+    z-index: 2;
+    width: calc(100% - 250px);
+}
+
+.wrapper.active .alert-section{
+    width: calc(100% - 80px);
+    margin-left: 80px;
+}
+
+@media screen and (max-width:768px) {
+    .wrapper .content .alert-section {
+        width: calc(100% - 80px);
+    }
+    
+    .wrapper.mob-active .content .alert-section {
+        width: calc(100% - 250px);
+    }
+}
+
+.alert-section label {
+    display: flex;
+}
+
+.alert-section .alert {
+    padding-left: 25px;
+    border-radius: 15px;
+}
+
+.alert-section .alert button {
+    margin-right: 2px;
+    outline: 0;
+}
+/* end of alert section */
+
+
+
+/* --------------- is mother registerd --------------- */
+
+/* sellect registration type section */
+.select-reg {
+    background: rgba(255,255,255, 0.5);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+    margin-top: 150px;
+    border: none;
+}
+
+.select-reg .card-header {
+    margin-top: 20px;
+    position: relative;
+    justify-content: center;
+    border: none;
+    background: none;
+}
+
+.select-reg .card-header h4 {
+    font-family: 'Poppins';
+}
+
+.select-reg .card-footer {
+    margin-top: 50px;
+    position: relative;
+    justify-content: center;
+    border: none;
+    margin-bottom: 10px;
+    background: none;
+}
+
+.select-reg .btn {
+    min-width: 100px;
+    background: #2a94c3;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+    border: none;
+    text-transform: uppercase;
+    min-height: 40px;
+    line-height: normal;
+}
+
+.select-reg .btn:hover {
+    opacity: 0.7;
+}
+
+/* end of sellect registration type section */
+
+/* search mother modal section */
+.modal-mgsearch {
+    width: 100%;
+}
+
+.modal-mgsearch .modal-content {
+    border-radius: 1px;
+    border: none;
+    background-image: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, rgba(255,255,255,0.4) 100%), url('../../img/midwife/modal-background.jpg');
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+
+.modal-mgsearch .modal-header {
+    position: relative;
+    justify-content: center;
+    border: none;
+    background: rgba(242, 242, 242, 0.4);
+}
+
+.modal-mgsearch h4 {
+    text-align: center;
+    font-size: 26px;
+}
+
+.modal-mgsearch .modal-body {
+    padding: 30px;
+}
+
+.modal-mgsearch .form-group label {
+    font-weight: bold;
+    color: #000;
+    font-size: 12px;
+    margin-left: 15px;
+}
+
+.modal-mgsearch .modal-footer {
+    background: rgba(242, 242, 242, 0.4);
+    border: none;
+}
+
+.modal-mgsearch .form-control {
+    min-height: 38px;
+    border-radius: 8px;
+}
+
+.modal-mgsearch .btn {
+    margin-right: 14px;
+    min-height: 38px;
+    border-radius: 0;
+}
+
+.modal-mgsearch .form-control:focus {
+    box-shadow: none;
+}
+
+.modal-mgsearch .hint-text {
+    text-align: center;
+}
+
+.modal-mgsearch .close {
+    position: absolute;
+    top: 15px;
+    outline: none;
+    right: 15px;
+}
+
+.modal-mgsearch .checkbox-inline {
+    margin-top: 12px;
+}
+
+.modal-mgsearch input[type="checkbox"] {
+    margin-top: 2px;
+}
+
+.modal-mgsearch .btn {
+    min-width: 100px;
+    background: #2a94c3;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border: none;
+    text-transform: uppercase;
+    line-height: normal;
+}
+
+.modal-mgsearch .btn:hover,
+.modal-mgsearch .btn:focus {
+    opacity: 0.7;
+}
+
+.modal-mgsearch .hint-text a {
+    color: #999;
+}
+
+.trigger-btn {
+    display: inline-block;
+    margin: 100px auto;
+}
+
+@media screen and (max-width:576px) {
+    .modal-mgsearch {
+        width: 300px;
+        margin: 0 auto;
+        margin-top: 150px;
+    }
+}
+/* end of search mother modal section */
+
+
+
+
+
+
+/* ----------------- form section ------------------- */
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #464642;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.6;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #2b7596;
+}
+
+
+/* form section */
+.registration-form {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+}
+
+.registration-form .card-header {
+    background: none;
+    border: none;
+}
+
+.registration-form .card-header h2 {
+    font-family: 'Poppins';
+    margin-bottom: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.registration-form .progress-area{
+    padding: 40px 0;
+}
+
+.registration-form .progress {
+    height: 10px;
+}
+
+.registration-form .progress .progress-bar {
+    background-color: #2a94c3;
+}
+
+.registration-form .progress .one, .registration-form .progress .two, .registration-form .progress .three , .registration-form .progress .four, .registration-form .progress .five {
+    position: absolute;
+    display:block;
+    z-index: 1;
+	margin-top:-25px;
+    margin-left: -30px;
+	height:60px;
+	width:60px;
+	border-radius: 50%;	
+}
+
+.registration-form .progress .one i {
+	position:absolute;
+	z-index: 2;
+	font-size: 40px;
+    margin-left: 20px;
+    margin-top: 10px;
+    color: #ffa7ba;
+}
+
+.registration-form .progress .two i {
+	position:absolute;
+	z-index: 2;
+	font-size: 35px;
+    margin-left: 16.75px;
+    margin-top: 12.5px;
+    color: #ffa7ba;
+}
+
+.registration-form .progress .three i {
+	position:absolute;
+	z-index: 2;
+	font-size: 29px;
+    margin-left: 15.5px;
+    margin-top: 15.5px;
+    color: #ffa7ba;
+}
+
+.registration-form .progress .four i {
+	position:absolute;
+	z-index: 2;
+	font-size: 30px;
+    margin-left: 13.125px;
+    margin-top: 13px;
+    color: #ffa7ba;
+}
+
+.registration-form .progress .five i {
+	position:absolute;
+	z-index: 2;
+	font-size: 38px;
+    margin-left: 11px;
+    margin-top: 11px;
+    color: #ffa7ba;
+}
+
+.registration-form .progress .one {
+    left: 18%;
+}
+
+.registration-form .progress .two {
+    left: 34%;   
+}
+
+.registration-form .progress .three {
+    left: 50%;
+}
+
+.registration-form .progress .four {
+    left: 66%;
+}
+
+.registration-form .progress .five {
+    left: 82%;
+}
+
+.colored {
+    background: linear-gradient(60deg,#2a94c3,#2a94c3);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.no-color {
+    background-color: inherit;
+}
+
+.registration-form .card-body {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0;
+    margin: 10px 40px;
+}
+
+.registration-form .card-body .card-title {
+    margin: 5px auto;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.registration-form .card-body .form-group {
+    margin: 0;
+}
+
+.registration-form .card-body .form-group label {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.registration-form .card-body img {
+    max-width: 90%;
+}
+
+.registration-form .form-control {
+    width: 100%;
+    font-size: 14px;
+    font-family: Raleway;
+    margin-bottom: 1rem;
+}
+
+.registration-form .form-control:focus {
+    box-shadow: none;
+}
+
+.registration-form .form-group .password-icon {
+    float: right;
+    margin-right: 6px;
+    margin-top: -44px;
+    position: relative;
+    z-index: 3;
+}
+
+.registration-form .form-group .complete, .registration-form .form-group .incomplete {
+    margin: 5px;
+    text-transform: uppercase;
+    color: red;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.registration-form .card-footer {
+    background: none;
+    border: none;
+    margin-left: 40px;
+    margin-right: 40px;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.registration-form .card-footer .btn {
+    background: #2a94c3;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    font-size: 15px;
+    width: 105px;
+    font-family: Raleway;
+    cursor: pointer;
+}
+
+
+#prevBtn {
+    background-color: #4e7788;
+}
+
+#clearBtn {
+    background-color: #77909d;
+}
+
+.registration-form .card-footer .btn:hover {
+    opacity: 0.8;
+}
+
+/* eroor tooltip of form section */
+.tooltip-inner {
+    max-width: 190px;
+    padding: 0;
+    text-align: center;
+    border: 1px solid #e8edf5;
+    border-radius: 0;
+}
+
+.tooltip-inner .card {
+    border-radius: 0;
+    background: #e8edf5;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.tooltip-inner .card-body {
+    padding: 5px;
+}
+
+.tooltip-inner .card-title {
+    text-align: start;
+    font-size: 12px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+.tooltip-inner .card-text {
+    text-align: start;
+    font-size: 12px;
+    color: #323336;
+    margin-top: 1px;
+    margin-bottom: 0px;
+}
+
+.tooltip.bs-tooltip-right .arrow:before {
+    display: none !important;
+}
+.tooltip.bs-tooltip-left .arrow:before {
+    display: none !important;
+}
+.tooltip.bs-tooltip-bottom .arrow:before {
+    display: none !important;
+}
+.tooltip.bs-tooltip-top .arrow:before {
+    display: none !important;
+}
+
+.registration-form .error-tooltip i {
+    float: right;
+    color: red;
+    margin-right: 36px;
+    margin-top: -44px;
+    position: relative;
+    z-index: 3;        
+}
+
+.registration-form .mName-error {
+    display: none;
+}
+.registration-form .mAge-error {
+    display: none;
+}
+.registration-form .mNic-error {
+    display: none;
+}
+.registration-form .bfName-error {
+    display: none;
+}
+.registration-form .blName-error {
+    display: none;
+}
+.registration-form .bGen-error {
+    display: none;
+}
+.registration-form .tp-error {
+    display: none;
+}
+.registration-form .bWeight-error {
+    display: none;
+}
+.registration-form .bLength-error {
+    display: none;
+}
+.registration-form .circumHead-error {
+    display: none;
+}
+.registration-form .hStates-error {
+    display: none;
+}
+.registration-form .apgar1-error {
+    display: none;
+}
+.registration-form .apgar2-error {
+    display: none;
+}
+.registration-form .apgar3-error {
+    display: none;
+}
+.registration-form .vitaminK-error {
+    display: none;
+}
+.registration-form .eyeContact-error {
+    display: none;
+}
+.registration-form .mPosition-error {
+    display: none;
+}
+.registration-form .pwd-error {
+    display: none;
+}
+.registration-form .email-error {
+    display: none;
+}
+.registration-form .lat-error {
+    display: none;
+}
+.registration-form .long-error {
+    display: none;
+}
+/* end of eroor tooltip of form section */
+
+/* end of form section */
+
+
+@media screen and (max-width:1200px) {
+   
+}
+
+@media screen and (max-width:992px) {
+    .registration-form .progress-area,
+    .registration-form .card-body img {
+        display: none;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .registration-form .card-footer .btn {
+        padding: 8px 4px;
+        font-size: 10px;
+        width: 60px;
+    }
+    .gmnoprint .gm-style-mtc div {
+        font-size: 10px !important;
+        background-color: rgba(255, 255, 255,0.5) !important;
+        padding: 0px 3px !important;
+        height: 20px !important;
+        font-weight: 400 !important;
+    }
+    .gmnoprint + div,
+    .gmnoprint .gm-svpc,
+    .gm-control-active.gm-fullscreen-control,
+    .gmnoprint div button.gm-control-active {
+        background-color: rgba(255, 255, 255,0.5) !important;
+    }
+}
+
+@media screen and (max-width:576px) {
+    .registration-form .card-body {
+        margin: 10px 10px;
+    }
+    .registration-form .card-footer {
+    margin-left: 10px;
+    margin-right: 10px;
+    }
+    .registration-form .card-body {
+    padding-left: 0;
+    padding-right: 0;
+    }
+    .registration-form .card-header h2 {
+        font-size: 25px;
+        font-weight: bold
+    }
+    .registration-form .card-body .card-title {
+        font-size: 18px;
+    }
+    .select-reg .card-header h4 {
+        font-size: 18px;
+    }
+    .select-reg {
+        margin-top: 100px;
+    }
+    .select-reg .btn {
+        padding: 8px 4px;
+        font-size: 10px;
+        min-width: 60px;
+        min-height: 20px;
+    }
+}
+

@@ -1,0 +1,79 @@
+.content {
+    margin-top: 38px;
+}
+
+.background-area {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.card {
+    border-radius: 2px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    color: rgba(0,0,0,.87);
+}
+
+.mother-details table {
+    border-collapse: separate !important;
+    border-spacing: 3px;
+}
+
+.mother-details table tr th {
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.mother-details table tr td {
+    border: 1px solid #000;
+    border-radius: 4px;
+    margin-left: 3px;
+    padding: 4px;
+}
+
+.baby-details table {
+    border-collapse: separate !important;
+    border-spacing: 3px;
+}
+
+.baby-details table tr th {
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.baby-details table tr td {
+    border: 1px solid #000;
+    border-radius: 4px;
+    margin-left: 3px;
+    padding: 4px;
+}
+
+.birth-details table {
+    border-collapse: separate !important;
+    border-spacing: 3px;
+}
+
+.birth-details table tr th {
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.birth-details table tr td {
+    border: 1px solid #000;
+    border-radius: 4px;
+    margin-left: 3px;
+    padding: 4px;
+}
+
+.icon-btn {
+    margin: auto;
+}
+
+.icon-btn i {
+    font-size: 60px;
+}

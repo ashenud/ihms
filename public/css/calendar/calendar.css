@@ -1,0 +1,91 @@
+@import url(https://fonts.googleapis.com/css?family=Muli:400,300);
+body { margin-top: 3%; }
+
+.calendar, .calendar_weekdays, .calendar_content {
+    max-width: 300px;
+}
+.calendar {
+    border: 1px solid #343a40;
+    padding: 25px 5px;
+    margin: auto;
+    font-family:'Muli', sans-serif;
+    font-weight: 400;
+}
+.calendar_content, .calendar_weekdays, .calendar_header {
+    position: relative;
+    overflow: hidden;
+}
+.calendar_weekdays div {
+    display:inline-block;
+    vertical-align:top;
+    color:#1b220f !important;
+    font-size: 12px !important;
+    text-transform: uppercase;
+    
+}
+.calendar_weekdays div, .calendar_content div {
+    width: 14.28571%;
+    overflow: hidden;
+    text-align: center;
+    background-color: transparent;
+    color: #0e0c0c;
+    font-size: 14px;
+}
+.calendar_content div {
+    border: 1px solid transparent;
+    float: left;
+}
+.calendar_content div:hover {
+    background-color: rgba(0, 0, 0, .07);
+    border-radius: 50px;
+    cursor: pointer;
+}
+.calendar_content div.blank:hover {
+    cursor: default;
+    border: 1px solid transparent;
+}
+.calendar_content div.past-date {
+    color:rgba(0, 0, 0, .5);
+}
+.calendar_content div.today {
+    font-weight: bold;
+    font-size: 14px;
+    color: #fff !important;
+    border-radius: 50px;
+    background: #007bff;
+}
+.calendar_content div.selected {
+    background-color: #27d6c7;
+}
+.calendar_header {
+    padding-bottom: 20px;
+    padding-right: 30px;
+    padding-left: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.calendar_header h2 {
+    font-family:'Muli', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    margin: auto;
+    color: #4d4d4d;
+    width:70%;
+}
+
+button.switch-month {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    padding-left: 6px;
+    padding-right: 6px;
+    color: #0e0c0c;
+    width:8%;
+    transition: color .2s;
+}
+button.switch-month :hover {
+    color: #1d2412;   
+}

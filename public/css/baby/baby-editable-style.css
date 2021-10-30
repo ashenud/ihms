@@ -1,0 +1,79 @@
+/* alert section */
+.alert-section {
+    position: fixed;
+    z-index: 2;
+    width: calc(100% - 250px);
+}
+
+.wrapper.active .alert-section{
+    width: calc(100% - 80px);
+    margin-left: 80px;
+}
+
+.alert-section label {
+    display: flex;
+}
+
+.alert-section .alert {
+    padding-left: 25px;
+    border-radius: 15px;
+}
+
+.alert-section .alert strong {
+    font-family: 'abhaya';
+}
+
+.alert-section .alert button {
+    margin-right: 2px;
+    outline: none;
+}
+
+@media screen and (max-width:768px) {
+    .wrapper .content .alert-section {
+        width: calc(100% - 80px);
+    }
+    
+    .wrapper.mob-active .content .alert-section {
+        width: calc(100% - 250px);
+    }
+}
+/* end of alert section */
+
+
+.card-body lable {
+    font-family: 'yaldevicolombo';
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.form-group .edit-vac .btn,
+.form-group .other-vac .btn,
+.form-group .bcg-scar .btn {
+    font-family: 'abhaya';
+}
+
+.form-group .edit-vac,
+.form-group .other-vac,
+.form-group .bcg-scar {
+    margin-top: 20px;
+    border: 1px solid #000;
+    border-radius: 30px;
+}
+
+.form-group .edit-vac {
+    height: 320px;
+}
+
+.form-group .edit-vac h5,
+.form-group .other-vac h5,
+.form-group .bcg-scar h5 {
+    font-family: 'abhaya';
+    font-size: 22px;
+    margin-top: 10px;
+    margin-left: 35px;
+    font-weight: bold;
+}
+
+.form-row .form-group label {
+    font-family: 'abhaya';
+}
